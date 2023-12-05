@@ -1,4 +1,4 @@
-import { Button, Flex } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { ROOM_BUTTON } from "../../Generics/interfaces";
 import { SIZES } from "../../Generics/constants";
 

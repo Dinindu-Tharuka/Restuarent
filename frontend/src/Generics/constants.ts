@@ -4,12 +4,13 @@ export enum COLOURS {
   MAIN_PAGE_YELLOW = "#ffec4b",
   MAIN_PAGE_BLACK = "black",
   MAIN_PAGE_WHITE = "white",
+  BACKGROUND_COLOR = '#f2f2f2',
 }
 
 export enum SIZES {
   MAIN_PAGE_BUTTON_BORDER_RADIOUS = 20,
   TABLE_BUTTON_WIDTH = window.innerWidth/5 - 10,
-  TABLE_BUTTON_HEIGHT = window.innerHeight/5 - 10,
+  TABLE_BUTTON_HEIGHT = window.innerHeight/5 - 30,
 
 }
 
