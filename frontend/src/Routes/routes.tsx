@@ -13,15 +13,11 @@ const router = createBrowserRouter([
     {
         element: <Privateroutes />,
         children: [
-          {
-            path: "/",
-            element: <AnimatePresence><MainPage/></AnimatePresence>,
-            children: [
-                { path:'/dining', element:<AnimatePresence><Dining/></AnimatePresence>},
-                { path:'/dining/order/:table', element:<AnimatePresence><OrderMainPage/></AnimatePresence>},
-                { path:'/takeaway', element:<AnimatePresence><Takeaway/></AnimatePresence>},
-            ],
-          },
+        { path: "/", element: <AnimatePresence><MainPage/></AnimatePresence>},            
+        { path:'/dining', element:<AnimatePresence><Dining/></AnimatePresence>},
+        { path:'/dining/order/:table', element:<AnimatePresence><OrderMainPage/></AnimatePresence>},
+        { path:'/takeaway', element:<AnimatePresence><Takeaway/></AnimatePresence>},           
+          
         ],
       },
 

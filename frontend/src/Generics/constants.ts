@@ -5,13 +5,14 @@ export enum COLOURS {
   MAIN_PAGE_BLACK = "black",
   MAIN_PAGE_WHITE = "white",
   BACKGROUND_COLOR = '#f2f2f2',
+  LOGIN_BACKGROUND = '#f6de56'
 }
 
 export enum SIZES {
   MAIN_PAGE_BUTTON_BORDER_RADIOUS = 20,
   TABLE_BUTTON_WIDTH = '18vw',
   TABLE_BUTTON_HEIGHT = '15vh',
-
+  LOGIN_FORM_INPUT_WIDTH = '20vw'
 }
 
 export const FIRST_FLOOR : ROOM_BUTTON[] = [
