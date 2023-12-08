@@ -3,92 +3,126 @@ import restuarent from "../assets/images/restuarent.jpg";
 import { COLOURS, SIZES } from "../Generics/constants";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import AdminPanel from "./Admin Panel/AdminPanel";
+import { useEffect, useState } from "react";
+import axiosInstance from "../services/api-client";
+import { User } from "../Generics/interfaces";
+import UserMeContext from "../Contexts/UserMe";
+import SignOutButton from "./Admin Panel/SidePanel/componants/SignOutButton";
 
 const MainPage = () => {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1, transition: { duration: 1 } }}
-      exit={{ opacity: 0 }}
-    >
-      <Flex width="100vw" height="100vh">
-        <Image src={restuarent} objectFit="cover" width="100vw" />
-        <Flex position="absolute" top="45vh" left="10vw">
-          <VStack alignItems="start">
-            <HStack>
-              <Text
-                fontWeight="bold"
-                fontSize={{
-                  sm: 50,
-                  lg: 70,
-                }}
-                color="white"
-                textShadow="1px 1px #ff0000"
-              >
-                Welcome to
-              </Text>
-              <Text
-                fontWeight="bold"
-                fontSize={{
-                  sm: 50,
-                  lg: 70,
-                }}
-                color={COLOURS.MAIN_PAGE_YELLOW}
-                textShadow="1px 1px #ff0000"
-              >
-                Restuarent
-              </Text>
-            </HStack>
-            <Text
-              textColor="white"
-              noOfLines={2}
-              width="40vw"
-              fontFamily="serif"
-              fontSize={20}
-              textShadow="1px 1px #ff0000"
-            >
-              Delight in exquisite flavors at our charming restaurant, where
-              every bite tells a unique story.
-            </Text>
-          </VStack>
-        </Flex>
+  const [userMe, setUserMe] = useState<User>({} as User);
 
-        <HStack position="absolute" top="70vh" left="50vw">
-          <Button
-            size="lg"
-            width={{
-              lg: "200px",
-              sm: "150px",
-            }}
-            borderRadius={SIZES.MAIN_PAGE_BUTTON_BORDER_RADIOUS}
-            variant="outline"
-            textColor={COLOURS.MAIN_PAGE_WHITE}
-            _hover={{
-              bg: COLOURS.MAIN_PAGE_YELLOW,
-              textColor: COLOURS.MAIN_PAGE_BLACK,
-            }}
-          >
-            <Link to="/dining">Dining</Link>
-          </Button>
-          <Button
-            size="lg"
-            width={{
-              lg: "200px",
-              sm: "150px",
-            }}
-            borderRadius={SIZES.MAIN_PAGE_BUTTON_BORDER_RADIOUS}
-            variant="outline"
-            textColor={COLOURS.MAIN_PAGE_WHITE}
-            _hover={{
-              bg: COLOURS.MAIN_PAGE_YELLOW,
-              textColor: COLOURS.MAIN_PAGE_BLACK,
-            }}
-          >
-            <Link to="/takeaway">Take away</Link>
-          </Button>
-        </HStack>
-      </Flex>
-    </motion.div>
+  console.log(userMe);
+
+  useEffect(() => {
+    if (localStorage.getItem("firstTime") === "true") {
+      window.location.reload();
+      localStorage.setItem("firstTime", "false");
+    }
+
+    axiosInstance
+      .get("/users/me/")
+      .then((res) => setUserMe(res.data))
+      .catch((err) => console.log(err.message));
+  }, [userMe]);
+  return (
+    <UserMeContext.Provider value={userMe}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, transition: { duration: 1 } }}
+        exit={{ opacity: 0 }}
+      >
+        <Flex width="100vw" height="100vh">
+          {/* Background Image */}
+          <Image src={restuarent} objectFit="cover" width="100vw" />
+
+          {/* Admin Panel */}
+          <Flex position="absolute" left="90vw" top="2vh">
+            <HStack>
+            <AdminPanel />
+            <SignOutButton/>
+
+            </HStack>
+          </Flex>
+
+          <Flex position="absolute" top="45vh" left="10vw">
+            <VStack alignItems="start">
+              <HStack>
+                <Text
+                  fontWeight="bold"
+                  fontSize={{
+                    sm: 50,
+                    lg: 70,
+                  }}
+                  color="white"
+                  textShadow="1px 1px #ff0000"
+                >
+                  Welcome to
+                </Text>
+                <Text
+                  fontWeight="bold"
+                  fontSize={{
+                    sm: 50,
+                    lg: 70,
+                  }}
+                  color={COLOURS.MAIN_PAGE_YELLOW}
+                  textShadow="1px 1px #ff0000"
+                >
+                  Restuarent
+                </Text>
+              </HStack>
+              <Text
+                textColor="white"
+                noOfLines={2}
+                width="40vw"
+                fontFamily="serif"
+                fontSize={20}
+                textShadow="1px 1px #ff0000"
+              >
+                Delight in exquisite flavors at our charming restaurant, where
+                every bite tells a unique story.
+              </Text>
+            </VStack>
+          </Flex>
+
+          <HStack position="absolute" top="70vh" left="50vw">
+            <Button
+              size="lg"
+              width={{
+                lg: "200px",
+                sm: "150px",
+              }}
+              borderRadius={SIZES.MAIN_PAGE_BUTTON_BORDER_RADIOUS}
+              variant="outline"
+              textColor={COLOURS.MAIN_PAGE_WHITE}
+              _hover={{
+                bg: COLOURS.MAIN_PAGE_YELLOW,
+                textColor: COLOURS.MAIN_PAGE_BLACK,
+              }}
+            >
+              <Link to="/dining">Dining</Link>
+            </Button>
+            <Button
+              size="lg"
+              width={{
+                lg: "200px",
+                sm: "150px",
+              }}
+              borderRadius={SIZES.MAIN_PAGE_BUTTON_BORDER_RADIOUS}
+              variant="outline"
+              textColor={COLOURS.MAIN_PAGE_WHITE}
+              _hover={{
+                bg: COLOURS.MAIN_PAGE_YELLOW,
+                textColor: COLOURS.MAIN_PAGE_BLACK,
+              }}
+            >
+              <Link to="/takeaway">Take away</Link>
+            </Button>
+          </HStack>
+        </Flex>
+      </motion.div>
+    </UserMeContext.Provider>
   );
 };
 

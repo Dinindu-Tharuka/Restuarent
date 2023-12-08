@@ -5,7 +5,8 @@ export enum COLOURS {
   MAIN_PAGE_BLACK = "black",
   MAIN_PAGE_WHITE = "white",
   BACKGROUND_COLOR = '#f2f2f2',
-  LOGIN_BACKGROUND = '#f6de56'
+  LOGIN_BACKGROUND = '#f6de56',
+  ADMIN_PAGE_BUTTON_COLOR = '#ff1a4c'
 }
 
 export enum SIZES {
