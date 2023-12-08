@@ -18,7 +18,10 @@ const MainPage = () => {
             <HStack>
               <Text
                 fontWeight="bold"
-                fontSize={70}
+                fontSize={{
+                  sm: 50,
+                  lg: 70,
+                }}
                 color="white"
                 textShadow="1px 1px #ff0000"
               >
@@ -26,7 +29,10 @@ const MainPage = () => {
               </Text>
               <Text
                 fontWeight="bold"
-                fontSize={70}
+                fontSize={{
+                  sm: 50,
+                  lg: 70,
+                }}
                 color={COLOURS.MAIN_PAGE_YELLOW}
                 textShadow="1px 1px #ff0000"
               >
@@ -50,7 +56,10 @@ const MainPage = () => {
         <HStack position="absolute" top="70vh" left="50vw">
           <Button
             size="lg"
-            width="10vw"
+            width={{
+              lg: "200px",
+              sm: "150px",
+            }}
             borderRadius={SIZES.MAIN_PAGE_BUTTON_BORDER_RADIOUS}
             variant="outline"
             textColor={COLOURS.MAIN_PAGE_WHITE}
@@ -63,7 +72,10 @@ const MainPage = () => {
           </Button>
           <Button
             size="lg"
-            width="10vw"
+            width={{
+              lg: "200px",
+              sm: "150px",
+            }}
             borderRadius={SIZES.MAIN_PAGE_BUTTON_BORDER_RADIOUS}
             variant="outline"
             textColor={COLOURS.MAIN_PAGE_WHITE}
