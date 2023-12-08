@@ -16,13 +16,11 @@ const Dining = () => {
   const navigate = useNavigate()
 
   const onClick = ()=>{
-
     navigate('/')
-
   }
   return (
     <VStack width="100vw" height="100vh" bg={COLOURS.BACKGROUND_COLOR}>
-      <Flex width="100vw">
+      <Flex width="100vw" >
         <IconButton
           bg={COLOURS.BACKGROUND_COLOR}
           aria-label=""
