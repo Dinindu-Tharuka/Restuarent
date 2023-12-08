@@ -9,8 +9,8 @@ export enum COLOURS {
 
 export enum SIZES {
   MAIN_PAGE_BUTTON_BORDER_RADIOUS = 20,
-  TABLE_BUTTON_WIDTH = window.innerWidth/5 - 10,
-  TABLE_BUTTON_HEIGHT = window.innerHeight/5 - 30,
+  TABLE_BUTTON_WIDTH = '18vw',
+  TABLE_BUTTON_HEIGHT = '15vh',
 
 }
 

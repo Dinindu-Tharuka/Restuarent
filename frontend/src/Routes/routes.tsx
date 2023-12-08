@@ -8,9 +8,9 @@ import OrderMainPage from "../pages/Order/OrderMainPage";
 
 const router = createBrowserRouter([
     { path:'/', element:<AnimatePresence><MainPage/></AnimatePresence>},
-    { path:'/dining', element:<AnimatePresence><Dining/></AnimatePresence>},
+    { path:'/dining', element:<AnimatePresence><Dining/></AnimatePresence>, children:[]},
+    { path:'/dining/order/:table', element:<AnimatePresence><OrderMainPage/></AnimatePresence>},
     { path:'/takeaway', element:<AnimatePresence><Takeaway/></AnimatePresence>},
-    { path:'/order/:table', element:<AnimatePresence><OrderMainPage/></AnimatePresence>},
 
 ])
 
