@@ -1,6 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import { ROOM_BUTTON } from "../../Generics/interfaces";
 import { SIZES } from "../../Generics/constants";
+import { Link } from "react-router-dom";
 
 interface props {
   tableButton: ROOM_BUTTON;
@@ -14,7 +15,7 @@ const TableButton = ({ tableButton }: props) => {
       borderRadius={50}
       boxShadow='lg'
     >
-      {tableButton.table_no}
+      <Link to={`/order/${tableButton.table_no}`}>{tableButton.table_no}</Link>
     </Button>
   );
 };

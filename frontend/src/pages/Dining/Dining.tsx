@@ -8,10 +8,18 @@ import Section_2 from "./Sections/Section_2t";
 import Section_3 from "./Sections/Section_3t";
 import { IoHomeSharp } from "react-icons/io5";
 import { COLOURS } from "../../Generics/constants";
+import { useNavigate } from "react-router-dom";
 
 const Dining = () => {
   const [page, setPage] = useState(0);
   const floors = ["First Floor", "Second Floor", "Second Floor"];
+  const navigate = useNavigate()
+
+  const onClick = ()=>{
+
+    navigate('/')
+
+  }
   return (
     <VStack width="100vw" height="100vh" bg={COLOURS.BACKGROUND_COLOR}>
       <Flex width="100vw">
@@ -20,6 +28,7 @@ const Dining = () => {
           aria-label=""
           icon={<IoHomeSharp />}
           alignSelf="self-start"
+          onClick={onClick}
         />
         <Text
           fontWeight="bold"
