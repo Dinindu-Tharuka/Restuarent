@@ -1,12 +1,4 @@
-import { motion } from "framer-motion";
-import {
-  Flex,
-  HStack,
-  IconButton,
-  SimpleGrid,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Flex, HStack, IconButton, Text, VStack } from "@chakra-ui/react";
 
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
