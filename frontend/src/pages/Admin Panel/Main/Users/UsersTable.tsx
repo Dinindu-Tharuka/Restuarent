@@ -1,5 +1,7 @@
 import {
-    IconButton,
+  Button,
+  HStack,
+  IconButton,
   Table,
   TableContainer,
   Tbody,
@@ -7,52 +9,75 @@ import {
   Th,
   Thead,
   Tr,
+  VStack,
 } from "@chakra-ui/react";
 import useUsers from "../../../../Hooks/User/User/useUsers";
 import { useState } from "react";
-import { IoIosPersonAdd } from "react-icons/io";
+import SignOutButton from "../../SidePanel/componants/SignOutButton";
+import AddUserAddModel from "./UserAdd/AddUserAddModel";
+import { SIZES } from "../../../../Generics/constants";
 
 const UsersTable = () => {
   const [page, setPage] = useState(1);
   const { data: users } = useUsers({ page: page, username: "" });
 
+  const userCount = users?.count;
+  let lastPage = 0;
+  if (userCount !== undefined) {
+    lastPage = Math.ceil(userCount / SIZES.USER_PAGE_PAGINATION_SIZE);
+  }
+
   console.log(users);
   return (
-    <TableContainer>
-      <Table>
-        <Thead>
-          <Tr>
-            <Th>User Name</Th>
-            <Th>Email</Th>
-            <Th>Designation</Th>
-            <Th></Th>
-            <Th></Th>
-            <Th>
-              <IconButton
-                colorScheme="red"
-                aria-label="Add User"
-                icon={<IoIosPersonAdd />}
-              />
-            </Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {users?.results.map((user) => (
+    <VStack width="100%">
+      <TableContainer width="100%" height="80vh">
+        <Table>
+          <Thead>
             <Tr>
-              <Td>{user.user_name}</Td>
-              <Td>{user.email}</Td>
-              <Td>
-                {user.is_superuser
-                  ? "Admin"
-                  : user.is_cashier
-                  ? "Chasier"
-                  : "Chef"}
-              </Td>
+              <Th>User Name</Th>
+              <Th>Email</Th>
+              <Th>Designation</Th>
+              <Th></Th>
+              <Th></Th>
+              <Th>
+                <HStack spacing={5}>
+                  <AddUserAddModel />
+                  <SignOutButton />
+                </HStack>
+              </Th>
             </Tr>
-          ))}
-        </Tbody>
-      </Table>
-    </TableContainer>
+          </Thead>
+          <Tbody>
+            {users?.results.map((user) => (
+              <Tr>
+                <Td>{user.user_name}</Td>
+                <Td>{user.email}</Td>
+                <Td>
+                  {user.is_superuser
+                    ? "Admin"
+                    : user.is_cashier
+                    ? "Chasier"
+                    : "Chef"}
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
+      </TableContainer>
+
+      <HStack position="absolute" top="90vh" right="40vw">
+        <Button width={SIZES.ADMIN_PAGE_BUTTON_WIDTH} isDisabled={page === 1} onClick={()=> setPage(page-1)}>
+          Previous
+        </Button>
+        <Button
+          width={SIZES.ADMIN_PAGE_BUTTON_WIDTH}
+          isDisabled={page === lastPage}
+          onClick={()=> setPage(page+1)}
+        >
+          Next
+        </Button>
+      </HStack>
+    </VStack>
   );
 };
 

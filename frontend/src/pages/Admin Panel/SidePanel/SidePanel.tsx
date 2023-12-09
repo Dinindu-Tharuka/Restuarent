@@ -1,4 +1,4 @@
-import { Button, List, ListItem, VStack } from "@chakra-ui/react";
+import { Button, List, ListItem } from "@chakra-ui/react";
 
 const SidePanel = () => {
   const panelItems = ["Dashboard", "Reports"];

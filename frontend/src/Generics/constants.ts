@@ -6,14 +6,18 @@ export enum COLOURS {
   MAIN_PAGE_WHITE = "white",
   BACKGROUND_COLOR = '#f2f2f2',
   LOGIN_BACKGROUND = '#f6de56',
-  ADMIN_PAGE_BUTTON_COLOR = '#ff1a4c'
+  ADMIN_PAGE_BUTTON_COLOR = '#ff1a4c',
+  BUTTON_LETTER_COLOR = 'white'
 }
 
 export enum SIZES {
   MAIN_PAGE_BUTTON_BORDER_RADIOUS = 20,
   TABLE_BUTTON_WIDTH = '18vw',
   TABLE_BUTTON_HEIGHT = '15vh',
-  LOGIN_FORM_INPUT_WIDTH = '20vw'
+  LOGIN_FORM_INPUT_WIDTH = '20vw',
+  FORM_FIELD_MARGIN = 5,
+  ADMIN_PAGE_BUTTON_WIDTH = '180px',
+  USER_PAGE_PAGINATION_SIZE = 7,
 }
 
 export const FIRST_FLOOR : ROOM_BUTTON[] = [
@@ -95,3 +99,10 @@ export const SECOND_FLOOR_PART_2 : ROOM_BUTTON[] = [
   { table_no: "T609", is_placed_order: false },
   { table_no: "T610", is_placed_order: false },
 ];
+
+export enum REQUEST {
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE',
+  UPDATE = 'UPDATE'
+}
