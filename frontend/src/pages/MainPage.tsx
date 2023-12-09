@@ -4,21 +4,19 @@ import { COLOURS, SIZES } from "../Generics/constants";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import AdminPanel from "./Admin Panel/AdminPanel";
-import { useEffect} from "react";
+import { useEffect } from "react";
 import UserMeContext from "../Contexts/UserMe";
 import SignOutButton from "./Admin Panel/SidePanel/componants/SignOutButton";
-import useUserMe from "../Hooks/useUserMe";
+import useUserMe from "../Hooks/User/useUserMe";
 
-const MainPage = () => {  
-
-  const { userMe } = useUserMe()
+const MainPage = () => {
+  const { userMe } = useUserMe();
 
   useEffect(() => {
     if (localStorage.getItem("firstTime") === "true") {
       window.location.reload();
       localStorage.setItem("firstTime", "false");
-    }   
-      
+    }
   }, []);
   return (
     <UserMeContext.Provider value={userMe}>
@@ -34,9 +32,8 @@ const MainPage = () => {
           {/* Admin Panel */}
           <Flex position="absolute" left="90vw" top="2vh">
             <HStack>
-            {userMe.is_superuser && <AdminPanel />}
-            <SignOutButton/>
-
+              {userMe.is_superuser && <AdminPanel />}
+              <SignOutButton />
             </HStack>
           </Flex>
 

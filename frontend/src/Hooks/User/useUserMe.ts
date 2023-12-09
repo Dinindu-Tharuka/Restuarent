@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import axiosInstance from "../services/api-client";
-import { User } from "../Generics/interfaces";
+import axiosInstance from "../../services/api-client";
+import { User } from "../../Generics/interfaces";
 
 const useUserMe = () => {
   const [userMe, setUserMe] = useState<User>({} as User);
@@ -12,7 +12,7 @@ const useUserMe = () => {
       .catch((err) => console.log(err.message));
   }, []);
 
-  return {userMe};
+  return { userMe };
 };
 
 export default useUserMe;
