@@ -63,7 +63,7 @@ const UsersTable = () => {
                   </Td>
                   <Td>
                     <HStack spacing={5}>
-                    <UserProfileShow/>
+                    <UserProfileShow user={user}/>
                     <UserDeleteConfirmation user={user}/>
 
                     </HStack>

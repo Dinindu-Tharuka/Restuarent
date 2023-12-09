@@ -11,7 +11,7 @@ const useMutateUsers = (
 
   const createUser = useMutation<User, Error, User>({
     mutationFn: (user: User) => {
-      if (requestType === "post") {
+      if (requestType === REQUEST.POST) {
         return usersService
           .create(user)
           .then((res) => res.data);

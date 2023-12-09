@@ -31,3 +31,12 @@ export interface PaginationStructure<T> {
   previous: string | null;
   results: T[];
 }
+
+export interface UserProfile {
+  id: number;
+  user_account_id: number;
+  first_name: string;
+  last_name: string;
+  telephone: string;
+  address: string;
+}

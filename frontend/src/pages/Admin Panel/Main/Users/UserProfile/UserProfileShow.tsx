@@ -9,9 +9,18 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { ImProfile } from "react-icons/im";
+import UserProfileCreateForm from "./UserProfileCreateForm";
+import { User } from "../../../../../Generics/interfaces";
 
-const UserProfileShow = () => {
+interface Props{
+  user:User
+}
+
+const UserProfileShow = ({ user }:Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  console.log('user', user)
+
   return (
     <>
       <IconButton icon={<ImProfile />} aria-label="profile" onClick={onOpen} />
@@ -25,7 +34,9 @@ const UserProfileShow = () => {
         <ModalContent>
           <ModalHeader>Profile</ModalHeader>
           <ModalCloseButton />
-          <ModalBody></ModalBody>
+          <ModalBody>
+            <UserProfileCreateForm user={user} onSuccess={()=>onClose()}/>
+          </ModalBody>
         </ModalContent>
       </Modal>
     </>
