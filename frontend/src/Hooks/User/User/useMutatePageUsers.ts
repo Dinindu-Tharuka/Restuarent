@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import usersService from "../../../services/user/users/users-service";
 import { User } from "../../../Generics/interfaces";
+import { REQUEST } from "../../../Generics/constants";
 
 const useMutateUsers = (
   onSuccessfull: (savedUser: User) => void,
@@ -14,10 +15,14 @@ const useMutateUsers = (
         return usersService
           .create(user)
           .then((res) => res.data);
+      }else if (requestType === REQUEST.DELETE){
+        return usersService
+            .delete(user.id)
+            .then((res)=> res.data)
       }
 
       return usersService
-        .update(user, user.id + "")
+        .update(user, user.id)
         .then((res) => res.data);
     },
     onSuccess: (savedUser, newUser) => {

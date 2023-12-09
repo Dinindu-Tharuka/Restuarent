@@ -14,13 +14,13 @@ export class HttpQueryService<T> {
   
       return request;
     };  
-    delete = (id: string) => {
+    delete = (id: number) => {
       return axiosInstance.delete(`${this.endpoint}${id}/`);
     };
     create = (entity: T) => {
       return axiosInstance.post(this.endpoint, entity);
     };
-    update = (entity: T, id: string) => {
+    update = (entity: T, id: number) => {
       return axiosInstance.put(`${this.endpoint}${id}/`, entity);
     };
    

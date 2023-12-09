@@ -1,11 +1,13 @@
 import {
   Button,
+  Container,
   HStack,
   IconButton,
   Table,
   TableContainer,
   Tbody,
   Td,
+  Text,
   Th,
   Thead,
   Tr,
@@ -16,6 +18,8 @@ import { useState } from "react";
 import SignOutButton from "../../SidePanel/componants/SignOutButton";
 import AddUserAddModel from "./UserAdd/AddUserAddModel";
 import { SIZES } from "../../../../Generics/constants";
+import UserDeleteConfirmation from "./UserDeleteConfirmation";
+import UserProfileShow from "./UserProfile/UserProfileShow";
 
 const UsersTable = () => {
   const [page, setPage] = useState(1);
@@ -26,53 +30,68 @@ const UsersTable = () => {
   if (userCount !== undefined) {
     lastPage = Math.ceil(userCount / SIZES.USER_PAGE_PAGINATION_SIZE);
   }
-
-  console.log(users);
   return (
-    <VStack width="100%">
-      <TableContainer width="100%" height="80vh">
-        <Table>
-          <Thead>
-            <Tr>
-              <Th>User Name</Th>
-              <Th>Email</Th>
-              <Th>Designation</Th>
-              <Th></Th>
-              <Th></Th>
-              <Th>
-                <HStack spacing={5}>
-                  <AddUserAddModel />
-                  <SignOutButton />
-                </HStack>
-              </Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {users?.results.map((user) => (
+    <VStack width="100%" >
+      <Container overflow='auto' maxWidth='100%' minHeight='80vh' maxHeight='80vh'>
+        
+          <Table overflow='auto'>
+            <Thead>
               <Tr>
-                <Td>{user.user_name}</Td>
-                <Td>{user.email}</Td>
-                <Td>
-                  {user.is_superuser
-                    ? "Admin"
-                    : user.is_cashier
-                    ? "Chasier"
-                    : "Chef"}
-                </Td>
+                <Th>User Name</Th>
+                <Th>Email</Th>
+                <Th>Designation</Th>
+                <Th></Th>
+                <Th>
+                  <HStack spacing={5}>
+                    <AddUserAddModel />
+                    <SignOutButton />
+                  </HStack>
+                </Th>
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
+            </Thead>
+            <Tbody>
+              {users?.results.map((user) => (
+                <Tr>
+                  <Td>{user.user_name}</Td>
+                  <Td>{user.email}</Td>
+                  <Td>
+                    {user.is_superuser
+                      ? "Admin"
+                      : user.is_cashier
+                      ? "Chasier"
+                      : "Chef"}
+                  </Td>
+                  <Td>
+                    <HStack spacing={5}>
+                    <UserProfileShow/>
+                    <UserDeleteConfirmation user={user}/>
+
+                    </HStack>
+                  </Td>
+                  
+                  
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+      </Container>
 
       <HStack position="absolute" top="90vh" right="40vw">
-        <Button width={SIZES.ADMIN_PAGE_BUTTON_WIDTH} isDisabled={page === 1} onClick={()=> setPage(page-1)}>
+        <Button
+          width={SIZES.ADMIN_PAGE_BUTTON_WIDTH}
+          isDisabled={page === 1}
+          onClick={() => setPage(page - 1)}
+        >
           Previous
         </Button>
+
+        <Text>
+          {page} of {lastPage}
+        </Text>
         <Button
           width={SIZES.ADMIN_PAGE_BUTTON_WIDTH}
           isDisabled={page === lastPage}
-          onClick={()=> setPage(page+1)}
+          onClick={() => setPage(page + 1)}
         >
           Next
         </Button>
