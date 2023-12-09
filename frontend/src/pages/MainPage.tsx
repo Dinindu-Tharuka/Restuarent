@@ -4,28 +4,22 @@ import { COLOURS, SIZES } from "../Generics/constants";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import AdminPanel from "./Admin Panel/AdminPanel";
-import { useEffect, useState } from "react";
-import axiosInstance from "../services/api-client";
-import { User } from "../Generics/interfaces";
+import { useEffect} from "react";
 import UserMeContext from "../Contexts/UserMe";
 import SignOutButton from "./Admin Panel/SidePanel/componants/SignOutButton";
+import useUserMe from "../Hooks/useUserMe";
 
-const MainPage = () => {
-  const [userMe, setUserMe] = useState<User>({} as User);
+const MainPage = () => {  
 
-  console.log(userMe);
+  const { userMe } = useUserMe()
 
   useEffect(() => {
     if (localStorage.getItem("firstTime") === "true") {
       window.location.reload();
       localStorage.setItem("firstTime", "false");
-    }
-
-    axiosInstance
-      .get("/users/me/")
-      .then((res) => setUserMe(res.data))
-      .catch((err) => console.log(err.message));
-  }, [userMe]);
+    }   
+      
+  }, []);
   return (
     <UserMeContext.Provider value={userMe}>
       <motion.div
@@ -40,7 +34,7 @@ const MainPage = () => {
           {/* Admin Panel */}
           <Flex position="absolute" left="90vw" top="2vh">
             <HStack>
-            <AdminPanel />
+            {userMe.is_superuser && <AdminPanel />}
             <SignOutButton/>
 
             </HStack>

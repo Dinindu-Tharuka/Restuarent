@@ -15,6 +15,10 @@ const Dining = () => {
   const floors = ["First Floor", "Second Floor", "Second Floor"];
   const navigate = useNavigate()
 
+
+
+  
+
   const onClick = ()=>{
     navigate('/')
   }

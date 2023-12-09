@@ -13,7 +13,6 @@ interface UserToken{
 
 const Privateroutes = () => {
   const access_token = localStorage.getItem("access");
-
   let isExpired = null;
   if (access_token) {
     const user: UserToken = jwtDecode(access_token ? access_token : "");
