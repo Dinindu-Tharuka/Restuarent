@@ -12,8 +12,8 @@ const Section_2 = () => {
     >
       <HStack justifyContent="center">
         <SimpleGrid columns={5} spacing={2}>
-          {SECOND_FLOOR_PART_1.map((table) => (
-            <TableButton tableButton={table} />
+          {SECOND_FLOOR_PART_1.map((table, index) => (
+            <TableButton tableButton={table} key={index}/>
           ))}
         </SimpleGrid>
       </HStack>

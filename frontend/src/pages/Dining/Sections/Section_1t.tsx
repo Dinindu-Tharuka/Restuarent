@@ -12,8 +12,8 @@ const Section_1 = () => {
     >
       <HStack justifyContent="center" height='100%'>
         <SimpleGrid columns={5} spacing={2} height='100%' alignItems='flex-start'>
-          {FIRST_FLOOR.map((table) => (
-            <TableButton tableButton={table} />
+          {FIRST_FLOOR.map((table, index) => (
+            <TableButton tableButton={table} key={index}/>
           ))}
         </SimpleGrid>
       </HStack>

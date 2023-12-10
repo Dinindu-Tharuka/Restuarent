@@ -1,4 +1,8 @@
-import { Button, SimpleGrid, Text } from "@chakra-ui/react";
+import {
+  Button,
+  SimpleGrid,
+  Text,
+} from "@chakra-ui/react";
 import { Category } from "../../../../Generics/interfaces";
 import { SIZES } from "../../../../Generics/constants";
 import { useNavigate } from "react-router-dom";
@@ -20,13 +24,14 @@ const Foods = ({ categories, table }: Props) => {
   return (
     <>
       {isAvailble !== undefined && isAvailble > 0 ? (
-        <SimpleGrid columns={{lg:5, base:3}} spacing={2}>
+        <SimpleGrid columns={{ lg: 5, base: 3 }} spacing={2}>
           {categories
             ?.filter((category) => category.is_food)
-            .map((category) => (
+            .map((category, index) => (
               <Button
                 height={SIZES.CATEGORY_ITEM_HEIGHT}
                 onClick={() => onClick(category.id)}
+                key={index}
               >
                 {category.title}
               </Button>

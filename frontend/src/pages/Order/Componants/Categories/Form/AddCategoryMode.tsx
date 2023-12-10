@@ -1,6 +1,7 @@
-import { Button, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react"
+import { IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, VStack, useDisclosure } from "@chakra-ui/react"
 import AddCategoryForm from "./AddCategoryForm"
 import { MdOutlineAddBox } from "react-icons/md"
+import ShowAllCategories from "./ShowAllCategories"
 
 
 const AddCategoryMode = () => {
@@ -20,7 +21,12 @@ const AddCategoryMode = () => {
           <ModalHeader>Add Category</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
+            <VStack alignItems='start'>
             <AddCategoryForm/>
+
+            <ShowAllCategories/>
+
+            </VStack>
           </ModalBody>
 
           

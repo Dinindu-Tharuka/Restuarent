@@ -1,7 +1,6 @@
 import {
   Box,
   Container,
-  IconButton,
   Tab,
   TabList,
   TabPanel,

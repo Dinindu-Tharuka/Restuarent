@@ -21,10 +21,11 @@ const Beverages = ({ categories, table }: Props) => {
         <SimpleGrid columns={5} spacing={2}>
           {categories
             ?.filter((category) => !category.is_food)
-            .map((category) => (
+            .map((category, index) => (
               <Button
                 height={SIZES.CATEGORY_ITEM_HEIGHT}
                 onClick={() => onClick(category.id)}
+                key={index}
               >
                 {category.title}
               </Button>
