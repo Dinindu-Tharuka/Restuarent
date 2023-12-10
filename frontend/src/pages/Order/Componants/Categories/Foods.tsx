@@ -20,7 +20,7 @@ const Foods = ({ categories, table }: Props) => {
   return (
     <>
       {isAvailble !== undefined && isAvailble > 0 ? (
-        <SimpleGrid columns={5} spacing={2}>
+        <SimpleGrid columns={{lg:5, base:3}} spacing={2}>
           {categories
             ?.filter((category) => category.is_food)
             .map((category) => (

@@ -1,6 +1,6 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import NavBar from "./Componants/NavBar";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 const OrderMainPage = () => {
   
