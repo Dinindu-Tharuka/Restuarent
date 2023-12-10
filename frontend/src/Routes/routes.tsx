@@ -9,6 +9,8 @@ import Login from "../pages/Auth/Login";
 import AdminMainPage from "../pages/Admin Panel/AdminMainPage";
 import UsersTable from "../pages/Admin Panel/Main/Users/UsersTable";
 import ReportMain from "../pages/Admin Panel/Main/Reports/ReportMain";
+import Categories from "../pages/Order/Componants/Categories";
+import CategoryCartItem from "../pages/Order/Componants/CategoryCartItem";
 
 
 const router = createBrowserRouter([
@@ -18,8 +20,11 @@ const router = createBrowserRouter([
         children: [
         { path: "/", element: <AnimatePresence><MainPage/></AnimatePresence>},            
         { path:'/dining', element:<AnimatePresence><Dining/></AnimatePresence>},
-        { path:'/dining/order/:table', element:<AnimatePresence><OrderMainPage/></AnimatePresence>},
-        { path:'/takeaway', element:<AnimatePresence><Takeaway/></AnimatePresence>},   
+        { path:'/dining/order/:table', element:<AnimatePresence><OrderMainPage/></AnimatePresence>, children:[
+          {path:'', element:<Categories/>},
+          {path:'items', element:<CategoryCartItem/>},
+        ]},
+          
         { path:'/admin', element:<AdminMainPage/>, children:[
           {path:'', element:<UsersTable/>},
           {path:'reports', element:<ReportMain/>}

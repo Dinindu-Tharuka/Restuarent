@@ -40,3 +40,8 @@ export interface UserProfile {
   telephone: string;
   address: string;
 }
+
+export interface Category{
+  id:number;
+  title:string;
+}

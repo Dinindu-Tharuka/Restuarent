@@ -108,7 +108,7 @@ const MainPage = () => {
                 textColor: COLOURS.MAIN_PAGE_BLACK,
               }}
             >
-              <Link to="/takeaway">Take away</Link>
+              <Link to="/dining/order/T000">Take away</Link>
             </Button>
           </HStack>
         </Flex>

@@ -1,8 +1,11 @@
-import React from 'react'
+import { SimpleGrid } from "@chakra-ui/react"
+
 
 const Categories = () => {
   return (
-    <div>Categories</div>
+    <SimpleGrid columns={5}>
+
+    </SimpleGrid>
   )
 }
 
