@@ -9,7 +9,7 @@ import AdminMainPage from "../pages/Admin Panel/AdminMainPage";
 import UsersTable from "../pages/Admin Panel/Main/Users/UsersTable";
 import ReportMain from "../pages/Admin Panel/Main/Reports/ReportMain";
 import Categories from "../pages/Order/Componants/Categories/Categories";
-import CategoryCartItem from "../pages/Order/Componants/CategoryCartItem";
+import CategoryCartItem from "../pages/Order/Componants/Categories/CategoryCartItem";
 
 const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
         ),
         children: [
           { path: "", element: <Categories /> },
-          { path: "items", element: <CategoryCartItem /> },
+          { path: "items/:id", element: <CategoryCartItem /> },
         ],
       },
 

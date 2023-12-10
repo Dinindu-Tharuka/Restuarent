@@ -41,8 +41,15 @@ export interface UserProfile {
   address: string;
 }
 
-export interface Category{
-  id:number;
-  title:string;
-  is_food:boolean;
+export interface Category {
+  id: number;
+  title: string;
+  is_food: boolean;
+}
+
+export interface Product {
+  id: number;
+  title: string;
+  price: number;
+  category_id: number;
 }
