@@ -22,12 +22,12 @@ const useProductsMutate = (
         .update(product, product.id)
         .then((res) => res.data);
     },
-    onSuccess: (savedCategory, newCategory) => {
+    onSuccess: (savedProduct, newProduct) => {
       queryClient.invalidateQueries({
         queryKey: ["products"],
       });
 
-      onSuccessfull(savedCategory);
+      onSuccessfull(savedProduct);
     },
   });
 

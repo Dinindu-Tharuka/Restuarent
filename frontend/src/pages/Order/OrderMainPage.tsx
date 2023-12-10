@@ -3,8 +3,7 @@ import NavBar from "./Componants/NavBar";
 import { Outlet, useParams } from "react-router-dom";
 
 const OrderMainPage = () => {
-  const params = useParams();
-  console.log(params);
+  
   return (
     <Grid templateAreas={`"nav nav" "main aside"`}>
       <GridItem area="nav" height="10vh">

@@ -9,9 +9,15 @@ import {
 import useCategories from "../../../../Hooks/Product/Category/useCategories";
 import Foods from "./Foods";
 import Beverages from "./Beverages";
+import { useParams } from "react-router-dom";
+
+
 
 const Categories = () => {
   const { data: categories } = useCategories();
+  const {table} = useParams();
+
+  console.log(table)
   return (
     <Tabs>
       <TabList>
@@ -27,7 +33,7 @@ const Categories = () => {
             maxHeight="78vh"
             minHeight="78vh"
           >
-            <Foods categories={categories} />
+            <Foods categories={categories} table={table}/>
           </Container>
         </TabPanel>
         <TabPanel>
@@ -37,7 +43,7 @@ const Categories = () => {
             maxHeight="78vh"
             minHeight="78vh"
           >
-            <Beverages categories={categories} />
+            <Beverages categories={categories} table={table}/>
           </Container>
         </TabPanel>
       </TabPanels>
