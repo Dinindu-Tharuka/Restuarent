@@ -44,7 +44,6 @@ const UsersTable = () => {
                 <Th>
                   <HStack spacing={5}>
                     <AddUserAddModel />
-                    <SignOutButton />
                   </HStack>
                 </Th>
               </Tr>

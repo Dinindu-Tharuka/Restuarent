@@ -3,7 +3,7 @@ import restuarent from "../assets/images/restuarent.jpg";
 import { COLOURS, SIZES } from "../Generics/constants";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import AdminPanel from "./Admin Panel/AdminPanel";
+import AdminPanelButton from "./Admin Panel/AdminPanelButton";
 import { useEffect } from "react";
 import UserMeContext from "../Contexts/UserMe";
 import SignOutButton from "./Admin Panel/SidePanel/componants/SignOutButton";
@@ -32,7 +32,7 @@ const MainPage = () => {
           {/* Admin Panel */}
           <Flex position="absolute" left="90vw" top="2vh">
             <HStack>
-              {userMe.is_superuser && <AdminPanel />}
+              {userMe.is_superuser && <AdminPanelButton />}
               <SignOutButton />
             </HStack>
           </Flex>
