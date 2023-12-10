@@ -44,4 +44,5 @@ export interface UserProfile {
 export interface Category{
   id:number;
   title:string;
+  is_food:boolean;
 }
