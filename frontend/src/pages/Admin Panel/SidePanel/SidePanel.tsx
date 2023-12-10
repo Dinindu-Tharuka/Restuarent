@@ -1,9 +1,18 @@
 import { Button, List, ListItem } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const SidePanel = () => {
   const panelItems = ["Dashboard", "Reports"];
-  const routes = ['/admin', '/admin/reports']
+  const routes = ['/admin', '/admin/reports'];
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const navigate = useNavigate()
+
+  const onClick = (index:number)=>{
+    
+      navigate(routes[index])
+   
+  }
 
   
   return (
@@ -14,11 +23,15 @@ const SidePanel = () => {
             width="100%"
             height="10vh"
             borderRadius={50}
+            bg={selectedIndex === index ? "#fc839f": ''}
             _hover={{
               background: "#fc839f",
             }}
+            onClick={()=>{
+              setSelectedIndex(index)
+              onClick(index)}}
           >
-            <Link to={routes[index]}>{item}</Link>
+            {item}
           </Button>
         </ListItem>
       ))}

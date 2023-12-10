@@ -15,7 +15,7 @@ const AdminMainPage = () => {
     <Grid templateAreas={`"nav nav" "aside main"`}>
       <GridItem area="nav" height="10vh">
         <HStack justifyContent="center" alignItems="center">
-          <Text fontSize={40} fontWeight='bold'>Admin Panel</Text>
+          <Text fontSize={{lg:40, base:20}} fontWeight='bold'>Admin Panel</Text>
         </HStack>
 
         <HStack position="absolute" left="93vw" top='2vh'>
