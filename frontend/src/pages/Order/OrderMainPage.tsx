@@ -4,11 +4,16 @@ import { Outlet, useParams } from "react-router-dom";
 import Billing from "./Billing/Billing";
 import useOrderMutate from "../../Hooks/Orders/useOrderMutate";
 import { REQUEST } from "../../Generics/constants";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useOrders from "../../Hooks/Orders/useOrders";
-import { isOrderOpen } from "./Functions/functions";
+import { findCurrentOrder, isOrderOpen } from "./Functions/functions";
+import { Order } from "../../Generics/interfaces";
+import CurrentOrderContext from "../../Contexts/Orders/CurrentOrderContext";
 
 const OrderMainPage = () => {
+  // for context
+  const [currentOrder, setCurrentOrder] = useState<Order>({} as Order);
+
   const { table } = useParams();
   const orderMutate = useOrderMutate(() => {
     console.log("craeted order");
@@ -31,22 +36,36 @@ const OrderMainPage = () => {
         is_order_open: true,
       };
       orderMutate.mutate(order);
+    } else {
+      if (orders && table) {
+        setCurrentOrder(findCurrentOrder(orders, table));
+      }
     }
   }, []);
 
   return (
-    <Grid templateAreas={`"nav nav" "main aside"`}>
-      <GridItem area="nav" height="10vh">
-        <NavBar />
-      </GridItem>
-      <GridItem area="main" height="90vh" width={{ lg: "65vw", base: "50vw" }}>
-        <Outlet />
-      </GridItem>
+    <CurrentOrderContext.Provider value={{ currentOrder }}>
+      <Grid templateAreas={`"nav nav" "main aside"`}>
+        <GridItem area="nav" height="10vh">
+          <NavBar />
+        </GridItem>
+        <GridItem
+          area="main"
+          height="90vh"
+          width={{ lg: "65vw", base: "50vw" }}
+        >
+          <Outlet />
+        </GridItem>
 
-      <GridItem area="aside" height="90vh" width={{ lg: "35vw", base: "50vw" }}>
-        <Billing />
-      </GridItem>
-    </Grid>
+        <GridItem
+          area="aside"
+          height="90vh"
+          width={{ lg: "35vw", base: "50vw" }}
+        >
+          <Billing />
+        </GridItem>
+      </Grid>
+    </CurrentOrderContext.Provider>
   );
 };
 

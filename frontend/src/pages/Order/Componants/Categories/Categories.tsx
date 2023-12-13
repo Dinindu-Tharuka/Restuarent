@@ -12,12 +12,15 @@ import Foods from "./Foods";
 import Beverages from "./Beverages";
 import { useParams } from "react-router-dom";
 import AddCategoryMode from "./Form/AddCategoryMode";
+import { useContext } from "react";
+import CurrentOrderContext from "../../../../Contexts/Orders/CurrentOrderContext";
 
 const Categories = () => {
   const { data: categories } = useCategories();
   const { table } = useParams();
+  const { currentOrder } = useContext(CurrentOrderContext)
 
-  console.log(table);
+  console.log('current order', currentOrder);
   return (
     <>
       <Box position='absolute' left={{ lg: "60vw", base: "45vw" }} zIndex={10}>
