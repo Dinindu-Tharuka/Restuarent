@@ -3,4 +3,4 @@ import { HttpQueryService } from "../http-service";
 
 
 
-export default new HttpQueryService<Order>("/orders/");
+export default new HttpQueryService<Order>("/store/orders/");

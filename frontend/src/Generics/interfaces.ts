@@ -62,13 +62,14 @@ export interface OrderItem{
 }
 
 export interface Order{
-  id:number;
-  table:string;
+  id?:number;
+  table?:string;
   customer_name:string;
   discount:number;
   is_takeway:boolean;
-  date:string;
-  orderitems:OrderItem[];
-  total:number;
-  is_order_canceld:boolean
+  date?:string;
+  orderitems?:OrderItem[];
+  total?:number;
+  is_order_canceld:boolean;
+  is_order_open:boolean;
 }
