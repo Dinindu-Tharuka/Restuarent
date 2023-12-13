@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import AdminPanelButton from "./Admin Panel/AdminPanelButton";
 import { useEffect } from "react";
-import UserMeContext from "../Contexts/UserMe";
 import SignOutButton from "./Admin Panel/SidePanel/componants/SignOutButton";
 import useUserMe from "../Hooks/User/useUserMe";
 
@@ -19,7 +18,7 @@ const MainPage = () => {
     }
   }, []);
   return (
-    <UserMeContext.Provider value={userMe}>
+    
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { duration: 1 } }}
@@ -113,7 +112,6 @@ const MainPage = () => {
           </HStack>
         </Flex>
       </motion.div>
-    </UserMeContext.Provider>
   );
 };
 

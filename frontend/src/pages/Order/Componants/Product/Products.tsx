@@ -1,12 +1,20 @@
-import { useParams } from "react-router-dom"
-
+import { useParams } from "react-router-dom";
+import { useProduct } from "../../../../Hooks/Product/Product/useProducts";
+import { SimpleGrid } from "@chakra-ui/react";
+import ProductItem from "./ProductItem";
 
 const Products = () => {
-  const params = useParams()
-  console.log(params)
-  return (
-    <div>Products</div>
-  )
-}
+  const { table, id } = useParams();
 
-export default Products
+  const { data:products} = useProduct({ category_id: id !== undefined ? parseInt(id) : 0 });
+
+  console.log('products', products)
+
+  return <SimpleGrid columns={{base:3, lg:5}}>
+    {
+      products?.map(product => <ProductItem product={product}/>)
+    }
+  </SimpleGrid>;
+};
+
+export default Products;

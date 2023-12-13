@@ -1,8 +1,11 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import NavBar from "./Componants/NavBar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
+import Billing from "./Billing/Billing";
 
 const OrderMainPage = () => {
+  const {table} = useParams()
+  
   
   return (
     <Grid templateAreas={`"nav nav" "main aside"`}>
@@ -17,7 +20,9 @@ const OrderMainPage = () => {
         area="aside"
         height="90vh"
         width={{ lg: "35vw", base: "50vw" }}
-      ></GridItem>
+      >
+        <Billing/>
+      </GridItem>
     </Grid>
   );
 };
