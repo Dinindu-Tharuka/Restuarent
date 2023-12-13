@@ -9,20 +9,24 @@ import Section_3 from "./Sections/Section_3t";
 import { IoHomeSharp } from "react-icons/io5";
 import { COLOURS } from "../../Generics/constants";
 import { useNavigate } from "react-router-dom";
+import OrderContext from "../../Contexts/Orders/OrdersContexts";
+import useOrders from "../../Hooks/Orders/useOrders";
 
 const Dining = () => {
   const [page, setPage] = useState(0);
   const floors = ["First Floor", "Second Floor", "Second Floor"];
-  const navigate = useNavigate()
+  const navigate = useNavigate()  
 
+  const date = new Date()
+  console.log('date', date.toDateString())
 
-
-  
+  const { data:orders} = useOrders()
 
   const onClick = ()=>{
     navigate('/')
   }
   return (
+    <OrderContext.Provider value={{orders}}>
     <VStack width="100vw" height="100vh" bg={COLOURS.BACKGROUND_COLOR}>
       <Flex width="100vw" >
         <IconButton
@@ -66,6 +70,7 @@ const Dining = () => {
         />
       </HStack>
     </VStack>
+    </OrderContext.Provider>
   );
 };
 

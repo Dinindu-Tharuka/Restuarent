@@ -2,8 +2,12 @@ import { HStack, SimpleGrid } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { FIRST_FLOOR } from "../../../Generics/constants";
 import TableButton from "../TableButton";
+import { useContext } from "react";
+import OrderContext from "../../../Contexts/Orders/OrdersContexts";
+import { makeOrderTables } from "../Functions/functions";
 
 const Section_1 = () => {
+  const { orders } = useContext(OrderContext)
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -12,7 +16,7 @@ const Section_1 = () => {
     >
       <HStack justifyContent="center" height='100%'>
         <SimpleGrid columns={5} spacing={2} height='100%' alignItems='flex-start'>
-          {FIRST_FLOOR.map((table, index) => (
+          {orders !== undefined && makeOrderTables(FIRST_FLOOR, orders).map((table, index) => (
             <TableButton tableButton={table} key={index}/>
           ))}
         </SimpleGrid>

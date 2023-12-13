@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import { ROOM_BUTTON } from "../../Generics/interfaces";
-import { SIZES } from "../../Generics/constants";
-import { Link, useNavigate } from "react-router-dom";
+import { COLOURS, SIZES } from "../../Generics/constants";
+import { useNavigate } from "react-router-dom";
 
 interface props {
   tableButton: ROOM_BUTTON;
@@ -20,6 +20,7 @@ const TableButton = ({ tableButton }: props) => {
       borderRadius={50}
       boxShadow='lg'
       onClick={onClick}
+      bg={tableButton.is_placed_order ? COLOURS.ORDER_PLACE_COLOR : ''}
     >
       {tableButton.table_no}
     </Button>

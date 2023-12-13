@@ -5,6 +5,8 @@ import Billing from "./Billing/Billing";
 import useOrderMutate from "../../Hooks/Orders/useOrderMutate";
 import { REQUEST } from "../../Generics/constants";
 import { useEffect } from "react";
+import useOrders from "../../Hooks/Orders/useOrders";
+import { isOrderOpen } from "./Functions/functions";
 
 const OrderMainPage = () => {
   const { table } = useParams();
@@ -12,16 +14,24 @@ const OrderMainPage = () => {
     console.log("craeted order");
   }, REQUEST.POST);
 
+  const { data: orders } = useOrders();
+
   useEffect(() => {
-    const order = {
-      table: table,
-      customer_name: "customer_name",
-      discount: 0,
-      is_takeway: false,
-      is_order_canceld: false,
-      is_order_open: false,
-    } ;
-    orderMutate.mutate(order);
+    if (
+      orders !== undefined &&
+      table !== undefined &&
+      !isOrderOpen(orders, table)
+    ) {
+      const order = {
+        table: table,
+        customer_name: "customer_name",
+        discount: 0,
+        is_takeway: false,
+        is_order_canceld: false,
+        is_order_open: true,
+      };
+      orderMutate.mutate(order);
+    }
   }, []);
 
   return (
