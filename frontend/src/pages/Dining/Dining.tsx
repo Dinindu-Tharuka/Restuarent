@@ -18,7 +18,6 @@ const Dining = () => {
   const navigate = useNavigate()  
 
   const date = new Date()
-  console.log('date', date.toDateString())
 
   const { data:orders} = useOrders()
 
