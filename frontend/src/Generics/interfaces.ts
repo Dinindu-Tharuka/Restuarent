@@ -53,3 +53,22 @@ export interface Product {
   price: number;
   category_id: number;
 }
+
+export interface OrderItem{
+  id:number;
+  product_id:number;
+  order_id:number;
+  quantity:number;
+}
+
+export interface Order{
+  id:number;
+  table:string;
+  customer_name:string;
+  discount:number;
+  is_takeway:boolean;
+  date:string;
+  orderitems:OrderItem[];
+  total:number;
+  is_order_canceld:boolean
+}
