@@ -8,7 +8,6 @@ const Products = () => {
 
   const { data:products} = useProduct({ category_id: id !== undefined ? parseInt(id) : 0 });
 
-  console.log('products', products)
 
   return <SimpleGrid columns={{base:3, lg:5}}>
     {

@@ -1,21 +1,73 @@
-import { Card, CardBody, Text } from "@chakra-ui/react";
-import { Product } from "../../../../Generics/interfaces";
-import { COLOURS } from "../../../../Generics/constants";
-interface Props{
-    product:Product
+import { Card, CardBody, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, useDisclosure } from "@chakra-ui/react";
+import { OrderItem, Product } from "../../../../Generics/interfaces";
+import { COLOURS, REQUEST } from "../../../../Generics/constants";
+import { useContext } from "react";
+import CurrentOrderContext from "../../../../Contexts/Orders/CurrentOrderContext";
+import useOrderItemMutate from "../../../../Hooks/OrderItem/useOrderItemMutate";
+import { FieldValues, useForm } from "react-hook-form";
+interface Props {
+  product: Product;
 }
 
-const ProductItem = ({ product }:Props) => {
+const ProductItem = ({ product }: Props) => {
+  // Model
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  // form
+  const { register, handleSubmit} = useForm()
+
+  const { currentOrder } = useContext(CurrentOrderContext);
+  const orderItemMutate = useOrderItemMutate(
+    () => {
+      console.log("created orderitem");
+    },
+    REQUEST.POST,
+    currentOrder.id ? currentOrder.id : 0
+  );
+
+  const onSubmit = (data:FieldValues)=>{
+    const orderitem = {
+      ...data,
+      product_id:product.id
+    } as OrderItem
+    orderItemMutate.mutate(orderitem)
+
+  }
+
+  
 
   return (
-    <Card _hover={{
-        bg:COLOURS.TABLE_BUTTON_HOVER_COLOR
-    }} onClick={()=> console.log(product.title)} margin={2}>
-      <CardBody>
-        <Text>{product.title}</Text>
-        <Text>Rs: {product.price}.00</Text>
-      </CardBody>
-    </Card>
+    <>
+      <Card
+        _hover={{
+          bg: COLOURS.TABLE_BUTTON_HOVER_COLOR,
+        }}
+        onClick={() => {
+          onOpen()
+         }}
+        margin={2}
+      >
+        <CardBody>
+          <Text>{product.title}</Text>
+          <Text>Rs: {product.price}.00</Text>
+        </CardBody>
+      </Card>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Add Quantity</ModalHeader>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Input placeholder="Quantity" type="number" {...register('quantity')}/>
+          </form>
+          <ModalCloseButton />
+          <ModalBody>
+          </ModalBody>
+
+          
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
 

@@ -8,7 +8,6 @@ export const makeOrderTables = (
   let tables : string[] = []
 
   orders
-        .filter(order => new Date(order.date !== undefined ? order.date : '').toDateString() === date.toDateString())
         .filter(order => order.is_order_open)
         .forEach((order, index) => {
             tables[index] = order.table !== undefined ? order.table : ''

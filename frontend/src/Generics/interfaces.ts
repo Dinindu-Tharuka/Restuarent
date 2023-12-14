@@ -59,6 +59,7 @@ export interface OrderItem{
   product_id:number;
   order_id:number;
   quantity:number;
+  item_total:number;
 }
 
 export interface Order{
