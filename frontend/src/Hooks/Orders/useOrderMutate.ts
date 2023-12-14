@@ -14,10 +14,10 @@ const useOrderMutate = (
       if (requestType === REQUEST.POST) {
         return orderService.create(order).then((res) => res.data);
       } else if (requestType === REQUEST.DELETE) {
-        return orderService.delete(order.id).then((res) => res.data);
+        return orderService.delete(order.id !== undefined ? order.id : 0).then((res) => res.data);
       }
 
-      return orderService.update(order, order.id).then((res) => res.data);
+      return orderService.update(order, order.id !== undefined ? order.id : 0).then((res) => res.data);
     },
     onSuccess: (savedOrder, newOrder) => {
       queryClient.invalidateQueries({
