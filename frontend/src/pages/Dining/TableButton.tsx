@@ -21,6 +21,8 @@ const TableButton = ({ tableButton }: props) => {
       boxShadow='lg'
       onClick={onClick}
       bg={tableButton.is_placed_order ? COLOURS.ORDER_PLACE_COLOR : ''}
+      color={tableButton.is_placed_order ? COLOURS.MAIN_PAGE_WHITE:''}
+      
     >
       {tableButton.table_no}
     </Button>

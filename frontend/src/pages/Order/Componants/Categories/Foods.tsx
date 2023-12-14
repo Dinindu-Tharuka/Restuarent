@@ -4,7 +4,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Category } from "../../../../Generics/interfaces";
-import { SIZES } from "../../../../Generics/constants";
+import { COLOURS, SIZES } from "../../../../Generics/constants";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -32,6 +32,10 @@ const Foods = ({ categories, table }: Props) => {
                 height={SIZES.CATEGORY_ITEM_HEIGHT}
                 onClick={() => onClick(category.id)}
                 key={index}
+                _hover={{
+                  bg:COLOURS.TABLE_BUTTON_HOVER_COLOR,
+                  color:COLOURS.MAIN_PAGE_WHITE
+                }}
               >
                 {category.title}
               </Button>

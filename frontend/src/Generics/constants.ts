@@ -8,7 +8,8 @@ export enum COLOURS {
   LOGIN_BACKGROUND = '#f6de56',
   ADMIN_PAGE_BUTTON_COLOR = '#ff1a4c',
   BUTTON_LETTER_COLOR = 'white',
-  ORDER_PLACE_COLOR = '#d34412'
+  ORDER_PLACE_COLOR = '#d34412',
+  TABLE_BUTTON_HOVER_COLOR = '#f67122',
 }
 
 export enum SIZES {

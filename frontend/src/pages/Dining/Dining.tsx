@@ -17,8 +17,6 @@ const Dining = () => {
   const floors = ["First Floor", "Second Floor", "Second Floor"];
   const navigate = useNavigate()  
 
-  const date = new Date()
-
   const { data:orders} = useOrders()
 
   const onClick = ()=>{
