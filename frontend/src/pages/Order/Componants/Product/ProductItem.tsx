@@ -1,4 +1,4 @@
-import { Card, CardBody, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, useDisclosure } from "@chakra-ui/react";
+import { Button, Card, CardBody, HStack, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, useDisclosure, useToast } from "@chakra-ui/react";
 import { OrderItem, Product } from "../../../../Generics/interfaces";
 import { COLOURS, REQUEST } from "../../../../Generics/constants";
 import { useContext } from "react";
@@ -16,10 +16,19 @@ const ProductItem = ({ product }: Props) => {
   // form
   const { register, handleSubmit} = useForm()
 
+  //////
+  const toast = useToast()
+
   const { currentOrder } = useContext(CurrentOrderContext);
   const orderItemMutate = useOrderItemMutate(
     () => {
-      console.log("created orderitem");
+      toast({
+        title: 'Order Item',
+        description: "Order Item Successfully added.",
+        status: 'success',
+        duration: 1000,
+        isClosable: true,
+      })
     },
     REQUEST.POST,
     currentOrder.id ? currentOrder.id : 0
@@ -56,9 +65,14 @@ const ProductItem = ({ product }: Props) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Add Quantity</ModalHeader>
+          <ModalHeader>Add {product.title} Quantity</ModalHeader>
           <form onSubmit={handleSubmit(onSubmit)}>
+            <HStack>
             <Input placeholder="Quantity" type="number" {...register('quantity')}/>
+
+            <Button type="submit">Add</Button>
+
+            </HStack>
           </form>
           <ModalCloseButton />
           <ModalBody>

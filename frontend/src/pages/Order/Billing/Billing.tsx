@@ -17,20 +17,25 @@ import CurrentOrderContext from "../../../Contexts/Orders/CurrentOrderContext";
 import { FieldValues, useForm } from "react-hook-form";
 import { REQUEST } from "../../../Generics/constants";
 import useOrderMutate from "../../../Hooks/Orders/useOrderMutate";
-import { useParams } from "react-router-dom";
-import { useProduct } from "../../../Hooks/Product/Product/useProducts";
+import useOrderItems from "../../../Hooks/OrderItem/useOrderItems";
+import useAllProducts from "../../../Hooks/Product/Product/useAllProducts";
 
 const Billing = () => {
   const { currentOrder } = useContext(CurrentOrderContext);
-  const { id } = useParams();
-  const { data: products } = useProduct({
-    category_id: parseInt(id ? id : "0"),
-  });
+ 
+
+  const {data:products} = useAllProducts()
+
+ 
+
+  
 
   const { register, handleSubmit } = useForm();
   const orderMutate = useOrderMutate(() => {
-    console.log("updated");
+    console.log('craeted')
   }, REQUEST.UPDATE);
+
+  const { data: orderitems} = useOrderItems({order_id:currentOrder.id ? currentOrder.id : 0})
 
   const onSubmit = (data: FieldValues) => {
     const newlyOrder = {
@@ -64,7 +69,7 @@ const Billing = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {currentOrder.orderitems?.map((orderitem) => (
+            {orderitems?.map((orderitem) => (
               <Tr>
                 <Td>
                   {
