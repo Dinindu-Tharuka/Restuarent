@@ -2,8 +2,6 @@ import { HStack, SimpleGrid } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { FIRST_FLOOR } from "../../../Generics/constants";
 import TableButton from "../TableButton";
-import { useContext } from "react";
-import OrderContext from "../../../Contexts/Orders/OrdersContexts";
 import { makeOrderTables } from "../Functions/functions";
 import useOrders from "../../../Hooks/Orders/useOrders";
 

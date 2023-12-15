@@ -26,6 +26,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { Order, OrderItem } from "../../../Generics/interfaces";
 import useOrderItemMutate from "../../../Hooks/OrderItem/useOrderItemMutate";
 import OrderCancelConfirmation from "./OrderCancelConfirmation";
+import BillShowModel from "./BillShowModel";
 
 const Billing = () => {
   const { currentOrder } = useContext(CurrentOrderContext);
@@ -45,7 +46,7 @@ const Billing = () => {
 
   const { register, handleSubmit } = useForm();
   const orderMutate = useOrderMutate(() => {
-    console.log("craeted");
+    
   }, REQUEST.UPDATE);
 
   const onSubmit = (data: FieldValues) => {
@@ -60,6 +61,8 @@ const Billing = () => {
   const onDeleteOrderItem = (orderitem: OrderItem) => {
     orderitemMutate.mutate(orderitem);
   };
+
+ 
   return (
     <Flex width="100%">
       <VStack justifyContent="center" width="100%">
@@ -128,20 +131,11 @@ const Billing = () => {
             </Tbody>
           </Table>
           <HStack>
-           
-              {currentOrder !== undefined && <OrderCancelConfirmation order={currentOrder} />}
-      
-            <Button
-              width="50%"
-              bg={COLOURS.OK_COLOUR}
-              color={COLOURS.MAIN_PAGE_WHITE}
-              _hover={{
-                color: "black",
-                bg: COLOURS.HOVER_BUTTON_COLOR,
-              }}
-            >
-              Print
-            </Button>
+            {currentOrder !== undefined && (
+              <OrderCancelConfirmation order={currentOrder} />
+            )}
+
+            <BillShowModel/>
           </HStack>
         </Container>
       </VStack>
