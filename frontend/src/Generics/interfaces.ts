@@ -74,5 +74,6 @@ export interface Order{
   is_order_canceld:boolean;
   is_order_open:boolean;
   total_product_price?:number;
-  service_charge?:number
+  service_charge?:number;
+  service_charge_price?:number;
 }

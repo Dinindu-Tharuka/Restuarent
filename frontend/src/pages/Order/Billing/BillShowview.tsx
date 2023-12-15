@@ -81,6 +81,11 @@ const BillShowview = ({ order }: Props) => {
                     <td>{formatNumberWithTwoDecimals(order?.discount ? order?.discount : 0)}</td>
                 </tr>
                 <tr>
+                    <td className="textalignReight">Service Charge</td>
+                    <td></td>
+                    <td>{formatNumberWithTwoDecimals(order?.service_charge_price ? order?.service_charge_price : 0)}</td>
+                </tr>
+                <tr>
                     <td className="textalignReight">Sub Total</td>
                     <td></td>
                     <td>{formatNumberWithTwoDecimals(order?.total ? order?.total : 0)}</td>
