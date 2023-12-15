@@ -23,7 +23,7 @@ import useOrderMutate from "../../../Hooks/Orders/useOrderMutate";
 import useAllProducts from "../../../Hooks/Product/Product/useAllProducts";
 import useOrders from "../../../Hooks/Orders/useOrders";
 import { AiFillDelete } from "react-icons/ai";
-import { OrderItem } from "../../../Generics/interfaces";
+import { Order, OrderItem } from "../../../Generics/interfaces";
 import useOrderItemMutate from "../../../Hooks/OrderItem/useOrderItemMutate";
 import OrderCancelConfirmation from "./OrderCancelConfirmation";
 
@@ -31,7 +31,7 @@ const Billing = () => {
   const { currentOrder } = useContext(CurrentOrderContext);
   const { data: orders } = useOrders();
   const currentFetchOrder = orders?.find(
-    (order) => order.id === currentOrder.id
+    (order) => order.id === currentOrder?.id
   );
 
   const { data: products } = useAllProducts();
@@ -40,7 +40,7 @@ const Billing = () => {
   const orderitemMutate = useOrderItemMutate(
     () => {},
     REQUEST.DELETE,
-    currentOrder.id ? currentOrder.id : 0
+    currentOrder?.id ? currentOrder?.id : 0
   );
 
   const { register, handleSubmit } = useForm();
@@ -52,7 +52,7 @@ const Billing = () => {
     const newlyOrder = {
       ...currentOrder,
       ...data,
-    };
+    } as Order;
 
     orderMutate.mutate(newlyOrder);
   };
@@ -71,7 +71,7 @@ const Billing = () => {
             <FormLabel marginRight={5}>Customer</FormLabel>
             <Input
               type="text"
-              defaultValue={currentOrder.customer_name}
+              defaultValue={currentOrder?.customer_name}
               placeholder="Customer Name"
               {...register("customer_name")}
               marginRight={10}
@@ -129,7 +129,7 @@ const Billing = () => {
           </Table>
           <HStack>
            
-              <OrderCancelConfirmation order={currentOrder} />
+              {currentOrder !== undefined && <OrderCancelConfirmation order={currentOrder} />}
       
             <Button
               width="50%"

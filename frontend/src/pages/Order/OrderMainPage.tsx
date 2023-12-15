@@ -10,24 +10,27 @@ import { findCurrentOrder, isOrderOpen } from "./Functions/functions";
 import { Order } from "../../Generics/interfaces";
 import CurrentOrderContext from "../../Contexts/Orders/CurrentOrderContext";
 
+//for Debug
+let isOrderRequested = false
+
 const OrderMainPage = () => {
+  const { data: orders } = useOrders();
   // for context
-  const [currentOrder, setCurrentOrder] = useState<Order>({} as Order);
+  const [currentOrder, setCurrentOrder] = useState<Order>();
 
   const { table } = useParams();
-  const orderMutate = useOrderMutate(( order) => {
+  const orderMutate = useOrderMutate(( order) => {   
     setCurrentOrder(order)
-    console.log("craeted order");
   }, REQUEST.POST);
 
-  const { data: orders } = useOrders();
   
 
   useEffect(() => {
     if (
       orders !== undefined &&
       table !== undefined &&
-      !isOrderOpen(orders, table) 
+      !isOrderOpen(orders, table) &&
+      !isOrderRequested
     ) {
       
       let order = {
@@ -42,7 +45,11 @@ const OrderMainPage = () => {
 
         order = {...order, is_takeway: true,}
       }
+      //for Degub
+      isOrderRequested = true
+
       orderMutate.mutate(order);
+      
     } else {
       if (orders && table) {
         setCurrentOrder(findCurrentOrder(orders, table));
@@ -51,7 +58,7 @@ const OrderMainPage = () => {
   }, []);
 
   return (
-    <CurrentOrderContext.Provider value={{ currentOrder, setCurrentOrder }}>
+    <CurrentOrderContext.Provider value={{ currentOrder , setCurrentOrder }}>
       <Grid templateAreas={`"nav nav" "main aside"`}>
         <GridItem area="nav" height="10vh">
           <NavBar />

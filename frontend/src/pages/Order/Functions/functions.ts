@@ -6,6 +6,7 @@ export const isOrderOpen = (orders: Order[], table: string) => {
 
 export const findCurrentOrder = (orders: Order[], table: string) => {
   const currentOrder = orders
+                        .filter(order => order.is_order_open)
                         .filter((order) => !order.is_takeway)
                         .find((order) => order.is_order_open && table === order.table);
 
