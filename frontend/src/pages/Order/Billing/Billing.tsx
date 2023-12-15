@@ -27,7 +27,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { Order, OrderItem } from "../../../Generics/interfaces";
 import useOrderItemMutate from "../../../Hooks/OrderItem/useOrderItemMutate";
 import OrderCancelConfirmation from "./OrderCancelConfirmation";
-import BillShowModel from "./BillShowModel";
+import BillShowModel from "./BillShow/BillShowModel";
 
 const Billing = () => {
   const { currentOrder } = useContext(CurrentOrderContext);
@@ -45,31 +45,33 @@ const Billing = () => {
     currentOrder?.id ? currentOrder?.id : 0
   );
 
-  const toast = useToast()
+  const toast = useToast();
 
   const { register, handleSubmit } = useForm();
   const orderMutate = useOrderMutate(() => {
-
     toast({
-      title: 'Order',
+      title: "Order",
       description: "Order Successfully updated.",
-      status: 'success',
+      status: "success",
       duration: 2000,
       isClosable: true,
-    })
-
+    });
   }, REQUEST.UPDATE);
 
   const onSubmit = (data: FieldValues) => {
     const newlyOrder = {
       ...currentOrder,
       ...data,
-      customer_name:data.customer_name ? data.customer_name : currentFetchOrder?.customer_name,
-      discount : data.discount ? data.discount : currentFetchOrder?.discount,
-      service_charge : data.service_charge ? data.service_charge : currentFetchOrder?.service_charge
+      customer_name: data.customer_name
+        ? data.customer_name
+        : currentFetchOrder?.customer_name,
+      discount: data.discount ? data.discount : currentFetchOrder?.discount,
+      service_charge: data.service_charge
+        ? data.service_charge
+        : currentFetchOrder?.service_charge,
     } as Order;
 
-    console.log('new',newlyOrder)
+    console.log("new", newlyOrder);
 
     orderMutate.mutate(newlyOrder);
   };
@@ -135,7 +137,7 @@ const Billing = () => {
           </Table>
           <form onSubmit={handleSubmit(onSubmit)}>
             <HStack justifyContent="space-between" marginBottom={2}>
-              <FormLabel  marginRight={2}>Customer</FormLabel>
+              <FormLabel marginRight={2}>Customer</FormLabel>
               <Input
                 type="text"
                 defaultValue={currentOrder?.customer_name}
@@ -155,7 +157,7 @@ const Billing = () => {
               />
             </HStack>
             <HStack marginBottom={2}>
-            <FormLabel whiteSpace='nowrap'>Service Charge</FormLabel>
+              <FormLabel whiteSpace="nowrap">Service Charge</FormLabel>
               <Input
                 margin={0}
                 type="number"
@@ -165,7 +167,9 @@ const Billing = () => {
                 marginRight={2}
               />
 
-              <Button margin={0} type="submit" width='200px'>Add</Button>
+              <Button margin={0} type="submit" width="200px">
+                Add
+              </Button>
             </HStack>
           </form>
           <HStack>

@@ -8,15 +8,15 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import { COLOURS } from "../../../Generics/constants";
+import { COLOURS } from "../../../../Generics/constants";
 import BillShowview from "./BillShowview";
-import { Order } from "../../../Generics/interfaces";
+import { Order } from "../../../../Generics/interfaces";
 
-interface Props{
-    order?:Order
+interface Props {
+  order?: Order;
 }
 
-const BillShowModel = ({ order }:Props) => {
+const BillShowModel = ({ order }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -39,9 +39,8 @@ const BillShowModel = ({ order }:Props) => {
           <ModalHeader>Bill</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <BillShowview order={order}/>
+            <BillShowview order={order} />
           </ModalBody>
-
         </ModalContent>
       </Modal>
     </>

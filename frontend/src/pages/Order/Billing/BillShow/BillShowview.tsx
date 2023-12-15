@@ -8,13 +8,13 @@ import {
   Tr,
   Th,
 } from "@chakra-ui/react";
-import { Order } from "../../../Generics/interfaces";
+import { Order } from "../../../../Generics/interfaces";
 import { useEffect, useRef, useState } from "react";
-import { COLOURS } from "../../../Generics/constants";
-import generatePdf from "../../../PDF/generatePdf";
-import useAllProducts from "../../../Hooks/Product/Product/useAllProducts";
+import { COLOURS } from "../../../../Generics/constants";
+import generatePdf from "../../../../PDF/generatePdf";
+import useAllProducts from "../../../../Hooks/Product/Product/useAllProducts";
 import "./BillShowView.css";
-import { formatNumberWithTwoDecimals } from "./Functions/functions";
+import { formatNumberWithTwoDecimals } from "../Functions/functions";
 
 interface Props {
   order?: Order;
@@ -43,10 +43,10 @@ const BillShowview = ({ order }: Props) => {
           <Text margin={0} fontWeight="semibold">
             Colombo, Sri Lanaka
           </Text>
-          <text className="w-100 line padding" >
+          <text className="w-100 line padding">
             {order?.customer_name} - Table {order?.table}
           </text>
-          
+
           <table>
             <tbody>
               {order?.orderitems?.map((orderitem) => (
@@ -62,34 +62,47 @@ const BillShowview = ({ order }: Props) => {
                   <td>{formatNumberWithTwoDecimals(orderitem.item_total)}</td>
                 </tr>
               ))}
-              
-              
             </tbody>
           </table>
           <text className="w-100 line"></text>
           <table>
-
             <tfoot>
-                <tr>
-                    <td className="textalignReight">Total Price</td>
-                    <td></td>
-                    <td>{formatNumberWithTwoDecimals(order?.total_product_price ? order?.total_product_price : 0)}</td>
-                </tr>
-                <tr>
-                    <td className="textalignReight">Discount</td>
-                    <td></td>
-                    <td>{formatNumberWithTwoDecimals(order?.discount ? order?.discount : 0)}</td>
-                </tr>
-                <tr>
-                    <td className="textalignReight">Service Charge</td>
-                    <td></td>
-                    <td>{formatNumberWithTwoDecimals(order?.service_charge_price ? order?.service_charge_price : 0)}</td>
-                </tr>
-                <tr>
-                    <td className="textalignReight">Sub Total</td>
-                    <td></td>
-                    <td>{formatNumberWithTwoDecimals(order?.total ? order?.total : 0)}</td>
-                </tr>
+              <tr>
+                <td className="textalignReight">Total Price</td>
+                <td></td>
+                <td>
+                  {formatNumberWithTwoDecimals(
+                    order?.total_product_price ? order?.total_product_price : 0
+                  )}
+                </td>
+              </tr>
+              <tr>
+                <td className="textalignReight">Discount</td>
+                <td></td>
+                <td>
+                  {formatNumberWithTwoDecimals(
+                    order?.discount ? order?.discount : 0
+                  )}
+                </td>
+              </tr>
+              <tr>
+                <td className="textalignReight">Service Charge</td>
+                <td></td>
+                <td>
+                  {formatNumberWithTwoDecimals(
+                    order?.service_charge_price
+                      ? order?.service_charge_price
+                      : 0
+                  )}
+                </td>
+              </tr>
+              <tr>
+                <td className="textalignReight">Sub Total</td>
+                <td></td>
+                <td>
+                  {formatNumberWithTwoDecimals(order?.total ? order?.total : 0)}
+                </td>
+              </tr>
             </tfoot>
           </table>
         </VStack>
