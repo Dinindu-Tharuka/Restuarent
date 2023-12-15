@@ -14,6 +14,7 @@ import { COLOURS } from "../../../Generics/constants";
 import generatePdf from "../../../PDF/generatePdf";
 import useAllProducts from "../../../Hooks/Product/Product/useAllProducts";
 import "./BillShowView.css";
+import { formatNumberWithTwoDecimals } from "./Functions/functions";
 
 interface Props {
   order?: Order;
@@ -58,7 +59,7 @@ const BillShowview = ({ order }: Props) => {
                       )?.title
                     }
                   </td>
-                  <td>{orderitem.item_total}.00</td>
+                  <td>{formatNumberWithTwoDecimals(orderitem.item_total)}</td>
                 </tr>
               ))}
               
@@ -72,17 +73,17 @@ const BillShowview = ({ order }: Props) => {
                 <tr>
                     <td className="textalignReight">Total Price</td>
                     <td></td>
-                    <td>{order?.total_product_price}.00</td>
+                    <td>{formatNumberWithTwoDecimals(order?.total_product_price ? order?.total_product_price : 0)}</td>
                 </tr>
                 <tr>
                     <td className="textalignReight">Discount</td>
                     <td></td>
-                    <td>{order?.discount}.00</td>
+                    <td>{formatNumberWithTwoDecimals(order?.discount ? order?.discount : 0)}</td>
                 </tr>
                 <tr>
                     <td className="textalignReight">Sub Total</td>
                     <td></td>
-                    <td>{order?.total}.00</td>
+                    <td>{formatNumberWithTwoDecimals(order?.total ? order?.total : 0)}</td>
                 </tr>
             </tfoot>
           </table>

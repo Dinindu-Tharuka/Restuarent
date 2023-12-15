@@ -19,7 +19,7 @@ import {
 import { useContext } from "react";
 import CurrentOrderContext from "../../../Contexts/Orders/CurrentOrderContext";
 import { FieldValues, useForm } from "react-hook-form";
-import { COLOURS, REQUEST } from "../../../Generics/constants";
+import { REQUEST } from "../../../Generics/constants";
 import useOrderMutate from "../../../Hooks/Orders/useOrderMutate";
 import useAllProducts from "../../../Hooks/Product/Product/useAllProducts";
 import useOrders from "../../../Hooks/Orders/useOrders";
