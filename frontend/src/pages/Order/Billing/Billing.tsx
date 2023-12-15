@@ -135,7 +135,7 @@ const Billing = () => {
               <OrderCancelConfirmation order={currentOrder} />
             )}
 
-            <BillShowModel/>
+            <BillShowModel order={currentFetchOrder}/>
           </HStack>
         </Container>
       </VStack>

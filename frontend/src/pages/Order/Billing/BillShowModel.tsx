@@ -4,14 +4,19 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
 import { COLOURS } from "../../../Generics/constants";
+import BillShowview from "./BillShowview";
+import { Order } from "../../../Generics/interfaces";
 
-const BillShowModel = () => {
+interface Props{
+    order?:Order
+}
+
+const BillShowModel = ({ order }:Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -33,14 +38,10 @@ const BillShowModel = () => {
         <ModalContent>
           <ModalHeader>Bill</ModalHeader>
           <ModalCloseButton />
-          <ModalBody></ModalBody>
+          <ModalBody>
+            <BillShowview order={order}/>
+          </ModalBody>
 
-          <ModalFooter>
-            <Button bg={COLOURS.OK_COLOUR} mr={3} >
-              Print
-            </Button>
-            
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

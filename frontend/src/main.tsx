@@ -4,6 +4,7 @@ import { RouterProvider } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./index.css";
+import 'bootstrap/dist/css/bootstrap.css'
 import router from "./Routes/routes";
 
 const query = new QueryClient()

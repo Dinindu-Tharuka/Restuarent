@@ -73,4 +73,5 @@ export interface Order{
   total?:number;
   is_order_canceld:boolean;
   is_order_open:boolean;
+  total_product_price?:number;
 }
