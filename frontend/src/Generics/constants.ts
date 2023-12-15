@@ -10,6 +10,9 @@ export enum COLOURS {
   BUTTON_LETTER_COLOR = 'white',
   ORDER_PLACE_COLOR = '#d34412',
   TABLE_BUTTON_HOVER_COLOR = '#f67122',
+  CANCEL_COLOR='red',
+  OK_COLOUR = '#5cf852',
+  HOVER_BUTTON_COLOR = '#d9d9d9'
 }
 
 export enum SIZES {

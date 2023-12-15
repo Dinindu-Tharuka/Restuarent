@@ -5,9 +5,10 @@ import TableButton from "../TableButton";
 import { useContext } from "react";
 import OrderContext from "../../../Contexts/Orders/OrdersContexts";
 import { makeOrderTables } from "../Functions/functions";
+import useOrders from "../../../Hooks/Orders/useOrders";
 
 const Section_1 = () => {
-  const { orders } = useContext(OrderContext)
+  const { data:orders } = useOrders()
   return (
     <motion.div
       initial={{ opacity: 0 }}

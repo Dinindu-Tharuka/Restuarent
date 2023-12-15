@@ -29,6 +29,7 @@ const ProductItem = ({ product }: Props) => {
         duration: 1000,
         isClosable: true,
       })
+      onClose()
     },
     REQUEST.POST,
     currentOrder.id ? currentOrder.id : 0
@@ -67,7 +68,7 @@ const ProductItem = ({ product }: Props) => {
         <ModalContent>
           <ModalHeader>Add {product.title} Quantity</ModalHeader>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <HStack>
+            <HStack margin={10}>
             <Input placeholder="Quantity" type="number" {...register('quantity')}/>
 
             <Button type="submit">Add</Button>

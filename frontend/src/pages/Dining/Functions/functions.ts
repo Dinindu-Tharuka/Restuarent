@@ -4,10 +4,10 @@ export const makeOrderTables = (
   tablebuttons: ROOM_BUTTON[],
   orders: Order[]
 ) => {
-  const date = new Date();
   let tables : string[] = []
 
   orders
+        .filter(order => !order.is_takeway)
         .filter(order => order.is_order_open)
         .forEach((order, index) => {
             tables[index] = order.table !== undefined ? order.table : ''

@@ -11,31 +11,42 @@ import {
   Th,
   Tbody,
   Td,
+  Container,
+  IconButton,
+  FormLabel,
 } from "@chakra-ui/react";
 import { useContext } from "react";
 import CurrentOrderContext from "../../../Contexts/Orders/CurrentOrderContext";
 import { FieldValues, useForm } from "react-hook-form";
-import { REQUEST } from "../../../Generics/constants";
+import { COLOURS, REQUEST } from "../../../Generics/constants";
 import useOrderMutate from "../../../Hooks/Orders/useOrderMutate";
-import useOrderItems from "../../../Hooks/OrderItem/useOrderItems";
 import useAllProducts from "../../../Hooks/Product/Product/useAllProducts";
+import useOrders from "../../../Hooks/Orders/useOrders";
+import { AiFillDelete } from "react-icons/ai";
+import { OrderItem } from "../../../Generics/interfaces";
+import useOrderItemMutate from "../../../Hooks/OrderItem/useOrderItemMutate";
+import OrderCancelConfirmation from "./OrderCancelConfirmation";
 
 const Billing = () => {
   const { currentOrder } = useContext(CurrentOrderContext);
- 
+  const { data: orders } = useOrders();
+  const currentFetchOrder = orders?.find(
+    (order) => order.id === currentOrder.id
+  );
 
-  const {data:products} = useAllProducts()
+  const { data: products } = useAllProducts();
 
- 
-
-  
+  // delete order item
+  const orderitemMutate = useOrderItemMutate(
+    () => {},
+    REQUEST.DELETE,
+    currentOrder.id ? currentOrder.id : 0
+  );
 
   const { register, handleSubmit } = useForm();
   const orderMutate = useOrderMutate(() => {
-    console.log('craeted')
+    console.log("craeted");
   }, REQUEST.UPDATE);
-
-  const { data: orderitems} = useOrderItems({order_id:currentOrder.id ? currentOrder.id : 0})
 
   const onSubmit = (data: FieldValues) => {
     const newlyOrder = {
@@ -45,45 +56,94 @@ const Billing = () => {
 
     orderMutate.mutate(newlyOrder);
   };
+
+  const onDeleteOrderItem = (orderitem: OrderItem) => {
+    orderitemMutate.mutate(orderitem);
+  };
   return (
     <Flex width="100%">
       <VStack justifyContent="center" width="100%">
-        <Text fontSize={20}>Restuarent</Text>
+        <Text fontSize={20}>
+          Restuarent - Table ({currentFetchOrder?.table})
+        </Text>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <HStack>
+          <HStack justifyContent="space-between">
+            <FormLabel marginRight={5}>Customer</FormLabel>
             <Input
               type="text"
               defaultValue={currentOrder.customer_name}
               placeholder="Customer Name"
               {...register("customer_name")}
+              marginRight={10}
             />
             <Button type="submit">Save</Button>
           </HStack>
         </form>
-        <Table>
-          <Thead>
-            <Tr>
-              <Th>Product</Th>
-              <Th>quantity</Th>
-              <Th>Price</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {orderitems?.map((orderitem) => (
+        <Container maxHeight="60vh" minHeight="60vh" overflow="auto">
+          <Table>
+            <Thead>
               <Tr>
-                <Td>
-                  {
-                    products?.find(
-                      (product) => orderitem.product_id === product.id
-                    )?.title
-                  }
-                </Td>
-                <Td>{orderitem.quantity}</Td>
-                <Td>{orderitem.item_total}</Td>
+                <Th></Th>
+                <Th>Product</Th>
+                <Th textAlign="right">quantity</Th>
+                <Th textAlign="right">Price</Th>
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
+            </Thead>
+            <Tbody>
+              {currentFetchOrder?.orderitems?.map((orderitem) => (
+                <Tr>
+                  <Td>
+                    <IconButton
+                      colorScheme="red"
+                      icon={<AiFillDelete />}
+                      aria-label="delete"
+                      onClick={() => onDeleteOrderItem(orderitem)}
+                    />
+                  </Td>
+                  <Td>
+                    {
+                      products?.find(
+                        (product) => orderitem.product_id === product.id
+                      )?.title
+                    }
+                  </Td>
+                  <Td textAlign="right">{orderitem.quantity}</Td>
+                  <Td textAlign="right">{orderitem.item_total}</Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </Container>
+
+        <Container>
+          <Table marginBottom={5}>
+            <Tbody>
+              <Tr>
+                <Th></Th>
+                <Th>Total Price</Th>
+                <Th></Th>
+                <Th></Th>
+                <Th textAlign="right">{currentFetchOrder?.total}</Th>
+              </Tr>
+            </Tbody>
+          </Table>
+          <HStack>
+           
+              <OrderCancelConfirmation order={currentOrder} />
+      
+            <Button
+              width="50%"
+              bg={COLOURS.OK_COLOUR}
+              color={COLOURS.MAIN_PAGE_WHITE}
+              _hover={{
+                color: "black",
+                bg: COLOURS.HOVER_BUTTON_COLOR,
+              }}
+            >
+              Print
+            </Button>
+          </HStack>
+        </Container>
       </VStack>
     </Flex>
   );

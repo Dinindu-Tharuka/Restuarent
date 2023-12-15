@@ -15,19 +15,22 @@ const OrderMainPage = () => {
   const [currentOrder, setCurrentOrder] = useState<Order>({} as Order);
 
   const { table } = useParams();
-  const orderMutate = useOrderMutate(() => {
+  const orderMutate = useOrderMutate(( order) => {
+    setCurrentOrder(order)
     console.log("craeted order");
   }, REQUEST.POST);
 
   const { data: orders } = useOrders();
+  
 
   useEffect(() => {
     if (
       orders !== undefined &&
       table !== undefined &&
-      !isOrderOpen(orders, table)
+      !isOrderOpen(orders, table) 
     ) {
-      const order = {
+      
+      let order = {
         table: table,
         customer_name: "customer_name",
         discount: 0,
@@ -35,6 +38,10 @@ const OrderMainPage = () => {
         is_order_canceld: false,
         is_order_open: true,
       };
+      if (table === 'T000'){
+
+        order = {...order, is_takeway: true,}
+      }
       orderMutate.mutate(order);
     } else {
       if (orders && table) {
@@ -44,7 +51,7 @@ const OrderMainPage = () => {
   }, []);
 
   return (
-    <CurrentOrderContext.Provider value={{ currentOrder }}>
+    <CurrentOrderContext.Provider value={{ currentOrder, setCurrentOrder }}>
       <Grid templateAreas={`"nav nav" "main aside"`}>
         <GridItem area="nav" height="10vh">
           <NavBar />

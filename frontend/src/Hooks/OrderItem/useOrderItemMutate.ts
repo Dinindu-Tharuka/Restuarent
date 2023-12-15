@@ -26,6 +26,10 @@ const useOrderItemMutate = (
           queryKey: ["orderItems"],
         });
 
+        queryClient.invalidateQueries({
+          queryKey: ["orders"],
+        });
+
         
   
         onSuccessfull(savedOrder);
