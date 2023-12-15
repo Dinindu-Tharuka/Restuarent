@@ -14,6 +14,7 @@ import {
   Container,
   IconButton,
   FormLabel,
+  useToast,
 } from "@chakra-ui/react";
 import { useContext } from "react";
 import CurrentOrderContext from "../../../Contexts/Orders/CurrentOrderContext";
@@ -44,16 +45,31 @@ const Billing = () => {
     currentOrder?.id ? currentOrder?.id : 0
   );
 
+  const toast = useToast()
+
   const { register, handleSubmit } = useForm();
   const orderMutate = useOrderMutate(() => {
-    
+
+    toast({
+      title: 'Order',
+      description: "Order Successfully updated.",
+      status: 'success',
+      duration: 2000,
+      isClosable: true,
+    })
+
   }, REQUEST.UPDATE);
 
   const onSubmit = (data: FieldValues) => {
     const newlyOrder = {
       ...currentOrder,
       ...data,
+      customer_name:data.customer_name ? data.customer_name : currentFetchOrder?.customer_name,
+      discount : data.discount ? data.discount : currentFetchOrder?.discount,
+      service_charge : data.service_charge ? data.service_charge : currentFetchOrder?.service_charge
     } as Order;
+
+    console.log('new',newlyOrder)
 
     orderMutate.mutate(newlyOrder);
   };
@@ -62,27 +78,14 @@ const Billing = () => {
     orderitemMutate.mutate(orderitem);
   };
 
- 
   return (
     <Flex width="100%">
       <VStack justifyContent="center" width="100%">
         <Text fontSize={20}>
           Restuarent - Table ({currentFetchOrder?.table})
         </Text>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <HStack justifyContent="space-between">
-            <FormLabel marginRight={5}>Customer</FormLabel>
-            <Input
-              type="text"
-              defaultValue={currentOrder?.customer_name}
-              placeholder="Customer Name"
-              {...register("customer_name")}
-              marginRight={10}
-            />
-            <Button type="submit">Save</Button>
-          </HStack>
-        </form>
-        <Container maxHeight="60vh" minHeight="60vh" overflow="auto">
+
+        <Container maxHeight="55vh" minHeight="55vh" overflow="auto">
           <Table>
             <Thead>
               <Tr>
@@ -130,12 +133,47 @@ const Billing = () => {
               </Tr>
             </Tbody>
           </Table>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <HStack justifyContent="space-between" marginBottom={2}>
+              <FormLabel  marginRight={2}>Customer</FormLabel>
+              <Input
+                type="text"
+                defaultValue={currentOrder?.customer_name}
+                placeholder="Name"
+                {...register("customer_name")}
+                marginRight={2}
+                margin={0}
+              />
+              <FormLabel>Discount</FormLabel>
+              <Input
+                margin={0}
+                type="number"
+                defaultValue={currentOrder?.discount}
+                placeholder="(%)"
+                {...register("discount")}
+                marginRight={2}
+              />
+            </HStack>
+            <HStack marginBottom={2}>
+            <FormLabel whiteSpace='nowrap'>Service Charge</FormLabel>
+              <Input
+                margin={0}
+                type="number"
+                defaultValue={currentOrder?.service_charge}
+                placeholder="10%"
+                {...register("service_charge")}
+                marginRight={2}
+              />
+
+              <Button margin={0} type="submit" width='200px'>Add</Button>
+            </HStack>
+          </form>
           <HStack>
             {currentOrder !== undefined && (
               <OrderCancelConfirmation order={currentOrder} />
             )}
 
-            <BillShowModel order={currentFetchOrder}/>
+            <BillShowModel order={currentFetchOrder} />
           </HStack>
         </Container>
       </VStack>
