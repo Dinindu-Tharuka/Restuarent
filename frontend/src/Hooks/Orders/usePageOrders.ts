@@ -2,10 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import { Order, PaginationStructure } from "../../Generics/interfaces";
 import pageOrderService from "../../services/Order/page-order-service";
 
-const usePageOrders = () => {
+interface Query{
+    page:number
+}
+const usePageOrders = (query:Query) => {
   return useQuery<PaginationStructure<Order>, Error>({
-    queryKey: ["pageOrders"],
-    queryFn: () => pageOrderService.getAll(),
+    queryKey: ["pageOrders", query],
+    queryFn: () => pageOrderService.getAll({params:{page:query.page}}),
   });
 };
 
