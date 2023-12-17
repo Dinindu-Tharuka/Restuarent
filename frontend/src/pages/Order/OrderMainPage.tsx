@@ -11,7 +11,6 @@ import { Order } from "../../Generics/interfaces";
 import CurrentOrderContext from "../../Contexts/Orders/CurrentOrderContext";
 
 //for Debug
-
 const OrderMainPage = () => {
   let isOrderRequested = false
   const { data: orders } = useOrders();
