@@ -3,10 +3,7 @@ import {
   Button,
   VStack,
   Text,
-  Table,
-  Tbody,
-  Tr,
-  Th,
+  HStack,
 } from "@chakra-ui/react";
 import { Order } from "../../../../Generics/interfaces";
 import { useEffect, useRef, useState } from "react";
@@ -15,6 +12,7 @@ import generatePdf from "../../../../PDF/generatePdf";
 import useAllProducts from "../../../../Hooks/Product/Product/useAllProducts";
 import "./BillShowView.css";
 import { formatNumberWithTwoDecimals } from "../Functions/functions";
+import BillCloseConfirmation from "./BillCloseConfirmation";
 
 interface Props {
   order?: Order;
@@ -28,6 +26,8 @@ const BillShowview = ({ order }: Props) => {
 
   // for get product
   const { data: products } = useAllProducts();
+
+  
 
   useEffect(() => {
     setCapture(pdfRef.current);
@@ -107,13 +107,18 @@ const BillShowview = ({ order }: Props) => {
           </table>
         </VStack>
       </div>
-      <Button
-        bg={COLOURS.OK_COLOUR}
-        mr={3}
-        onClick={() => generatePdf(capture, setLoader)}
-      >
-        {loader ? "Printing..." : "Print"}
-      </Button>
+      <HStack width='100%'>
+        <Button
+          bg={COLOURS.OK_COLOUR}
+          mr={3}
+          onClick={() => generatePdf(capture, setLoader)}
+          width='50%'
+        >
+          {loader ? "Printing..." : "Print"}
+        </Button>
+
+        <BillCloseConfirmation order={order}/>
+      </HStack>
     </Flex>
   );
 };

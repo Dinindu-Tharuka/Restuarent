@@ -6,14 +6,14 @@ import useOrderMutate from "../../Hooks/Orders/useOrderMutate";
 import { REQUEST } from "../../Generics/constants";
 import { useEffect, useState } from "react";
 import useOrders from "../../Hooks/Orders/useOrders";
-import { findCurrentOrder, isOrderOpen } from "./Functions/functions";
+import { findCurrentOrder, findCurrentTakewayOrder, isOrderOpen } from "./Functions/functions";
 import { Order } from "../../Generics/interfaces";
 import CurrentOrderContext from "../../Contexts/Orders/CurrentOrderContext";
 
 //for Debug
-let isOrderRequested = false
 
 const OrderMainPage = () => {
+  let isOrderRequested = false
   const { data: orders } = useOrders();
   // for context
   const [currentOrder, setCurrentOrder] = useState<Order>();
@@ -41,10 +41,12 @@ const OrderMainPage = () => {
         is_order_canceld: false,
         is_order_open: true,
       };
-      if (table === 'T000'){
 
-        order = {...order, is_takeway: true,}
+      if (table === 'T000'){
+        order = {...order, is_takeway:true}
+        console.log('takeway')
       }
+    
       //for Degub
       isOrderRequested = true
 
@@ -52,7 +54,15 @@ const OrderMainPage = () => {
       
     } else {
       if (orders && table) {
-        setCurrentOrder(findCurrentOrder(orders, table));
+
+        console.log('current order', setCurrentOrder(findCurrentOrder(orders, table)))
+        if (table !== 'T000'){
+          setCurrentOrder(findCurrentOrder(orders, table));
+
+        }
+        else{
+          setCurrentOrder(findCurrentTakewayOrder(orders, table))
+        }
       }
     }
   }, []);

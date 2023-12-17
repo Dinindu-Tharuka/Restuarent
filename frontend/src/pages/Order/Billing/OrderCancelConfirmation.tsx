@@ -29,7 +29,12 @@ const OrderCancelConfirmation = ({ order }:Props) => {
   const toast = useToast()
 
   const orderMuatate = useOrderMutate(()=>{
-    navigate('/dining')
+    if (order.is_takeway){
+      navigate('/')
+    }else{
+      navigate('/dining')
+
+    }
 
     toast({
         title: 'Cancel Order',

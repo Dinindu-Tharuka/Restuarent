@@ -4,7 +4,6 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalHeader,
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -36,7 +35,6 @@ const BillShowModel = ({ order }: Props) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Bill</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <BillShowview order={order} />

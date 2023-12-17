@@ -32,7 +32,7 @@ const ProductItem = ({ product }: Props) => {
       onClose()
     },
     REQUEST.POST,
-    currentOrder.id ? currentOrder.id : 0
+    currentOrder?.id ? currentOrder.id : 0
   );
 
   const onSubmit = (data:FieldValues)=>{
