@@ -6,14 +6,19 @@ import ProductItem from "./ProductItem";
 const Products = () => {
   const { table, id } = useParams();
 
-  const { data:products} = useProduct({ category_id: id !== undefined ? parseInt(id) : 0 });
+  const { data: products } = useProduct({
+    category_id: id !== undefined ? parseInt(id) : 0,
+  });
 
-
-  return <SimpleGrid columns={{base:3, lg:5}}>
-    {
-      products?.map(product => <ProductItem product={product}/>)
-    }
-  </SimpleGrid>;
+  return (
+    <>
+      <SimpleGrid columns={{ base: 3, lg: 5 }}>
+        {products?.map((product) => (
+          <ProductItem product={product} />
+        ))}
+      </SimpleGrid>
+    </>
+  );
 };
 
 export default Products;
