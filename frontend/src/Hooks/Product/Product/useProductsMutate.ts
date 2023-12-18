@@ -27,6 +27,10 @@ const useProductsMutate = (
         queryKey: ["products"],
       });
 
+      queryClient.invalidateQueries({
+        queryKey:["all-products"]
+      })
+
       onSuccessfull(savedProduct);
     },
   });

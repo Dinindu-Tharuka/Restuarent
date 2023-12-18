@@ -1,10 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useProduct } from "../../../../Hooks/Product/Product/useProducts";
-import { SimpleGrid } from "@chakra-ui/react";
+import { Flex, SimpleGrid } from "@chakra-ui/react";
 import ProductItem from "./ProductItem";
+import ProductAddModel from "./Product Add/ProductAddModel";
 
 const Products = () => {
-  const { table, id } = useParams();
+  const { id } = useParams();
 
   const { data: products } = useProduct({
     category_id: id !== undefined ? parseInt(id) : 0,
@@ -12,6 +13,9 @@ const Products = () => {
 
   return (
     <>
+      <Flex position='absolute'  zIndex={2} left='60vw'>
+        <ProductAddModel category_id={id ? parseInt(id) : 0} />
+      </Flex>
       <SimpleGrid columns={{ base: 3, lg: 5 }}>
         {products?.map((product) => (
           <ProductItem product={product} />

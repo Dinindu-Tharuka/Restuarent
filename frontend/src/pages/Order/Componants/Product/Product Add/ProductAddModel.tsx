@@ -31,7 +31,7 @@ const ProductAddModel = ({ category_id }: Props) => {
           <ModalHeader>Add Product</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <ProductAddForm category_id={category_id} />
+            <ProductAddForm category_id={category_id} onClose={onClose}/>
           </ModalBody>
         </ModalContent>
       </Modal>
