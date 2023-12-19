@@ -4,7 +4,11 @@ import useMutateFloors from "../../../../Hooks/Floor/useMutateFloors";
 import { REQUEST } from "../../../../Generics/constants";
 import { Floor } from "../../../../Generics/interfaces";
 
-const FloorAddForm = () => {
+interface Props{
+  onClose:()=>void
+}
+
+const FloorAddForm = ({ onClose }:Props) => {
   const { register, handleSubmit } = useForm<Floor>();
   const toast = useToast()
   const floorMutate = useMutateFloors(() => {
@@ -15,6 +19,10 @@ const FloorAddForm = () => {
         duration: 3000,
         isClosable: true,
       })
+
+      onClose()
+
+      
   },()=>{
     toast({
       title: 'Floor',

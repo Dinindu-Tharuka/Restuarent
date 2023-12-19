@@ -26,8 +26,8 @@ const Floors = () => {
             <Tr>
               <Th></Th>
               <Th>Floor Number</Th>
-              <Th>Table Start No</Th>
-              <Th>Table End No</Th>
+              <Th>Tables</Th>
+              <Th>VIP Tables</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -35,8 +35,8 @@ const Floors = () => {
               <Tr>
                 <Td><FloorDeleteConfirmation floor={floor}/></Td>
                 <Td>{floor.floor_number}</Td>
-                <Td>{floor.table_start_number}</Td>
-                <Td>{floor.table_end_number}</Td>
+                <Td>{floor.table_end_number - floor.table_start_number + 1}</Td>
+                <Td>{floor.vip_table_end_number - floor.vip_table_start_number + 1}</Td>
               </Tr>
             ))}
           </Tbody>

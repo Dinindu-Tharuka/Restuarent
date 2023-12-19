@@ -28,7 +28,7 @@ const FloorAddModel = () => {
           <ModalHeader>Add Floor</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <FloorAddForm/>
+            <FloorAddForm onClose={onClose}/>
           </ModalBody>
         </ModalContent>
       </Modal>
