@@ -87,7 +87,8 @@ export interface Table{
 
 export interface Floor{
   id:number;
-  floor_start_number:number;
-  floor_end_number:number;
+  floor_number:number;
+  table_start_number:number;
+  table_end_number:number;
   tables:Table[]
 }

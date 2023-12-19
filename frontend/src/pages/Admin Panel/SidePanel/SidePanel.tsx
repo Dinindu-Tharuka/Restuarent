@@ -3,8 +3,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const SidePanel = () => {
-  const panelItems = ["Dashboard", "Reports"];
-  const routes = ['/admin', '/admin/reports'];
+  const panelItems = ["Dashboard", "Reports", "Floors & Tables"];
+  const routes = ['/admin', '/admin/reports', '/admin/floors'];
   const [selectedIndex, setSelectedIndex] = useState(0)
   const navigate = useNavigate()
 

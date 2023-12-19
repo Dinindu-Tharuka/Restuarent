@@ -1,4 +1,3 @@
-import React from "react";
 import { Table } from "../../Generics/interfaces";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { REQUEST } from "../../Generics/constants";

@@ -10,6 +10,7 @@ import UsersTable from "../pages/Admin Panel/Main/Users/UsersTable";
 import ReportMain from "../pages/Admin Panel/Main/Reports/ReportMain";
 import Categories from "../pages/Order/Componants/Categories/Categories";
 import Products from "../pages/Order/Componants/Product/Products";
+import Floors from "../pages/Admin Panel/Main/Floors/Floors";
 
 const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
         children: [
           { path: "", element: <UsersTable /> },
           { path: "reports", element: <ReportMain /> },
+          { path: "floors", element: <Floors /> },
         ],
       },
     ],
