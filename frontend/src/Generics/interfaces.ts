@@ -77,3 +77,15 @@ export interface Order{
   service_charge?:number;
   service_charge_price?:number;
 }
+
+export interface Table{
+  table_no:string;
+  is_place_order:boolean;
+  floor_id:number;
+}
+
+export interface Floor{
+  floor_start_number:number;
+  floor_end_number:number;
+  tables:Table[]
+}

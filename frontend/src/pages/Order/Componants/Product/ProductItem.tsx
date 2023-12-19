@@ -2,7 +2,6 @@ import {
   Button,
   Card,
   CardBody,
-  CloseButton,
   HStack,
   Input,
   Modal,
@@ -23,6 +22,7 @@ import useOrderItemMutate from "../../../../Hooks/OrderItem/useOrderItemMutate";
 import { FieldValues, useForm } from "react-hook-form";
 import ProductItemDeleteConfirmation from "./ProductItemDeleteConfirmation";
 import { formatNumberWithTwoDecimals } from "../../Billing/Functions/functions";
+import UserMeContext from "../../../../Contexts/UserMe";
 interface Props {
   product: Product;
 }
@@ -33,6 +33,11 @@ const ProductItem = ({ product }: Props) => {
 
   // form
   const { register, handleSubmit } = useForm();
+
+  //user
+ const userMe = useContext(UserMeContext)
+
+ console.log('user', userMe)
 
   //////
   const toast = useToast();
@@ -70,7 +75,10 @@ const ProductItem = ({ product }: Props) => {
         margin={2}
       >
         <HStack justifyContent="right">
-          <ProductItemDeleteConfirmation product={product}/>
+          {
+            userMe.is_superuser && <ProductItemDeleteConfirmation product={product}/>
+          }
+          
         </HStack>
         <CardBody
           onClick={() => {
