@@ -7,8 +7,10 @@ import { REQUEST } from "../../Generics/constants";
 import { useEffect, useState } from "react";
 import useOrders from "../../Hooks/Orders/useOrders";
 import { findCurrentOrder, findCurrentTakewayOrder, isOrderOpen } from "./Functions/functions";
-import { Order } from "../../Generics/interfaces";
+import { Order, Table } from "../../Generics/interfaces";
 import CurrentOrderContext from "../../Contexts/Orders/CurrentOrderContext";
+import useAllTables from "../../Hooks/Floor/useAllTables";
+import useAllTableMutate from "../../Hooks/Floor/useAllTableMutate";
 
 //for Debug
 const OrderMainPage = () => {
@@ -21,6 +23,24 @@ const OrderMainPage = () => {
   const orderMutate = useOrderMutate(( order) => {   
     setCurrentOrder(order)
   }, REQUEST.POST);
+
+  const {data:allTables} = useAllTables()
+  const allTableMutate = useAllTableMutate(()=>{}, REQUEST.PUT)
+
+  useEffect(()=>{
+    const currentTable = allTables?.find(tab=> tab.table_no === table)
+
+    const newTable = {
+      ...currentTable,
+      is_place_order:true
+    } as Table
+
+    allTableMutate.mutate(newTable)
+
+
+  }, [])
+
+  
 
 
   

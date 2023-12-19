@@ -83,6 +83,7 @@ export interface Table{
   table_no:string;
   is_place_order:boolean;
   floor_id:number;
+  is_vip:boolean;
 }
 
 export interface Floor{
