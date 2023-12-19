@@ -10,11 +10,19 @@ const FloorAddForm = () => {
   const floorMutate = useMutateFloors(() => {
     toast({
         title: 'Floor',
-        description: "Floor Createdsuccessfully.",
+        description: "Floor Created successfully.",
         status: 'success',
         duration: 3000,
         isClosable: true,
       })
+  },()=>{
+    toast({
+      title: 'Floor',
+      description: "Floor Created not successfully.",
+      status: 'error',
+      duration: 3000,
+      isClosable: true,
+    })
   }, REQUEST.POST);
 
   const onSubmit = (data:Floor) => {
@@ -41,6 +49,18 @@ const FloorAddForm = () => {
       <Input
         placeholder="End Table No"
         {...register("table_end_number")}
+        type="number"
+        marginBottom={5}
+      />
+      <Input
+        placeholder="VIP Start Table No"
+        {...register("vip_table_start_number")}
+        type="number"
+        marginBottom={5}
+      />
+      <Input
+        placeholder="VIP End Table No"
+        {...register("vip_table_end_number")}
         type="number"
         marginBottom={5}
       />

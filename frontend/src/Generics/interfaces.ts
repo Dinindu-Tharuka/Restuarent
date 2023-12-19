@@ -90,5 +90,7 @@ export interface Floor{
   floor_number:number;
   table_start_number:number;
   table_end_number:number;
+  vip_table_start_number:number; 
+  vip_table_end_number:number;
   tables:Table[]
 }

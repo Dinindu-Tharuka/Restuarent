@@ -18,7 +18,7 @@ const Section_2 = () => {
         <SimpleGrid columns={5} spacing={2}>
           {orders !== undefined &&
             makeOrderTables(SECOND_FLOOR_PART_1, orders).map((table, index) => (
-              <TableButton tableButton={table} key={index} />
+              <TableButton table={table} key={index} />
             ))}
         </SimpleGrid>
       </HStack>

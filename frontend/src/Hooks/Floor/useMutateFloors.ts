@@ -10,7 +10,7 @@ const useMutateFloors = (
 ) => {
   const queryClient = useQueryClient();
 
-  const order = useMutation<Floor, Error, Floor>({
+  const floor = useMutation<Floor, Error, Floor>({
     mutationFn: (floor: Floor) => {
       if (requestType === REQUEST.POST) {
         return floorService.create(floor).then((res) => res.data);
@@ -37,7 +37,7 @@ const useMutateFloors = (
     }
   });
 
-  return order;
+  return floor;
 };
 
 export default useMutateFloors;

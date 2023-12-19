@@ -1,30 +1,28 @@
 import { Button } from "@chakra-ui/react";
-import { ROOM_BUTTON } from "../../Generics/interfaces";
+import {Table } from "../../Generics/interfaces";
 import { COLOURS, SIZES } from "../../Generics/constants";
 import { useNavigate } from "react-router-dom";
 
 interface props {
-  tableButton: ROOM_BUTTON;
+  table: Table;
 }
 
-const TableButton = ({ tableButton }: props) => {
-  const navigate = useNavigate()
-  const onClick =()=>{
-    navigate(`/dining/order/${tableButton.table_no}`)
-
-  }
+const TableButton = ({ table }: props) => {
+  const navigate = useNavigate();
+  const onClick = () => {
+    navigate(`/dining/order/${table.table_no}`);
+  };
   return (
     <Button
       width={SIZES.TABLE_BUTTON_WIDTH}
       height={SIZES.TABLE_BUTTON_HEIGHT}
       borderRadius={50}
-      boxShadow='lg'
+      boxShadow="lg"
       onClick={onClick}
-      bg={tableButton.is_placed_order ? COLOURS.ORDER_PLACE_COLOR : ''}
-      color={tableButton.is_placed_order ? COLOURS.MAIN_PAGE_WHITE:''}
-      
+      bg={table.is_place_order ? COLOURS.ORDER_PLACE_COLOR : ""}
+      color={table.is_place_order ? COLOURS.MAIN_PAGE_WHITE : ""}
     >
-      {tableButton.table_no}
+      {table.table_no}
     </Button>
   );
 };

@@ -11,62 +11,69 @@ import { COLOURS } from "../../Generics/constants";
 import { useNavigate } from "react-router-dom";
 import OrderContext from "../../Contexts/Orders/OrdersContexts";
 import useOrders from "../../Hooks/Orders/useOrders";
+import useTables from "../../Hooks/Floor/useTables";
+import useFloors from "../../Hooks/Floor/useFloors";
+import TableSection from "./Sections/TableSection";
 
 const Dining = () => {
-  const [page, setPage] = useState(0);
-  const floors = ["First Floor", "Second Floor", "Second Floor"];
-  const navigate = useNavigate()  
+  const [floorNo, setFloorNo] = useState(1);
+  // const floors = ["First Floor", "Second Floor", "Second Floor"];
+  const navigate = useNavigate();
 
-  const { data:orders} = useOrders()
+  // for fetch tables
+  const { data: floors } = useFloors();
+  const numOfFloors = floors?.length;
+  const { data: tables } = useTables({ floor_id: floorNo });
 
-  const onClick = ()=>{
-    navigate('/')
-  }
+  console.log('tables', tables)
+
+  const { data: orders } = useOrders();
+
+  const onClick = () => {
+    navigate("/");
+  };
   return (
-    <OrderContext.Provider value={{orders}}>
-    <VStack width="100vw" height="100vh" bg={COLOURS.BACKGROUND_COLOR}>
-      <Flex width="100vw" >
-        <IconButton
-          bg={COLOURS.BACKGROUND_COLOR}
-          aria-label=""
-          icon={<IoHomeSharp />}
-          alignSelf="self-start"
-          onClick={onClick}
-        />
-        <Text
-          fontWeight="bold"
-          alignSelf="center"
-          position="absolute"
-          left="50vw"
-        >
-          {floors[page]}
-        </Text>
-      </Flex>
-      <HStack bg={COLOURS.BACKGROUND_COLOR} height="90vh">
-        <IconButton
-          bg={COLOURS.BACKGROUND_COLOR}
-          aria-label=""
-          icon={<GrPrevious />}
-          height="100%"
-          isDisabled={!(page > 0)}
-          onClick={() => setPage(page - 1)}
-        />
-        {page === 0 && <Section_1 />}
+    <OrderContext.Provider value={{ orders }}>
+      <VStack width="100vw" height="100vh" bg={COLOURS.BACKGROUND_COLOR}>
+        <Flex width="100vw">
+          <IconButton
+            bg={COLOURS.BACKGROUND_COLOR}
+            aria-label=""
+            icon={<IoHomeSharp />}
+            alignSelf="self-start"
+            onClick={onClick}
+          />
+          <Text
+            fontWeight="bold"
+            alignSelf="center"
+            position="absolute"
+            left="50vw"
+          >
+            {/* {floors[floor]} */}
+          </Text>
+        </Flex>
+        <HStack bg={COLOURS.BACKGROUND_COLOR} height="90vh">
+          <IconButton
+            bg={COLOURS.BACKGROUND_COLOR}
+            aria-label=""
+            icon={<GrPrevious />}
+            height="100%"
+            isDisabled={!(floorNo > 1)}
+            onClick={() => setFloorNo(floorNo - 1)}
+          />
 
-        {page === 1 && <Section_2 />}
+          {tables ? <TableSection tables={tables}/> : <Text color='red'>No Tables</Text>}
 
-        {page === 2 && <Section_3 />}
-
-        <IconButton
-          bg={COLOURS.BACKGROUND_COLOR}
-          aria-label=""
-          icon={<GrNext />}
-          isDisabled={!(page < 2)}
-          height="100%"
-          onClick={() => setPage(page + 1)}
-        />
-      </HStack>
-    </VStack>
+          <IconButton
+            bg={COLOURS.BACKGROUND_COLOR}
+            aria-label=""
+            icon={<GrNext />}
+            isDisabled={!(floorNo < (numOfFloors ? numOfFloors : 1))}
+            height="100%"
+            onClick={() => setFloorNo(floorNo + 1)}
+          />
+        </HStack>
+      </VStack>
     </OrderContext.Provider>
   );
 };

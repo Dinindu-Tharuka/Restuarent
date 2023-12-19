@@ -1,12 +1,13 @@
 import { HStack, SimpleGrid } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { FIRST_FLOOR } from "../../../Generics/constants";
+import { Table } from "../../../Generics/interfaces";
 import TableButton from "../TableButton";
-import { makeOrderTables } from "../Functions/functions";
-import useOrders from "../../../Hooks/Orders/useOrders";
 
-const Section_1 = () => {
-  const { data: orders } = useOrders();
+interface Props {
+  tables: Table[];
+}
+
+const TableSection = ({ tables }: Props) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -20,14 +21,13 @@ const Section_1 = () => {
           height="100%"
           alignItems="flex-start"
         >
-          {orders !== undefined &&
-            makeOrderTables(FIRST_FLOOR, orders).map((table, index) => (
-              <TableButton table={table} key={index} />
-            ))}
+          {tables.map((table, index) => (
+            <TableButton table={table} key={index} />
+          ))}
         </SimpleGrid>
       </HStack>
     </motion.div>
   );
 };
 
-export default Section_1;
+export default TableSection;

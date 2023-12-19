@@ -1,6 +1,6 @@
 import { Button, List, ListItem } from "@chakra-ui/react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SidePanel = () => {
   const panelItems = ["Dashboard", "Reports", "Floors & Tables"];
