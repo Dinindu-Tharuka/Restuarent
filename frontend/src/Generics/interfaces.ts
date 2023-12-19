@@ -79,12 +79,14 @@ export interface Order{
 }
 
 export interface Table{
+  id:number;
   table_no:string;
   is_place_order:boolean;
   floor_id:number;
 }
 
 export interface Floor{
+  id:number;
   floor_start_number:number;
   floor_end_number:number;
   tables:Table[]
