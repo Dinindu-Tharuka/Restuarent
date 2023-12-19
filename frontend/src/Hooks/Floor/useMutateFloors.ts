@@ -1,10 +1,11 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Floor } from "../../Generics/interfaces";
 import floorService from "../../services/Floor/floor-service";
 import { REQUEST } from "../../Generics/constants";
 
 const useMutateFloors = (
   onSuccessfull: (floor: Floor) => void,
+  onError:()=>void,
   requestType: string
 ) => {
   const queryClient = useQueryClient();
@@ -30,6 +31,10 @@ const useMutateFloors = (
 
       onSuccessfull(savedFloor);
     },
+
+    onError:()=>{
+      onError()
+    }
   });
 
   return order;

@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import FloorAddModel from "./FloorAddModel";
 import useFloors from "../../../../Hooks/Floor/useFloors";
+import FloorDeleteConfirmation from "./FloorDeleteConfirmation";
 
 const Floors = () => {
   const { data: floors } = useFloors();
@@ -23,7 +24,7 @@ const Floors = () => {
         <Table variant="simple">
           <Thead>
             <Tr>
-              <Th>Floor Id</Th>
+              <Th></Th>
               <Th>Floor Number</Th>
               <Th>Table Start No</Th>
               <Th>Table End No</Th>
@@ -32,7 +33,7 @@ const Floors = () => {
           <Tbody>
             {floors?.map((floor) => (
               <Tr>
-                <Td>{floor.id}</Td>
+                <Td><FloorDeleteConfirmation floor={floor}/></Td>
                 <Td>{floor.floor_number}</Td>
                 <Td>{floor.table_start_number}</Td>
                 <Td>{floor.table_end_number}</Td>
