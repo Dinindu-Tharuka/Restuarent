@@ -51,25 +51,25 @@ const FloorAddForm = ({ onClose }:Props) => {
       <Input
         placeholder="Start Table No"
         {...register("table_start_number")}
-        type="number"
+        type="text"
         marginBottom={5}
       />
       <Input
         placeholder="End Table No"
         {...register("table_end_number")}
-        type="number"
+        type="text"
         marginBottom={5}
       />
       <Input
         placeholder="VIP Start Table No"
         {...register("vip_table_start_number")}
-        type="number"
+        type="text"
         marginBottom={5}
       />
       <Input
         placeholder="VIP End Table No"
         {...register("vip_table_end_number")}
-        type="number"
+        type="text"
         marginBottom={5}
       />
       <Button type="submit">Add</Button>

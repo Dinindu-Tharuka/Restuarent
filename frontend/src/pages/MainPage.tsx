@@ -38,7 +38,7 @@ const MainPage = () => {
             </HStack>
           </Flex>
 
-          <Flex position="absolute" top="45vh" left="10vw">
+          <Flex position="absolute" top="25vh" left="10vw">
             <VStack alignItems="start">
               <HStack>
                 <Text
@@ -61,7 +61,7 @@ const MainPage = () => {
                   color={COLOURS.MAIN_PAGE_YELLOW}
                   textShadow="1px 1px #ff0000"
                 >
-                  Restuarent
+                  HIKKA LASSO
                 </Text>
               </HStack>
               <Text
