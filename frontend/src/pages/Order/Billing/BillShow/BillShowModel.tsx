@@ -15,7 +15,7 @@ interface Props {
   order?: Order;
 }
 
-const BillShowModel = ({ order }: Props) => {
+const BillShowModel = ({ order}: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>

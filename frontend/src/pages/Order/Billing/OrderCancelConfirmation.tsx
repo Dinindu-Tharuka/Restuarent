@@ -12,9 +12,11 @@ import {
 } from "@chakra-ui/react";
 import { useRef } from "react";
 import { COLOURS, REQUEST } from "../../../Generics/constants";
-import { Order } from "../../../Generics/interfaces";
+import { Order, Table } from "../../../Generics/interfaces";
 import useOrderMutate from "../../../Hooks/Orders/useOrderMutate";
 import { useNavigate } from "react-router-dom";
+import useAllTables from "../../../Hooks/Floor/useAllTables";
+import useAllTableMutate from "../../../Hooks/Floor/useAllTableMutate";
 
 interface Props{
     order:Order
@@ -27,6 +29,11 @@ const OrderCancelConfirmation = ({ order }:Props) => {
 
   ///
   const toast = useToast()
+
+  // all tables
+  const { data: tables} = useAllTables()
+  const currentTable = tables?.find(table => table.table_no === order?.table)
+  const allTableMutate = useAllTableMutate(()=>{}, REQUEST.PUT)
 
   const orderMuatate = useOrderMutate(()=>{
     if (order.is_takeway){
@@ -48,6 +55,12 @@ const OrderCancelConfirmation = ({ order }:Props) => {
   const onClickCancelOrder = ()=>{
 
     orderMuatate.mutate(order)
+
+    const newTable = {
+      ...currentTable,
+      is_place_order:false
+    } as Table
+    allTableMutate.mutate(newTable)
 
   }
   return (

@@ -1,9 +1,11 @@
 import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, useDisclosure, useToast } from '@chakra-ui/react'
 import React from 'react'
-import { Order } from '../../../../Generics/interfaces'
+import { Order, Table } from '../../../../Generics/interfaces'
 import { REQUEST } from '../../../../Generics/constants'
 import useOrderMutate from '../../../../Hooks/Orders/useOrderMutate'
 import { useNavigate } from 'react-router-dom'
+import useAllTables from '../../../../Hooks/Floor/useAllTables'
+import useAllTableMutate from '../../../../Hooks/Floor/useAllTableMutate'
 
 interface Props{
     order?:Order
@@ -15,6 +17,10 @@ const BillCloseConfirmation = ({ order }:Props) => {
     const navigate = useNavigate()
     const toast = useToast()
 
+    // all tables
+    const { data: tables} = useAllTables()
+    const currentTable = tables?.find(table => table.table_no === order?.table)
+    const allTableMutate = useAllTableMutate(()=>{}, REQUEST.PUT)
 
     const orderMutate = useOrderMutate(()=>{
         if (order?.is_takeway){
@@ -28,7 +34,7 @@ const BillCloseConfirmation = ({ order }:Props) => {
             title: 'Order',
             description: "Order Successfully closed.",
             status: 'success',
-            duration: 9000,
+            duration: 3000,
             isClosable: true,
           })
     }, REQUEST.UPDATE)
@@ -40,6 +46,12 @@ const BillCloseConfirmation = ({ order }:Props) => {
         } as Order
 
         orderMutate.mutate(changedOrder)
+
+        const newTable = {
+          ...currentTable,
+          is_place_order:false
+        } as Table
+        allTableMutate.mutate(newTable)
 
     }
   

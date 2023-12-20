@@ -16,7 +16,7 @@ import {
   FormLabel,
   useToast,
 } from "@chakra-ui/react";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import CurrentOrderContext from "../../../Contexts/Orders/CurrentOrderContext";
 import { FieldValues, useForm } from "react-hook-form";
 import { REQUEST } from "../../../Generics/constants";
@@ -35,6 +35,11 @@ const Billing = () => {
   const currentFetchOrder = orders?.find(
     (order) => order.id === currentOrder?.id
   );
+
+  console.log('current fetch order', currentFetchOrder)
+
+  console.log('current order', currentOrder)
+
 
   const { data: products } = useAllProducts();
 
@@ -60,7 +65,7 @@ const Billing = () => {
 
   const onSubmit = (data: FieldValues) => {
     const newlyOrder = {
-      ...currentOrder,
+      ...currentFetchOrder,
       ...data,
       customer_name: data.customer_name
         ? data.customer_name
@@ -140,7 +145,7 @@ const Billing = () => {
               <FormLabel marginRight={2}>Customer</FormLabel>
               <Input
                 type="text"
-                defaultValue={currentOrder?.customer_name}
+                defaultValue={currentFetchOrder?.customer_name}
                 placeholder="Name"
                 {...register("customer_name")}
                 marginRight={2}
@@ -150,19 +155,18 @@ const Billing = () => {
               <Input
                 margin={0}
                 type="number"
-                defaultValue={currentOrder?.discount}
+                defaultValue={currentFetchOrder?.discount}
                 placeholder="(%)"
                 {...register("discount")}
                 marginRight={2}
               />
             </HStack>
             <HStack marginBottom={2}>
-              <FormLabel whiteSpace="nowrap">Service Charge</FormLabel>
+              <FormLabel whiteSpace="nowrap">Service Charge (%)</FormLabel>
               <Input
                 margin={0}
                 type="number"
-                defaultValue={currentOrder?.service_charge}
-                placeholder="10%"
+                defaultValue={currentFetchOrder?.service_charge}
                 {...register("service_charge")}
                 marginRight={2}
               />
@@ -177,7 +181,7 @@ const Billing = () => {
               <OrderCancelConfirmation order={currentOrder} />
             )}
 
-            <BillShowModel order={currentFetchOrder} />
+            <BillShowModel order={currentFetchOrder}/>
           </HStack>
         </Container>
       </VStack>

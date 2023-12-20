@@ -60,10 +60,11 @@ const OrderMainPage = () => {
         is_takeway: false,
         is_order_canceld: false,
         is_order_open: true,
+        service_charge:10
       };
 
       if (table === 'T000'){
-        order = {...order, is_takeway:true}
+        order = {...order, is_takeway:true, service_charge:0}
         console.log('takeway')
       }
     
