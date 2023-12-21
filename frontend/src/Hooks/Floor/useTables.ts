@@ -10,6 +10,7 @@ const useTables = (query:Query) => {
   return useQuery<Table[], Error>({
     queryKey: ["tables", query],
     queryFn: () => tableService(query.floor_id).getAll(),
+    refetchInterval:5000
   });
 }
 

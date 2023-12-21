@@ -7,6 +7,8 @@ import AdminPanelButton from "./Admin Panel/AdminPanelButton";
 import { useEffect } from "react";
 import SignOutButton from "./Admin Panel/SidePanel/componants/SignOutButton";
 import useUserMe from "../Hooks/User/useUserMe";
+import KitchenBillShowView from "./Order/Billing/BillShow/KitchenBillShowView";
+import KitchenShowModel from "./Kitchen/KitchenShowModel";
 
 const MainPage = () => {
   const { userMe } = useUserMe();
@@ -33,6 +35,7 @@ const MainPage = () => {
           {/* Admin Panel */}
           <Flex position="absolute" left="90vw" top="2vh">
             <HStack>
+              <KitchenShowModel/>
               {userMe.is_superuser && <AdminPanelButton />}
               <SignOutButton />
             </HStack>
@@ -80,11 +83,11 @@ const MainPage = () => {
 
           <HStack position="absolute" top="70vh" left="50vw">
             <Button
-              size="lg"
               width={{
-                lg: "200px",
+                lg: "300px",
                 sm: "150px",
               }}
+              height="50px"
               borderRadius={SIZES.MAIN_PAGE_BUTTON_BORDER_RADIOUS}
               variant="outline"
               textColor={COLOURS.MAIN_PAGE_WHITE}
@@ -96,11 +99,12 @@ const MainPage = () => {
               <Link to="/dining">Dining</Link>
             </Button>
             <Button
-              size="lg"
+              
               width={{
-                lg: "200px",
+                lg: "300px",
                 sm: "150px",
               }}
+              height="50px"
               borderRadius={SIZES.MAIN_PAGE_BUTTON_BORDER_RADIOUS}
               variant="outline"
               textColor={COLOURS.MAIN_PAGE_WHITE}
