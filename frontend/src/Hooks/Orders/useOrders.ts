@@ -8,6 +8,7 @@ const useOrders = () => {
   return useQuery<Order[], Error>({
     queryKey: ["orders"],
     queryFn: () => orderService.getAll(),
+    refetchInterval:500
   });
 }
 

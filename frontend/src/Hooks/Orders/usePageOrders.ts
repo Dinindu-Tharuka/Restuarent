@@ -8,7 +8,7 @@ interface Query{
 const usePageOrders = (query:Query) => {
   return useQuery<PaginationStructure<Order>, Error>({
     queryKey: ["pageOrders", query],
-    queryFn: () => pageOrderService.getAll({params:{page:query.page}}),
+    queryFn: () => pageOrderService.getAll({params:{page:query.page}}),   
   });
 };
 

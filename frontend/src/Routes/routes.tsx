@@ -11,6 +11,7 @@ import ReportMain from "../pages/Admin Panel/Main/Reports/ReportMain";
 import Categories from "../pages/Order/Componants/Categories/Categories";
 import Products from "../pages/Order/Componants/Product/Products";
 import Floors from "../pages/Admin Panel/Main/Floors/Floors";
+import KitchenOrderShow from "../pages/Kitchen/KitchenOrderShow";
 
 const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
             <Dining />
           </AnimatePresence>
         ),
+      },
+      {
+        path: "/kitchen",
+        element: <KitchenOrderShow/>
       },
       {
         path: "/dining/order/:table",

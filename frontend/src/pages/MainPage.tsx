@@ -1,19 +1,18 @@
-import { Button, Flex, HStack, Image, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, Image, Text, VStack } from "@chakra-ui/react";
 import restuarent from "../assets/images/restuarent.jpg";
 import { COLOURS, SIZES } from "../Generics/constants";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import {  motion } from "framer-motion";
 import AdminPanelButton from "./Admin Panel/AdminPanelButton";
 import { useEffect } from "react";
 import SignOutButton from "./Admin Panel/SidePanel/componants/SignOutButton";
 import useUserMe from "../Hooks/User/useUserMe";
-import KitchenBillShowView from "./Order/Billing/BillShow/KitchenBillShowView";
 import KitchenShowModel from "./Kitchen/KitchenShowModel";
 
 const MainPage = () => {
   const { userMe } = useUserMe();
 
-  console.log(userMe)
+  console.log(userMe);
 
   useEffect(() => {
     if (localStorage.getItem("firstTime") === "true") {
@@ -22,102 +21,112 @@ const MainPage = () => {
     }
   }, []);
   return (
-    
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, transition: { duration: 1 } }}
-        exit={{ opacity: 0 }}
-      >
-        <Flex width="100vw" height="100vh">
-          {/* Background Image */}
-          <Image src={restuarent} objectFit="cover" width="100vw" />
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, transition: { duration: 1 } }}
+      exit={{ opacity: 0 }}
+    >
+      <Flex width="100%" height="100%">
+        {/* Background Image */}
+        
 
-          {/* Admin Panel */}
-          <Flex position="absolute" left="90vw" top="2vh">
-            <HStack>
-              <KitchenShowModel/>
-              {userMe.is_superuser && <AdminPanelButton />}
-              <SignOutButton />
-            </HStack>
-          </Flex>
+        <Box
+          width="100%"
+          height="100%"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Image src={restuarent} objectFit="fill" width="100%" height="100%" />
+        </Box>
 
-          <Flex position="absolute" top="25vh" left="10vw">
-            <VStack alignItems="start">
-              <HStack>
-                <Text
-                  fontWeight="bold"
-                  fontSize={{
-                    sm: 50,
-                    lg: 70,
-                  }}
-                  color="white"
-                  textShadow="1px 1px #ff0000"
-                >
-                  Welcome to
-                </Text>
-                <Text
-                  fontWeight="bold"
-                  fontSize={{
-                    sm: 50,
-                    lg: 70,
-                  }}
-                  color={COLOURS.MAIN_PAGE_YELLOW}
-                  textShadow="1px 1px #ff0000"
-                >
-                  HIKKA LASSO
-                </Text>
-              </HStack>
-              <Text
-                textColor="white"
-                noOfLines={2}
-                width="40vw"
-                fontFamily="serif"
-                fontSize={20}
-                textShadow="1px 1px #ff0000"
-              >
-                Delight in exquisite flavors at our charming restaurant, where
-                every bite tells a unique story.
-              </Text>
-            </VStack>
-          </Flex>
-
-          <HStack position="absolute" top="70vh" left="50vw">
-            <Button
-              width={{
-                lg: "300px",
-                sm: "150px",
-              }}
-              height="50px"
-              borderRadius={SIZES.MAIN_PAGE_BUTTON_BORDER_RADIOUS}
-              variant="outline"
-              textColor={COLOURS.MAIN_PAGE_WHITE}
-              _hover={{
-                bg: COLOURS.MAIN_PAGE_YELLOW,
-                textColor: COLOURS.MAIN_PAGE_BLACK,
-              }}
-            >
-              <Link to="/dining">Dining</Link>
-            </Button>
-            <Button
-              
-              width={{
-                lg: "300px",
-                sm: "150px",
-              }}
-              height="50px"
-              borderRadius={SIZES.MAIN_PAGE_BUTTON_BORDER_RADIOUS}
-              variant="outline"
-              textColor={COLOURS.MAIN_PAGE_WHITE}
-              _hover={{
-                bg: COLOURS.MAIN_PAGE_YELLOW,
-                textColor: COLOURS.MAIN_PAGE_BLACK,
-              }}
-            >
-              <Link to="/dining/order/T000">Take away</Link>
-            </Button>
+        {/* Admin Panel */}
+        <Flex position="absolute" left="85%" top="2vh">
+          <HStack>
+            <KitchenShowModel />
+            {userMe.is_superuser && <AdminPanelButton />}
+            <SignOutButton />
           </HStack>
         </Flex>
-      </motion.div>
+
+        <Flex position="absolute" top="25vh" left="10vw">
+          <VStack alignItems="start">
+            <HStack>
+              <Text
+                fontWeight="bold"
+                fontSize={{
+                  sm: 50,
+                  lg: 70,
+                }}
+                color="white"
+                textShadow="1px 1px #ff0000"
+              >
+                Welcome to
+              </Text>
+              <Text
+                fontWeight="bold"
+                fontSize={{
+                  sm: 50,
+                  lg: 70,
+                }}
+                color={COLOURS.MAIN_PAGE_YELLOW}
+                textShadow="1px 1px #ff0000"
+              >
+                HIKKA LASSO
+              </Text>
+            </HStack>
+            <Text
+              textColor="white"
+              noOfLines={2}
+              width="40vw"
+              fontFamily="serif"
+              fontSize={20}
+              textShadow="1px 1px #ff0000"
+            >
+              Delight in exquisite flavors at our charming restaurant, where
+              every bite tells a unique story.
+            </Text>
+          </VStack>
+        </Flex>
+
+        <HStack position="absolute" top="75vh" left="50vw">
+          <Button
+            width={{
+              lg: "300px",
+              sm: "150px",
+            }}
+            height="50px"
+            borderRadius={SIZES.MAIN_PAGE_BUTTON_BORDER_RADIOUS}
+            variant="outline"
+            textColor={COLOURS.MAIN_PAGE_YELLOW}
+            borderColor={COLOURS.MAIN_PAGE_BLACK}
+            _hover={{
+              bg: COLOURS.MAIN_PAGE_YELLOW,
+              textColor: COLOURS.MAIN_PAGE_BLACK,
+            }}
+          >
+            <Link to="/dining">Dining</Link>
+          </Button>
+          <Button
+            width={{
+              lg: "300px",
+              sm: "150px",
+            }}
+            borderColor={COLOURS.MAIN_PAGE_BLACK}
+            height="50px"
+            borderRadius={SIZES.MAIN_PAGE_BUTTON_BORDER_RADIOUS}
+            variant="outline"
+            textColor={COLOURS.MAIN_PAGE_YELLOW}
+            _hover={{
+              bg: COLOURS.MAIN_PAGE_YELLOW,
+              textColor: COLOURS.MAIN_PAGE_BLACK,
+            }}
+          >
+            <Link to="/dining/order/T000">Take away</Link>
+          </Button>
+        </HStack>
+      </Flex>
+    </motion.div>
   );
 };
 

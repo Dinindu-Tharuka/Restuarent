@@ -1,32 +1,15 @@
-import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, IconButton, useDisclosure } from "@chakra-ui/react";
-import React from "react";
+import { IconButton} from "@chakra-ui/react";
 import { TbToolsKitchen } from "react-icons/tb";
-import KitchenOrderShow from "./KitchenOrderShow";
+import { useNavigate } from "react-router-dom";
 const KitchenShowModel = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef(null);
+  const navigate = useNavigate()
+
+  const onClick = ()=>{
+    return navigate('/kitchen')
+  }
   return (
     <>
-      <IconButton icon={<TbToolsKitchen/>} ref={btnRef} onClick={onOpen} aria-label="open kitchen"/>
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onClose}
-        finalFocusRef={btnRef}
-        size="full"
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>Kitchen</DrawerHeader>
-
-          <DrawerBody>
-            <KitchenOrderShow/>
-          </DrawerBody>
-
-          
-        </DrawerContent>
-      </Drawer>
+      <IconButton icon={<TbToolsKitchen/>} onClick={onClick} aria-label="open kitchen"/>      
     </>
   );
 };

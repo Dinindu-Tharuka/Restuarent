@@ -16,7 +16,7 @@ import {
   FormLabel,
   useToast,
 } from "@chakra-ui/react";
-import { useContext, useEffect, useState } from "react";
+import { useContext} from "react";
 import CurrentOrderContext from "../../../Contexts/Orders/CurrentOrderContext";
 import { FieldValues, useForm } from "react-hook-form";
 import { REQUEST } from "../../../Generics/constants";
@@ -29,18 +29,17 @@ import useOrderItemMutate from "../../../Hooks/OrderItem/useOrderItemMutate";
 import OrderCancelConfirmation from "./OrderCancelConfirmation";
 import BillShowModel from "./BillShow/BillShowModel";
 import KichenBillModel from "./BillShow/KichenBillModel";
+import useUserMe from "../../../Hooks/User/useUserMe";
 
 const Billing = () => {
   const { currentOrder } = useContext(CurrentOrderContext);
   const { data: orders } = useOrders();
+  const { userMe } = useUserMe();
   const currentFetchOrder = orders?.find(
     (order) => order.id === currentOrder?.id
   );
 
-  console.log('current fetch order', currentFetchOrder)
-
-  console.log('current order', currentOrder)
-
+  console.log('current order', currentFetchOrder)
 
   const { data: products } = useAllProducts();
 
@@ -107,12 +106,14 @@ const Billing = () => {
               {currentFetchOrder?.orderitems?.map((orderitem) => (
                 <Tr>
                   <Td>
-                    <IconButton
-                      colorScheme="red"
-                      icon={<AiFillDelete />}
-                      aria-label="delete"
-                      onClick={() => onDeleteOrderItem(orderitem)}
-                    />
+                    {userMe.is_superuser && (
+                      <IconButton
+                        colorScheme="red"
+                        icon={<AiFillDelete />}
+                        aria-label="delete"
+                        onClick={() => onDeleteOrderItem(orderitem)}
+                      />
+                    )}
                   </Td>
                   <Td>
                     {
@@ -129,7 +130,7 @@ const Billing = () => {
           </Table>
         </Container>
 
-        <Container>
+        {(userMe.is_superuser || userMe.is_cashier)  && <Container>
           <Table marginBottom={5}>
             <Tbody>
               <Tr>
@@ -141,51 +142,55 @@ const Billing = () => {
               </Tr>
             </Tbody>
           </Table>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <HStack justifyContent="space-between" marginBottom={2}>
-              <FormLabel marginRight={2}>Customer</FormLabel>
-              <Input
-                type="text"
-                defaultValue={currentFetchOrder?.customer_name}
-                placeholder="Name"
-                {...register("customer_name")}
-                marginRight={2}
-                margin={0}
-              />
-              <FormLabel>Discount</FormLabel>
-              <Input
-                margin={0}
-                type="number"
-                defaultValue={currentFetchOrder?.discount}
-                placeholder="(%)"
-                {...register("discount")}
-                marginRight={2}
-              />
-            </HStack>
-            <HStack marginBottom={2}>
-              <FormLabel whiteSpace="nowrap">Service Charge (%)</FormLabel>
-              <Input
-                margin={0}
-                type="number"
-                defaultValue={currentFetchOrder?.service_charge}
-                {...register("service_charge")}
-                marginRight={2}
-              />
+          
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <HStack justifyContent="space-between" marginBottom={2}>
+                <FormLabel marginRight={2}>Customer</FormLabel>
+                <Input
+                  type="text"
+                  defaultValue={currentFetchOrder?.customer_name}
+                  placeholder="Name"
+                  {...register("customer_name")}
+                  marginRight={2}
+                  margin={0}
+                />
+                <FormLabel>Discount</FormLabel>
+                <Input
+                  margin={0}
+                  type="number"
+                  defaultValue={currentFetchOrder?.discount}
+                  placeholder="(%)"
+                  {...register("discount")}
+                  marginRight={2}
+                />
+              </HStack>
+              <HStack marginBottom={2}>
+                <FormLabel whiteSpace="nowrap">Service Charge (%)</FormLabel>
+                <Input
+                  margin={0}
+                  type="number"
+                  defaultValue={currentFetchOrder?.service_charge}
+                  {...register("service_charge")}
+                  marginRight={2}
+                />
 
-              <Button margin={0} type="submit" width="200px">
-                Add
-              </Button>
-            </HStack>
-          </form>
-          <HStack>
-            {currentOrder !== undefined && (
-              <OrderCancelConfirmation order={currentOrder} />
-            )}
-            <KichenBillModel order={currentFetchOrder}/>
+                <Button margin={0} type="submit" width="200px">
+                  Add
+                </Button>
+              </HStack>
+            </form>
+          
+          
+            <HStack>
+              {currentOrder !== undefined && (
+                <OrderCancelConfirmation order={currentOrder} />
+              )}
+              <KichenBillModel order={currentFetchOrder} />
 
-            <BillShowModel order={currentFetchOrder}/>
-          </HStack>
-        </Container>
+              <BillShowModel order={currentFetchOrder} />
+            </HStack>
+          
+        </Container>}
       </VStack>
     </Flex>
   );
