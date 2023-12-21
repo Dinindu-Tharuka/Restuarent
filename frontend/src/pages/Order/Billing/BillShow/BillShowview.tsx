@@ -4,6 +4,7 @@ import {
   VStack,
   Text,
   HStack,
+  Image,
 } from "@chakra-ui/react";
 import { Order } from "../../../../Generics/interfaces";
 import { useEffect, useRef, useState } from "react";
@@ -13,6 +14,7 @@ import useAllProducts from "../../../../Hooks/Product/Product/useAllProducts";
 import "./BillShowView.css";
 import { formatNumberWithTwoDecimals } from "../Functions/functions";
 import BillCloseConfirmation from "./BillCloseConfirmation";
+import logo from '../../../../assets/images/logo.png'
 
 interface Props {
   order?: Order;
@@ -37,9 +39,10 @@ const BillShowview = ({ order }: Props) => {
     <Flex flexDir="column">
       <div ref={pdfRef} className="">
         <VStack padding={2}>
-          <Text margin={0} fontSize="x-large" fontWeight="bold">
+          {/* <Text margin={0} fontSize="x-large" fontWeight="bold">
             HIKKA LASSO
-          </Text>
+          </Text> */}
+          <Image src={logo}/>
           <Text margin={0} fontWeight="semibold" textAlign='center'>
           Galle Road, Seenigama, <br/> 
             Hikkaduwa, <br/> Sri Lanka

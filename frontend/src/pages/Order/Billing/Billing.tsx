@@ -28,6 +28,7 @@ import { Order, OrderItem } from "../../../Generics/interfaces";
 import useOrderItemMutate from "../../../Hooks/OrderItem/useOrderItemMutate";
 import OrderCancelConfirmation from "./OrderCancelConfirmation";
 import BillShowModel from "./BillShow/BillShowModel";
+import KichenBillModel from "./BillShow/KichenBillModel";
 
 const Billing = () => {
   const { currentOrder } = useContext(CurrentOrderContext);
@@ -180,6 +181,7 @@ const Billing = () => {
             {currentOrder !== undefined && (
               <OrderCancelConfirmation order={currentOrder} />
             )}
+            <KichenBillModel order={currentFetchOrder}/>
 
             <BillShowModel order={currentFetchOrder}/>
           </HStack>
