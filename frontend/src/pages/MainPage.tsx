@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import SignOutButton from "./Admin Panel/SidePanel/componants/SignOutButton";
 import useUserMe from "../Hooks/User/useUserMe";
 import KitchenShowModel from "./Kitchen/KitchenShowModel";
+import { COLORS } from "html2canvas/dist/types/css/types/color";
 
 const MainPage = () => {
   const { userMe } = useUserMe();
@@ -96,6 +97,7 @@ const MainPage = () => {
               sm: "150px",
             }}
             height="50px"
+            bg={COLOURS.MAIN_PAGE_BUTTON_COLOR_YELLOW}
             borderRadius={SIZES.MAIN_PAGE_BUTTON_BORDER_RADIOUS}
             variant="outline"
             textColor={COLOURS.MAIN_PAGE_YELLOW}
@@ -112,10 +114,11 @@ const MainPage = () => {
               lg: "300px",
               sm: "150px",
             }}
+            bg={COLOURS.MAIN_PAGE_BUTTON_COLOR_YELLOW}
             borderColor={COLOURS.MAIN_PAGE_BLACK}
             height="50px"
             borderRadius={SIZES.MAIN_PAGE_BUTTON_BORDER_RADIOUS}
-            variant="outline"
+            variant="outline"            
             textColor={COLOURS.MAIN_PAGE_YELLOW}
             _hover={{
               bg: COLOURS.MAIN_PAGE_YELLOW,
