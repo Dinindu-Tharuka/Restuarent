@@ -12,10 +12,9 @@ import { COLOURS } from "../../../../Generics/constants";
 import generatePdf from "../../../../PDF/generatePdf";
 import useAllProducts from "../../../../Hooks/Product/Product/useAllProducts";
 import "./BillShowView.css";
-import { formatNumberWithTwoDecimals } from "../Functions/functions";
 import BillCloseConfirmation from "./BillCloseConfirmation";
 import logo from '../../../../assets/images/logo.png'
-import { getConvertedDateTime } from "../../../../Generics/functions";
+import { formatNumberWithTwoDecimals, getConvertedDateTime } from "../../../../Generics/functions";
 
 interface Props {
   order?: Order;

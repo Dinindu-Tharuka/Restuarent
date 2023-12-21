@@ -1,16 +1,40 @@
-
-import { Container, Table, Thead, VStack, Tr, Th, HStack, Tbody, Td, Button, Text } from "@chakra-ui/react"
-import usePageOrders from "../../../../Hooks/Orders/usePageOrders"
-import { SIZES } from "../../../../Generics/constants"
-import { useState } from "react"
-import { converDateTme } from "./Functions/functions"
-
+import {
+  Container,
+  Table,
+  Thead,
+  VStack,
+  Tr,
+  Th,
+  HStack,
+  Tbody,
+  Td,
+  Button,
+  Text,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+} from "@chakra-ui/react";
+import usePageOrders from "../../../../Hooks/Orders/usePageOrders";
+import { SIZES } from "../../../../Generics/constants";
+import { useState } from "react";
+import { converDateTme } from "./Functions/functions";
+import OrderDeleteConfirm from "./Orders/OrderDeleteConfirm";
+import useOrders from "../../../../Hooks/Orders/useOrders";
+import RevenueShowModel from "./Revenue/RevenueShowModel";
 
 const ReportMain = () => {
-  const [page, setPage]= useState(1)
- 
-  const {data:orders} = usePageOrders({page:page})
-  console.log(orders, 'orders')
+  const [page, setPage] = useState(1);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+
+  const { data: orders } = usePageOrders({
+    page: page,
+    startDate: startDate,
+    endDate: endDate,
+  });
+
+  // for filtering orders
+  const {data: allOrders} = useOrders({startDate:startDate, endDate:endDate})
 
   const userCount = orders?.count;
   let lastPage = 0;
@@ -18,36 +42,59 @@ const ReportMain = () => {
     lastPage = Math.ceil(userCount / SIZES.ORDER_PAGE_SIZE);
   }
   return (
-    <VStack width="100%" >
-      <Container overflow='auto' maxWidth='100%' minHeight='80vh' maxHeight='80vh'>
-        
-          <Table overflow='auto'>
-            <Thead>
+    <VStack width="100%">
+      <HStack>
+        <InputGroup>
+          <InputLeftAddon children="START" />
+          <Input
+            type="date"
+            onChange={(e) => setStartDate(e.currentTarget.value)}
+          />
+        </InputGroup>
+
+        <InputGroup>
+          <InputLeftAddon children="END" />
+          <Input
+            type="date"
+            onChange={(e) => setEndDate(e.currentTarget.value)}
+          />
+        </InputGroup>
+
+        {allOrders && <RevenueShowModel orders={allOrders}/>}
+      </HStack>
+      <Container
+        overflow="auto"
+        maxWidth="100%"
+        minHeight="80vh"
+        maxHeight="80vh"
+      >
+        <Table overflow="auto">
+          <Thead>
+            <Tr>
+              <Th>User Name</Th>
+              <Th>Date</Th>
+              <Th>Table</Th>
+              <Th>Total</Th>
+              <Th></Th>
+              <Th>
+                <HStack spacing={5}></HStack>
+              </Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {orders?.results.map((order) => (
               <Tr>
-                <Th>User Name</Th>
-                <Th>Date</Th>
-                <Th></Th>
-                <Th>
-                  <HStack spacing={5}>
-                  </HStack>
-                </Th>
+                <Td>{order.id}</Td>
+                <Td>{converDateTme(order.date ? order.date : "")}</Td>
+                <Td>{order.table}</Td>
+                <Td>{order.total}</Td>
+                <Td>
+                  <OrderDeleteConfirm order={order} />
+                </Td>
               </Tr>
-            </Thead>
-            <Tbody>
-              {orders?.results.map((order) => (
-                <Tr>
-                  <Td>{order.id}</Td>
-                  <Td>{converDateTme(order.date ? order.date : '')}</Td>
-                  <Td>             
-                  </Td>
-                  <Td>
-                  </Td>
-                  
-                  
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
+            ))}
+          </Tbody>
+        </Table>
       </Container>
 
       <HStack position="absolute" top="90vh" right="40vw">
@@ -71,7 +118,7 @@ const ReportMain = () => {
         </Button>
       </HStack>
     </VStack>
-  )
-}
+  );
+};
 
-export default ReportMain
+export default ReportMain;

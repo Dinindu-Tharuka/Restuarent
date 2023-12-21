@@ -24,6 +24,10 @@ const useOrderMutate = (
         queryKey: ["orders"],
       });
 
+      queryClient.invalidateQueries({
+        queryKey:["pageOrders"]
+      })
+
       onSuccessfull(savedOrder);
     },
   });
