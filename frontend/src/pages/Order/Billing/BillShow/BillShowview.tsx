@@ -15,6 +15,7 @@ import "./BillShowView.css";
 import { formatNumberWithTwoDecimals } from "../Functions/functions";
 import BillCloseConfirmation from "./BillCloseConfirmation";
 import logo from '../../../../assets/images/logo.png'
+import { getConvertedDateTime } from "../../../../Generics/functions";
 
 interface Props {
   order?: Order;
@@ -45,7 +46,8 @@ const BillShowview = ({ order }: Props) => {
           <Image src={logo}/>
           <Text margin={0} fontWeight="semibold" textAlign='center'>
           Galle Road, Seenigama, <br/> 
-            Hikkaduwa, <br/> Sri Lanka
+            Hikkaduwa, <br/> Sri Lanka <br/>
+            {getConvertedDateTime(order?.date)}
           </Text>
           <text className="w-100 line padding">
             {order?.customer_name} - Table {order?.table}
@@ -109,6 +111,7 @@ const BillShowview = ({ order }: Props) => {
               </tr>
             </tfoot>
           </table>
+          <Text textAlign='center'>Your satisfaction is our joy. Thank you !!! <br/>See you soon!</Text>
         </VStack>
       </div>
       <HStack width='100%'>

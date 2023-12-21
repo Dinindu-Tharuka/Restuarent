@@ -12,8 +12,8 @@ import {
   import generatePdf from "../../../../PDF/generatePdf";
   import useAllProducts from "../../../../Hooks/Product/Product/useAllProducts";
   import "./BillShowView.css";
-  import { formatNumberWithTwoDecimals } from "../Functions/functions";
   import logo from '../../../../assets/images/logo.png'
+import { getConvertedDateTime } from "../../../../Generics/functions";
   
   interface Props {
     order?: Order;
@@ -45,7 +45,8 @@ const KitchenBillShowView = ({ order}: Props) => {
         <Image src={logo}/>
         <Text margin={0} fontWeight="semibold" textAlign='center'>
         Galle Road, Seenigama, <br/> 
-          Hikkaduwa, <br/> Sri Lanka
+          Hikkaduwa, <br/> Sri Lanka <br/>
+          {getConvertedDateTime(order?.date)}
         </Text>
         <text className="w-100 line padding">
           {order?.customer_name} - Table {order?.table}
@@ -69,6 +70,8 @@ const KitchenBillShowView = ({ order}: Props) => {
           </tbody>
         </table>
         <text className="w-100 line"></text>
+
+       
         
       </VStack>
     </div>
