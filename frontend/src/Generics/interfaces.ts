@@ -84,6 +84,7 @@ export interface Table{
   is_place_order:boolean;
   floor_id:number;
   is_vip:boolean;
+  
 }
 
 export interface Floor{
@@ -93,5 +94,7 @@ export interface Floor{
   table_end_number:string;
   vip_table_start_number:string; 
   vip_table_end_number:string;
+  table_count:number;
+  vip_table_count:number;
   tables:Table[]
 }

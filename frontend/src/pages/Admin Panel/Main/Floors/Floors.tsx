@@ -1,5 +1,4 @@
 import {
-  FormLabel,
   HStack,
   Table,
   TableContainer,
@@ -27,7 +26,7 @@ const Floors = () => {
               <Th></Th>
               <Th>Floor Number</Th>
               <Th>Tables</Th>
-              <Th>Table End No</Th>
+              <Th>VIP Tables</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -35,7 +34,8 @@ const Floors = () => {
               <Tr>
                 <Td><FloorDeleteConfirmation floor={floor}/></Td>
                 <Td>{floor.floor_number}</Td>
-                <Td></Td>
+                <Td>{floor.table_count}</Td>
+                <Td>{floor.vip_table_count}</Td>
                 <Td></Td>
               </Tr>
             ))}

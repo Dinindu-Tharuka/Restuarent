@@ -38,7 +38,7 @@ const OrderMainPage = () => {
     allTableMutate.mutate(newTable)
 
 
-  }, [])
+  }, [allTables])
 
   
 

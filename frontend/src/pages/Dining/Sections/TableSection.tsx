@@ -10,8 +10,8 @@ interface Props {
 const TableSection = ({ tables }: Props) => {
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1, transition: { duration: 1 } }}
+      initial={{ width:'5vw', height:'5vh' }}
+      animate={{ width:'100%', height:'100%', transition: { duration: 1 } }}
       exit={{ opacity: 0 }}
     >
       <HStack justifyContent="center" height="100%">

@@ -12,7 +12,8 @@ export enum COLOURS {
   TABLE_BUTTON_HOVER_COLOR = '#f67122',
   CANCEL_COLOR='red',
   OK_COLOUR = '#5cf852',
-  HOVER_BUTTON_COLOR = '#d9d9d9'
+  HOVER_BUTTON_COLOR = '#d9d9d9',
+  VIP_COLOR = '#dd0939'
 }
 
 export enum SIZES {

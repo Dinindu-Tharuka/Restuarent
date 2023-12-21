@@ -38,10 +38,11 @@ const BillShowview = ({ order }: Props) => {
       <div ref={pdfRef} className="">
         <VStack padding={2}>
           <Text margin={0} fontSize="x-large" fontWeight="bold">
-            Resturent
+            HIKKA LASSO
           </Text>
-          <Text margin={0} fontWeight="semibold">
-            Colombo, Sri Lanaka
+          <Text margin={0} fontWeight="semibold" textAlign='center'>
+          Galle Road, Seenigama, <br/> 
+            Hikkaduwa, <br/> Sri Lanka
           </Text>
           <text className="w-100 line padding">
             {order?.customer_name} - Table {order?.table}
