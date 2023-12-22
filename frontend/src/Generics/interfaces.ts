@@ -60,6 +60,8 @@ export interface OrderItem{
   order_id:number;
   quantity:number;
   item_total:number;
+  datetime?:string;
+  is_ok_in_kitchen?:boolean;
 }
 
 export interface Order{

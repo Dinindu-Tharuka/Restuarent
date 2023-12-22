@@ -25,6 +25,7 @@ const RevenueReportShow = ({ orders }: Props) => {
   useEffect(() => {
     setCapture(pdfRef.current);
   }, []);
+  
   return (
     <>
       <div ref={pdfRef} >

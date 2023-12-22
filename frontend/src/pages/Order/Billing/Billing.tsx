@@ -92,7 +92,7 @@ const Billing = () => {
           Restuarent - Table ({currentFetchOrder?.table})
         </Text>
 
-        <Container maxHeight="55vh" minHeight="55vh" overflow="auto">
+        <Container maxHeight="50vh" minHeight="50vh" overflow="auto">
           <Table>
             <Thead>
               <Tr>

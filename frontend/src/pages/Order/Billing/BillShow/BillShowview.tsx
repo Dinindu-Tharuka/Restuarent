@@ -39,9 +39,6 @@ const BillShowview = ({ order }: Props) => {
     <Flex flexDir="column">
       <div ref={pdfRef} className="">
         <VStack padding={2}>
-          {/* <Text margin={0} fontSize="x-large" fontWeight="bold">
-            HIKKA LASSO
-          </Text> */}
           <Image src={logo}/>
           <Text margin={0} fontWeight="semibold" textAlign='center'>
           Galle Road, Seenigama, <br/> 
