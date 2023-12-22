@@ -25,15 +25,15 @@ const BillShowview = ({ order }: Props) => {
   const [loader, setLoader] = useState(false);
   const pdfRef = useRef<HTMLDivElement>(null);
   const [capture, setCapture] = useState<HTMLDivElement | null>(null);
+  
+    useEffect(() => {
+      setCapture(pdfRef.current);
+    }, []);
 
   // for get product
   const { data: products } = useAllProducts();
 
   
-
-  useEffect(() => {
-    setCapture(pdfRef.current);
-  }, []);
 
   return (
     <Flex flexDir="column">

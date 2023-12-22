@@ -21,8 +21,8 @@ import CurrentOrderContext from "../../../../Contexts/Orders/CurrentOrderContext
 import useOrderItemMutate from "../../../../Hooks/OrderItem/useOrderItemMutate";
 import { FieldValues, useForm } from "react-hook-form";
 import ProductItemDeleteConfirmation from "./ProductItemDeleteConfirmation";
-import { formatNumberWithTwoDecimals } from "../../Billing/Functions/functions";
 import UserMeContext from "../../../../Contexts/UserMe";
+import { formatNumberWithTwoDecimals } from "../../../../Generics/functions";
 interface Props {
   product: Product;
 }
@@ -36,8 +36,6 @@ const ProductItem = ({ product }: Props) => {
 
   //user
  const userMe = useContext(UserMeContext)
-
- console.log('user', userMe)
 
   //////
   const toast = useToast();

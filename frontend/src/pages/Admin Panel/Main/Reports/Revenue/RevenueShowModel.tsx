@@ -1,4 +1,4 @@
-import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react"
+import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from "@chakra-ui/react"
 import RevenueReportShow from "./RevenueReportShow"
 import { Order } from "../../../../../Generics/interfaces"
 
@@ -11,10 +11,12 @@ const RevenueShowModel = ({ orders }:Props) => {
     <>
       <Button onClick={onOpen} width='280px'>Revenue Report</Button>
 
-      <Modal isOpen={isOpen} onClose={onClose} size='xl'>
+      <Modal isOpen={isOpen} onClose={onClose} size='custom'>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Revenue Report</ModalHeader>
+        <ModalContent css={{
+          width:"600px"
+        }}>
+          
           <ModalCloseButton />
           <ModalBody>
             <RevenueReportShow orders={orders}/>
