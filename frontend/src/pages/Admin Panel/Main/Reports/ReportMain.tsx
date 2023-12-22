@@ -13,6 +13,10 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from "@chakra-ui/react";
 import usePageOrders from "../../../../Hooks/Orders/usePageOrders";
 import { SIZES } from "../../../../Generics/constants";
@@ -23,6 +27,7 @@ import useOrders from "../../../../Hooks/Orders/useOrders";
 import RevenueShowModel from "./Revenue/RevenueShowModel";
 import useAllProducts from "../../../../Hooks/Product/Product/useAllProducts";
 import ProductShowModel from "./Product/ProductShowModel";
+import { FaAngleDown } from "react-icons/fa6";
 
 const ReportMain = () => {
   const [page, setPage] = useState(1);
@@ -36,12 +41,17 @@ const ReportMain = () => {
   });
 
   // for filtering orders
-  const {data: allOrders} = useOrders({startDate:startDate, endDate:endDate})
+  const { data: allOrders } = useOrders({
+    startDate: startDate,
+    endDate: endDate,
+  });
 
   // For filter products
-  const {data:products} = useAllProducts({startDate:startDate, endDate:endDate})
+  const { data: products } = useAllProducts({
+    startDate: startDate,
+    endDate: endDate,
+  });
 
-  
   const userCount = orders?.count;
   let lastPage = 0;
   if (userCount !== undefined) {
@@ -66,11 +76,21 @@ const ReportMain = () => {
           />
         </InputGroup>
 
-        {allOrders && <RevenueShowModel orders={allOrders}/>}
-
-        {products && <ProductShowModel products={products}/>}
        
 
+        
+
+        <Menu>
+          <MenuButton as={Button} rightIcon={<FaAngleDown />} width='300px'>
+            Reports
+          </MenuButton>
+          <MenuList>
+            <MenuItem>{allOrders && <RevenueShowModel orders={allOrders} />}</MenuItem>
+            <MenuItem>{products && <ProductShowModel products={products} />}</MenuItem>
+            
+          </MenuList>
+        </Menu>
+        
       </HStack>
       <Container
         overflow="auto"
@@ -107,7 +127,7 @@ const ReportMain = () => {
         </Table>
       </Container>
 
-      <HStack position="absolute" top="90vh" right="40vw">
+      <HStack position="absolute" top="90vh" right="30vw">
         <Button
           width={SIZES.ADMIN_PAGE_BUTTON_WIDTH}
           isDisabled={page === 1}

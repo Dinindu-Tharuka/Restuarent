@@ -9,7 +9,7 @@ const RevenueShowModel = ({ orders }:Props) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
-      <Button onClick={onOpen} width='280px'>Revenue Report</Button>
+      <Button onClick={onOpen} width='100%'>Revenue Report</Button>
 
       <Modal isOpen={isOpen} onClose={onClose} size='custom'>
         <ModalOverlay />

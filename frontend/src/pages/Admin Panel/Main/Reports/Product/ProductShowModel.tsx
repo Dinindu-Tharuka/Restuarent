@@ -18,7 +18,7 @@ const ProductShowModel = ({ products }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Button onClick={onOpen}>Products Report</Button>
+      <Button onClick={onOpen} width='100%'>Products Report</Button>
 
       <Modal isOpen={isOpen} onClose={onClose} size='custom'>
         <ModalOverlay />
