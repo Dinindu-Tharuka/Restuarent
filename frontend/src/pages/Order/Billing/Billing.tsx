@@ -76,8 +76,6 @@ const Billing = () => {
         : currentFetchOrder?.service_charge,
     } as Order;
 
-    console.log("new", newlyOrder);
-
     orderMutate.mutate(newlyOrder);
   };
 

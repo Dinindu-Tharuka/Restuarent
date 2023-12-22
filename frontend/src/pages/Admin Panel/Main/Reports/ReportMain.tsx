@@ -21,6 +21,8 @@ import { converDateTme } from "./Functions/functions";
 import OrderDeleteConfirm from "./Orders/OrderDeleteConfirm";
 import useOrders from "../../../../Hooks/Orders/useOrders";
 import RevenueShowModel from "./Revenue/RevenueShowModel";
+import useAllProducts from "../../../../Hooks/Product/Product/useAllProducts";
+import ProductShowModel from "./Product/ProductShowModel";
 
 const ReportMain = () => {
   const [page, setPage] = useState(1);
@@ -36,6 +38,10 @@ const ReportMain = () => {
   // for filtering orders
   const {data: allOrders} = useOrders({startDate:startDate, endDate:endDate})
 
+  // For filter products
+  const {data:products} = useAllProducts({startDate:startDate, endDate:endDate})
+
+  
   const userCount = orders?.count;
   let lastPage = 0;
   if (userCount !== undefined) {
@@ -61,6 +67,10 @@ const ReportMain = () => {
         </InputGroup>
 
         {allOrders && <RevenueShowModel orders={allOrders}/>}
+
+        {products && <ProductShowModel products={products}/>}
+       
+
       </HStack>
       <Container
         overflow="auto"

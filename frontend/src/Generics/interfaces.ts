@@ -52,6 +52,9 @@ export interface Product {
   title: string;
   price: number;
   category_id: number;
+  orderitem_count:number;
+  orderitem_total_quantity:number;
+  orderitems_total_price:number;
 }
 
 export interface OrderItem{

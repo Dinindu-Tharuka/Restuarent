@@ -1,4 +1,4 @@
-import { Order } from "./interfaces";
+import { Order, Product } from "./interfaces";
 
 export const getConvertedDateTime = (date?: string) => {
   const dateConverted = new Date(date ? date : "");
@@ -54,3 +54,13 @@ export const getDiscountTotal = (orders: Order[]) => {
 
   return subtotal;
 }
+
+/// Products Report
+export const getTotalOrderItemPrice = (orders: Product[]) => {
+  const subtotal = orders.reduce((accumilator, currentObj) => {
+    return accumilator + (currentObj.orderitems_total_price ? currentObj.orderitems_total_price : 0);
+  }, 0);
+
+  return subtotal;
+}
+
