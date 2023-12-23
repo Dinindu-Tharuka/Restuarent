@@ -1,8 +1,9 @@
-import { Button, FormLabel, Input, useToast } from "@chakra-ui/react"
+import { Button, FormLabel, Input, VStack, useToast } from "@chakra-ui/react"
 import { FieldValues, useForm } from "react-hook-form"
 import { Product } from "../../../../../Generics/interfaces"
 import useProductsMutate from "../../../../../Hooks/Product/Product/useProductsMutate"
 import { REQUEST } from "../../../../../Generics/constants"
+import UploadExcelFile from "./UploadExcelFile"
 
 interface Props{
   category_id:number;
@@ -12,6 +13,8 @@ interface Props{
 const ProductAddForm = ({ category_id, onClose }:Props) => {
     const {register, handleSubmit} = useForm<Product>()
     const toast = useToast()
+
+    
 
     const productMutate = useProductsMutate(()=>{
       toast({
@@ -34,16 +37,24 @@ const ProductAddForm = ({ category_id, onClose }:Props) => {
       productMutate.mutate(newProdcut)
 
     }
+
+    
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-        <FormLabel>Title</FormLabel>
-        <Input {...register('title')} type="text" marginBottom={5}/>
+    <VStack>
 
-        <FormLabel>Price</FormLabel>
-        <Input {...register('price')} type="number" marginBottom={5}/>
+      <form onSubmit={handleSubmit(onSubmit)}>
+          <FormLabel>Title</FormLabel>
+          <Input {...register('title')} type="text" marginBottom={5}/>
+  
+          <FormLabel>Price</FormLabel>
+          <Input {...register('price')} type="number" marginBottom={5}/>
+  
+          <Button type="submit">Create</Button>
+      </form>
+  
+      <UploadExcelFile category_id={category_id}/>
+    </VStack>
 
-        <Button type="submit">Create</Button>
-    </form>
   )
 }
 
