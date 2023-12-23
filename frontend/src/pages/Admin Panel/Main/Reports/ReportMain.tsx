@@ -31,6 +31,8 @@ import { FaAngleDown } from "react-icons/fa6";
 
 const ReportMain = () => {
   const [page, setPage] = useState(1);
+  const [selectedProductId, setSelectedProductId] = useState<number>();
+  const [productFilter, setProductFilter] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
@@ -50,7 +52,10 @@ const ReportMain = () => {
   const { data: products } = useAllProducts({
     startDate: startDate,
     endDate: endDate,
+    productId:selectedProductId
   });
+
+  
 
   const userCount = orders?.count;
   let lastPage = 0;
@@ -59,8 +64,8 @@ const ReportMain = () => {
   }
   return (
     <VStack width="100%">
-      <HStack>
-        <InputGroup>
+      <HStack width="100%">
+        <InputGroup width="25%" margin={3}>
           <InputLeftAddon children="START" />
           <Input
             type="date"
@@ -68,7 +73,7 @@ const ReportMain = () => {
           />
         </InputGroup>
 
-        <InputGroup>
+        <InputGroup width="25%" margin={3}>
           <InputLeftAddon children="END" />
           <Input
             type="date"
@@ -76,21 +81,54 @@ const ReportMain = () => {
           />
         </InputGroup>
 
-       
-
-        
-
         <Menu>
-          <MenuButton as={Button} rightIcon={<FaAngleDown />} width='300px'>
+          <MenuButton
+            as={Button}
+            rightIcon={<FaAngleDown />}
+            width="25%"
+            margin={3}
+          >
             Reports
           </MenuButton>
           <MenuList>
-            <MenuItem>{allOrders && <RevenueShowModel orders={allOrders} />}</MenuItem>
-            <MenuItem>{products && <ProductShowModel products={products} />}</MenuItem>
-            
+            <MenuItem>
+              {allOrders && <RevenueShowModel orders={allOrders} />}
+            </MenuItem>
+            <MenuItem>
+              {products && <ProductShowModel products={products} />}
+            </MenuItem>
           </MenuList>
         </Menu>
-        
+
+        <Menu>
+          <MenuButton
+            as={Button}
+            rightIcon={<FaAngleDown />}
+            width="25%"
+            margin={3}
+          >
+            {selectedProductId
+              ? products?.find((product) => product.id === selectedProductId)
+                  ?.title
+              : " Select Product"}
+          </MenuButton>
+          <MenuList>
+            <Input
+              type="text"
+              onChange={(e) => setProductFilter(e.currentTarget.value)}
+            />
+            <MenuItem onClick={()=>setSelectedProductId(undefined)}>All Products</MenuItem>
+
+            {products
+              ?.filter((product) => product.title.startsWith(productFilter))
+              .filter((product, index) => index < 10)
+              .map((product) => (
+                <MenuItem onClick={() => setSelectedProductId(product.id)}>
+                  {product.title}
+                </MenuItem>
+              ))}
+          </MenuList>
+        </Menu>
       </HStack>
       <Container
         overflow="auto"

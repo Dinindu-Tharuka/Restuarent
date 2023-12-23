@@ -25,8 +25,8 @@ const LoginForm = () => {
   if (accessToken) return <Navigate to="/" />;
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-75">
-        {error && <Text>{error}</Text>}
-      <Flex flexDir='column'>
+      {error && <Text>{error}</Text>}
+      <Flex flexDir="column">
         <Input
           {...register("user_name")}
           type="text"
@@ -45,7 +45,9 @@ const LoginForm = () => {
           width={SIZES.LOGIN_FORM_INPUT_WIDTH}
         />
         {error && <Text color="red">{error}</Text>}
-        <Button type="submit" bg='#f22827'>Login</Button>
+        <Button width={SIZES.LOGIN_FORM_INPUT_WIDTH} type="submit" bg="#f22827">
+          Login
+        </Button>
       </Flex>
     </form>
   );
