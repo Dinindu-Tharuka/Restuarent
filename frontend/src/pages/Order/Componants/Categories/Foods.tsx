@@ -1,4 +1,4 @@
-import { Button, Container, Input, SimpleGrid, Text } from "@chakra-ui/react";
+import { Button, Input, SimpleGrid, Text } from "@chakra-ui/react";
 import { Category } from "../../../../Generics/interfaces";
 import { COLOURS, SIZES } from "../../../../Generics/constants";
 import { useNavigate } from "react-router-dom";

@@ -9,11 +9,13 @@ interface Props{
 
 const UploadExcelFile = ({ category_id }:Props) => {
   const [uploadError, setUploadError] = useState("");
+  const [success, setSuccess] = useState("")
   // for upload excel
   const { register, handleSubmit } = useForm();
 
   const onSubmitExcel = async (data: FieldValues) => {
     setUploadError('')
+    setSuccess('')
     const selectedFile = data.file[0];
 
     const fileTypes = [
@@ -34,12 +36,13 @@ const UploadExcelFile = ({ category_id }:Props) => {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then(() => console.log("successfull"))
-      .catch(() => console.log("Error"));
+      .then(() => setSuccess('Created successfully products. refresh the page to update the products.'))
+      .catch(() => setUploadError('Bad fromat or Network error.'));
   };
   return (
     <>
       {uploadError && <Text color='red'>{uploadError}</Text>}
+      {success && <Text color='green'>{success}</Text>}
       <form onSubmit={handleSubmit(onSubmitExcel)} >
         <FormLabel marginTop={5}>Upload Excel</FormLabel>
         <Input type="file" {...register("file")} marginBottom={5}/>

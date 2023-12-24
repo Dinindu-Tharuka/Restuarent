@@ -1,6 +1,7 @@
 import {
-  Box,
+  Text,
   Container,
+  HStack,
   Tab,
   TabList,
   TabPanel,
@@ -22,13 +23,14 @@ const Categories = () => {
   return (
     <UserMeContext.Provider value={userMe}>
       <>
-        <Box
+        <HStack
           position="absolute"
-          left={{ lg: "60vw", base: "45vw" }}
+          left={{ lg: "55vw", base: "35vw" }}
           zIndex={10}
         >
+          <Text>Add Category</Text>
          {userMe.is_superuser && <AddCategoryMode />}
-        </Box>
+        </HStack>
         <Tabs>
           <TabList>
             <Tab>Food</Tab>

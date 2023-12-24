@@ -8,7 +8,6 @@ import { useEffect } from "react";
 import SignOutButton from "./Admin Panel/SidePanel/componants/SignOutButton";
 import useUserMe from "../Hooks/User/useUserMe";
 import KitchenShowModel from "./Kitchen/KitchenShowModel";
-import { COLORS } from "html2canvas/dist/types/css/types/color";
 
 const MainPage = () => {
   const { userMe } = useUserMe();
