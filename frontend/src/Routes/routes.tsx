@@ -12,9 +12,14 @@ import Categories from "../pages/Order/Componants/Categories/Categories";
 import Products from "../pages/Order/Componants/Product/Products";
 import Floors from "../pages/Admin Panel/Main/Floors/Floors";
 import KitchenOrderShow from "../pages/Kitchen/KitchenOrderShow";
+import PasswordReset from "../pages/Auth/PasswordReset";
 
 const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
+  {
+    path: "/password/reset/:uid/:token",
+    element: <PasswordReset />,
+  },
   {
     element: <Privateroutes />,
     children: [

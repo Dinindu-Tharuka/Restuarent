@@ -1,9 +1,10 @@
-import { Button, Flex, Input, Text } from "@chakra-ui/react";
+import { Button, Flex, FormLabel, Input, Text } from "@chakra-ui/react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
 import axiosInstance from "../../services/api-client";
 import { SIZES } from "../../Generics/constants";
+import PasswordResetForm from "./PasswordResetForm";
 
 const LoginForm = () => {
   const { register, handleSubmit } = useForm();
@@ -24,32 +25,42 @@ const LoginForm = () => {
   };
   if (accessToken) return <Navigate to="/" />;
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-75">
-      {error && <Text>{error}</Text>}
-      <Flex flexDir="column">
-        <Input
-          {...register("user_name")}
-          type="text"
-          placeholder="Username"
-          marginBottom={5}
-          borderColor="black"
-          color="white"
-          width={SIZES.LOGIN_FORM_INPUT_WIDTH}
-        />
-        <Input
-          {...register("password")}
-          type="password"
-          placeholder="Password"
-          marginBottom={5}
-          borderColor="black"
-          width={SIZES.LOGIN_FORM_INPUT_WIDTH}
-        />
-        {error && <Text color="red">{error}</Text>}
-        <Button width={SIZES.LOGIN_FORM_INPUT_WIDTH} type="submit" bg="#f22827">
-          Login
-        </Button>
-      </Flex>
-    </form>
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} className="w-50 mt-5">
+        {error && <Text>{error}</Text>}
+        <Flex flexDir="column">
+          <FormLabel>Username</FormLabel>
+          <Input
+            {...register("user_name")}
+            type="text"
+            marginBottom={5}
+            borderColor="black"
+            color="black"
+            width={SIZES.LOGIN_FORM_INPUT_WIDTH}
+            
+          />
+          <FormLabel>Password</FormLabel>
+          <Input
+            {...register("password")}
+            type="password"
+            color="black"
+            marginBottom={5}
+            borderColor="black"
+            width={SIZES.LOGIN_FORM_INPUT_WIDTH}
+          />
+          {error && <Text color="red">{error}</Text>}
+          <Button
+            width={SIZES.LOGIN_FORM_INPUT_WIDTH}
+            type="submit"
+            bg="#f22827"
+          >
+            Login
+          </Button>
+        </Flex>
+      </form>
+
+      <PasswordResetForm/>
+    </>
   );
 };
 

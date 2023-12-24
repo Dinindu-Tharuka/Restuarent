@@ -12,8 +12,6 @@ import KitchenShowModel from "./Kitchen/KitchenShowModel";
 const MainPage = () => {
   const { userMe } = useUserMe();
 
-  console.log(userMe);
-
   useEffect(() => {
     if (localStorage.getItem("firstTime") === "true") {
       window.location.reload();

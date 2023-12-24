@@ -1,4 +1,4 @@
-import { Flex, Image } from "@chakra-ui/react";
+import { Flex, Image, Text } from "@chakra-ui/react";
 import food from "../../assets/images/food.jpg";
 import LoginForm from "./LoginForm";
 import { COLOURS } from "../../Generics/constants";
@@ -6,6 +6,7 @@ import { COLOURS } from "../../Generics/constants";
 const Login = () => {
   return (
     <Flex bg={COLOURS.LOGIN_BACKGROUND} height="100vh">
+
       <Image
         src={food}
         width="50vw"
@@ -21,14 +22,17 @@ const Login = () => {
         bg='RGBA(255, 255, 255, 0.7)'
         position="absolute"
         width="40vw"
-        height="50vh"
+        height="70vh"
         top="25vh"
         left="50vw"
         borderRadius={50}
         alignItems='center'
         justifyContent='center'
+        flexDir='column'
+        color='black'
         
       >
+        <Text color='black' fontWeight='bold' fontSize={30}>LOGIN</Text>
         <LoginForm />
       </Flex>
     </Flex>
