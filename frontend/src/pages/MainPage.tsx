@@ -29,13 +29,11 @@ const MainPage = () => {
         
 
         <Box
-          width="100%"
-          height="100%"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
+          width="100vw"
+          height="100vh"
+          
         >
-          <Image src={restuarent} objectFit="fill" width="100%" height="100%" />
+          <Image src={restuarent} objectFit='cover' width="100%" height="100%" />
         </Box>
 
         {/* Admin Panel */}
@@ -50,6 +48,8 @@ const MainPage = () => {
         <Flex position="absolute" top="25vh" left="10vw">
           <VStack alignItems="start">
             <HStack>
+              <Flex flexDir={{ lg:'row', md:'column',sm:'column'}}>
+
               <Text
                 fontWeight="bold"
                 fontSize={{
@@ -59,7 +59,7 @@ const MainPage = () => {
                 color="white"
                 textShadow="1px 1px #ff0000"
               >
-                Welcome to
+                Welcome to {"  "}
               </Text>
               <Text
                 fontWeight="bold"
@@ -72,6 +72,7 @@ const MainPage = () => {
               >
                 HIKKA LASSO
               </Text>
+              </Flex>
             </HStack>
             <Text
               textColor="white"
@@ -87,13 +88,13 @@ const MainPage = () => {
           </VStack>
         </Flex>
 
-        <HStack position="absolute" top="75vh" left="50vw">
+        <HStack position="absolute" top="75vh" left="30vw">
           <Button
             width={{
-              lg: "300px",
-              sm: "150px",
+              lg: SIZES.MAIN_PAGE_BUTTON_WIDTH_LG,
+              sm: SIZES.MAIN_PAGE_BUTTON_WIDTH_SM,
             }}
-            height="50px"
+            height="80px"
             bg={COLOURS.MAIN_PAGE_BUTTON_COLOR_YELLOW}
             borderRadius={SIZES.MAIN_PAGE_BUTTON_BORDER_RADIOUS}
             variant="outline"
@@ -108,12 +109,12 @@ const MainPage = () => {
           </Button>
           <Button
             width={{
-              lg: "300px",
-              sm: "150px",
+              lg: SIZES.MAIN_PAGE_BUTTON_WIDTH_LG,
+              sm: SIZES.MAIN_PAGE_BUTTON_WIDTH_SM,
             }}
             bg={COLOURS.MAIN_PAGE_BUTTON_COLOR_YELLOW}
             borderColor={COLOURS.MAIN_PAGE_BLACK}
-            height="50px"
+            height={SIZES.MAIN_PAGE_BUTTON_HEIGHT_LG}
             borderRadius={SIZES.MAIN_PAGE_BUTTON_BORDER_RADIOUS}
             variant="outline"            
             textColor={COLOURS.MAIN_PAGE_YELLOW}
