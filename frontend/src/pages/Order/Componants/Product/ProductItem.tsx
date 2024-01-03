@@ -23,6 +23,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import ProductItemDeleteConfirmation from "./ProductItemDeleteConfirmation";
 import UserMeContext from "../../../../Contexts/UserMe";
 import { formatNumberWithTwoDecimals } from "../../../../Generics/functions";
+import ProductUpdate from "./ProductUpdate";
 interface Props {
   product: Product;
 }
@@ -73,6 +74,9 @@ const ProductItem = ({ product }: Props) => {
         margin={2}
       >
         <HStack justifyContent="right">
+          {
+            userMe.is_superuser && <ProductUpdate product={product}/>
+          }
           {
             userMe.is_superuser && <ProductItemDeleteConfirmation product={product}/>
           }
