@@ -42,6 +42,7 @@ const Foods = ({ categories, table }: Props) => {
                       bg: COLOURS.TABLE_BUTTON_HOVER_COLOR,
                       color: COLOURS.MAIN_PAGE_WHITE,
                     }}
+                    whiteSpace='pre-line'
                   >
                     {category.title}
                   </Button>

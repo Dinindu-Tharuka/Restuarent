@@ -61,6 +61,7 @@ const MainPage = () => {
               >
                 Welcome to {"  "}
               </Text>
+              <Box padding={5}></Box>
               <Text
                 fontWeight="bold"
                 fontSize={{

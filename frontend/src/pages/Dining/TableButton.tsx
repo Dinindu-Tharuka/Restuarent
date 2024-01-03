@@ -8,8 +8,6 @@ interface props {
 }
 
 const TableButton = ({ table }: props) => {
-
-  console.log(table)
   const navigate = useNavigate();
   const onClick = () => {
     navigate(`/dining/order/${table.table_no}`);
@@ -23,8 +21,9 @@ const TableButton = ({ table }: props) => {
       onClick={onClick}
       bg={table.is_place_order && table.is_vip ? COLOURS.VIP_COLOR : table.is_place_order ? COLOURS.ORDER_PLACE_COLOR : ''}
       color={table.is_place_order ? COLOURS.MAIN_PAGE_WHITE : ""}
+      
     >
-      {table.table_no}
+      {table.table_no} 
     </Button>
   );
 };

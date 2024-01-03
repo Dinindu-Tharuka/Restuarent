@@ -39,7 +39,7 @@ const Beverages = ({ categories, table }: Props) => {
                     color: COLOURS.MAIN_PAGE_WHITE,
                   }}
                 >
-                  {category.title}
+                  {category.title} 
                 </Button>
               ))}
           </SimpleGrid>
