@@ -1,8 +1,18 @@
-import { Button, Input, SimpleGrid, Text } from "@chakra-ui/react";
+import {
+  Button,
+  CloseButton,
+  HStack,
+  Input,
+  SimpleGrid,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { Category } from "../../../../Generics/interfaces";
-import { COLOURS, SIZES } from "../../../../Generics/constants";
+import { COLOURS, REQUEST, SIZES } from "../../../../Generics/constants";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import useCategoryMutate from "../../../../Hooks/Product/Category/useCategoryMutate";
+import ItemEdit from "./ItemEdit";
 
 interface Props {
   categories: Category[] | undefined;
@@ -13,11 +23,18 @@ const Foods = ({ categories, table }: Props) => {
   const isAvailble = categories?.filter((category) => category.is_food).length;
   const [categoryFilter, setCategoryFilter] = useState("");
 
+  /// mutate in the foods
+  const mutateCategoris = useCategoryMutate(()=>{}, REQUEST.DELETE)
+
   const navigate = useNavigate();
 
   const onClick = (category_id: number) => {
     navigate(`/dining/order/${table}/products/${category_id}`);
   };
+
+  const onClickDelete = (date:Category)=>{
+    mutateCategoris.mutate(date)
+  }
 
   return (
     <>
@@ -28,27 +45,34 @@ const Foods = ({ categories, table }: Props) => {
             onChange={(e) => setCategoryFilter(e.currentTarget.value)}
             marginBottom={5}
           />
-         
-            <SimpleGrid columns={{ lg: 5, base: 3 }} spacing={2}>
-              {categories
-                ?.filter((category) => category.is_food)
-                .filter((category) => category.title.startsWith(categoryFilter))
-                .map((category, index) => (
+
+          <SimpleGrid columns={{ lg: 5, base: 3 }} spacing={2}>
+            {categories
+              ?.filter((category) => category.is_food)
+              .filter((category) => category.title.startsWith(categoryFilter))
+              .map((category, index) => (
+                <HStack>
                   <Button
                     height={SIZES.CATEGORY_ITEM_HEIGHT}
                     onClick={() => onClick(category.id)}
+                    width='100%'
                     key={index}
                     _hover={{
                       bg: COLOURS.TABLE_BUTTON_HOVER_COLOR,
                       color: COLOURS.MAIN_PAGE_WHITE,
                     }}
-                    whiteSpace='pre-line'
-                  >
+                    whiteSpace="pre-line"
+                    >
                     {category.title}
                   </Button>
-                ))}
-            </SimpleGrid>
-          
+                  <VStack>
+
+                    <CloseButton onClick={()=>onClickDelete(category)}/>
+                    <ItemEdit category={category}/>
+                  </VStack>
+                </HStack>
+              ))}
+          </SimpleGrid>
         </>
       ) : (
         <Text>No Foods</Text>
