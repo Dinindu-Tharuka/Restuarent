@@ -20,8 +20,8 @@ const Products = () => {
       <>
         <Flex position="absolute" zIndex={2} left={{lg:"55vw", base: '35vw'}} top="5vh">
           <HStack>
-          <FormLabel>Add Product</FormLabel>
-          <ProductAddModel category_id={id ? parseInt(id) : 0} />
+          {userMe.is_superuser && <FormLabel>Add Product</FormLabel>}
+          {userMe.is_superuser && <ProductAddModel category_id={id ? parseInt(id) : 0} />}
           </HStack>
         </Flex>
         <Container

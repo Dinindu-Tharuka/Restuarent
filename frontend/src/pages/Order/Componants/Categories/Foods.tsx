@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useCategoryMutate from "../../../../Hooks/Product/Category/useCategoryMutate";
 import ItemEdit from "./ItemEdit";
+import useUserMe from "../../../../Hooks/User/useUserMe";
 
 interface Props {
   categories: Category[] | undefined;
@@ -22,6 +23,8 @@ interface Props {
 const Foods = ({ categories, table }: Props) => {
   const isAvailble = categories?.filter((category) => category.is_food).length;
   const [categoryFilter, setCategoryFilter] = useState("");
+
+  const {userMe} = useUserMe()
 
   /// mutate in the foods
   const mutateCategoris = useCategoryMutate(()=>{}, REQUEST.DELETE)
@@ -67,8 +70,8 @@ const Foods = ({ categories, table }: Props) => {
                   </Button>
                   <VStack>
 
-                    <CloseButton onClick={()=>onClickDelete(category)}/>
-                    <ItemEdit category={category}/>
+                    {userMe.is_superuser && <CloseButton onClick={()=>onClickDelete(category)}/>}
+                    {userMe.is_superuser && <ItemEdit category={category}/>}
                   </VStack>
                 </HStack>
               ))}

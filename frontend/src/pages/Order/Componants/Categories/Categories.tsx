@@ -28,7 +28,7 @@ const Categories = () => {
           left={{ lg: "55vw", base: "35vw" }}
           zIndex={10}
         >
-          <Text>Add Category</Text>
+          {userMe.is_superuser && <Text>Add Category</Text>}
          {userMe.is_superuser && <AddCategoryMode />}
         </HStack>
         <Tabs>
