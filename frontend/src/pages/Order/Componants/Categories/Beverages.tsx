@@ -61,6 +61,7 @@ const Beverages = ({ categories, table }: Props) => {
                       color: COLOURS.MAIN_PAGE_WHITE,
                     }}
                     whiteSpace="pre-line"
+                    width='100%'
                   >
                     {category.title}
                   </Button>
