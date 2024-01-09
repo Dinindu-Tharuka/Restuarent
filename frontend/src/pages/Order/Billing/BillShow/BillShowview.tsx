@@ -114,7 +114,7 @@ const BillShowview = ({ order }: Props) => {
         <Button
           bg={COLOURS.OK_COLOUR}
           mr={3}
-          onClick={() => generatePdf(capture, setLoader)}
+          onClick={() => generatePdf(capture, setLoader, order.orderitems.length)}
           width='50%'
         >
           {loader ? "Printing..." : "Print"}
