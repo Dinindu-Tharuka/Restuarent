@@ -4,12 +4,12 @@ import jsPDF from 'jspdf';
 import React, { SetStateAction } from 'react'
 
 const generatePdf = (capture : HTMLDivElement | null, setLoader:React.Dispatch<SetStateAction<boolean>>, num?:number) => {
-    const numwidth = 130 + num * 5;
+    const numwidth = 110 + num * 5;
     setLoader(true);
     if (capture)
       html2canvas(capture).then(async (canvas) => {
         const imgData = canvas.toDataURL("img/png");
-        const doc = new jsPDF({ format: [100, numwidth], unit:'mm'}); 
+        const doc = new jsPDF({ format: [80, numwidth], unit:'mm'}); 
         const pdfWidth = doc.internal.pageSize.getWidth();
         const pdfHeight = doc.internal.pageSize.getHeight();
         const imgWidth = canvas.width;
@@ -19,7 +19,7 @@ const generatePdf = (capture : HTMLDivElement | null, setLoader:React.Dispatch<S
         const imgY = 5;
         doc.addImage(
           imgData,
-          "PNG",
+          "JPEG",
           imgX,
           imgY,
           imgWidth * ratio,
