@@ -40,12 +40,12 @@ const BillShowview = ({ order }: Props) => {
       <div ref={pdfRef} className="">
         <VStack padding={2}>
           <Image src={logo}/>
-          <Text margin={0} fontWeight="semibold" textAlign='center'>
+          <Text margin={0} fontWeight="bold" textAlign='center'>
           Galle Road, Seenigama, <br/> 
             Hikkaduwa, <br/> Sri Lanka <br/>
             {getConvertedDateTime(order?.date)}
           </Text>
-          <text className="w-100 line padding">
+          <text className="w-100 line padding font-weight textbold">
             {order?.customer_name} - Table {order?.table}
           </text>
 
@@ -53,15 +53,15 @@ const BillShowview = ({ order }: Props) => {
             <tbody>
               {order?.orderitems?.map((orderitem) => (
                 <tr className="marginBottom">
-                  <td>{orderitem.quantity}</td>
-                  <td>
+                  <td className="textbold">{orderitem.quantity}</td>
+                  <td className="textbold">
                     {
                       products?.find(
                         (product) => product.id === orderitem.product_id
                       )?.title
                     }
                   </td>
-                  <td>{formatNumberWithTwoDecimals(orderitem.item_total)}</td>
+                  <td className="textbold">{formatNumberWithTwoDecimals(orderitem.item_total)}</td>
                 </tr>
               ))}
             </tbody>
@@ -70,27 +70,27 @@ const BillShowview = ({ order }: Props) => {
           <table>
             <tfoot>
               <tr>
-                <td className="textalignReight">Total Price</td>
+                <td className="textalignReight textbold">Total Price</td>
                 <td></td>
-                <td>
+                <td className="textbold">
                   {formatNumberWithTwoDecimals(
                     order?.total_product_price ? order?.total_product_price : 0
                   )}
                 </td>
               </tr>
               <tr>
-                <td className="textalignReight">Discount</td>
+                <td className="textalignReight textbold">Discount</td>
                 <td></td>
-                <td>
+                <td className="textbold">
                   {formatNumberWithTwoDecimals(
                     order?.discount ? order?.discount : 0
                   )}
                 </td>
               </tr>
               <tr>
-                <td className="textalignReight">Service Charge</td>
+                <td className="textalignReight textbold">Service Charge</td>
                 <td></td>
-                <td>
+                <td className="textbold">
                   {formatNumberWithTwoDecimals(
                     order?.service_charge_price
                       ? order?.service_charge_price
@@ -99,15 +99,15 @@ const BillShowview = ({ order }: Props) => {
                 </td>
               </tr>
               <tr>
-                <td className="textalignReight">Sub Total</td>
+                <td className="textalignReight textbold">Sub Total</td>
                 <td></td>
-                <td>
+                <td className="textbold">
                   {formatNumberWithTwoDecimals(order?.total ? order?.total : 0)}
                 </td>
               </tr>
             </tfoot>
           </table>
-          <Text textAlign='center'>Your satisfaction is our joy. Thank you !!! <br/>See you soon!</Text>
+          <Text textAlign='center' fontWeight='bold'>Your satisfaction is our joy. Thank you !!! <br/>See you soon!</Text>
         </VStack>
       </div>
       <HStack width='100%'>

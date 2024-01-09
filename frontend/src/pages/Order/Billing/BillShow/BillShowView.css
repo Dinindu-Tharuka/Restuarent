@@ -28,3 +28,7 @@ table{
 .center{
     text-align: center;
 }
+
+.textbold{
+    font-weight: bold;
+}

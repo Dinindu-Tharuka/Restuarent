@@ -14,6 +14,7 @@ import {
   import "./BillShowView.css";
   import logo from '../../../../assets/images/logo.png'
 import { getConvertedDateTime } from "../../../../Generics/functions";
+
   
   interface Props {
     order?: Order;
@@ -43,12 +44,12 @@ const KitchenBillShowView = ({ order}: Props) => {
           HIKKA LASSO
         </Text> */}
         <Image src={logo}/>
-        <Text margin={0} fontWeight="semibold" textAlign='center'>
+        <Text margin={0} fontWeight="bold" textAlign='center'>
         Galle Road, Seenigama, <br/> 
           Hikkaduwa, <br/> Sri Lanka <br/>
           {getConvertedDateTime(order?.date)}
         </Text>
-        <text className="w-100 line padding">
+        <text className="w-100 line padding textbold" >
           {order?.customer_name} - Table {order?.table}
         </text>
 
@@ -56,20 +57,20 @@ const KitchenBillShowView = ({ order}: Props) => {
           <tbody>
             {order?.orderitems?.map((orderitem) => (
               <tr className="marginBottom">
-                <td className="left">
+                <td className="left textbold">
                   {
                     products?.find(
                       (product) => product.id === orderitem.product_id
                     )?.title
                   }
                 </td>
-                <td className="center">{orderitem.quantity}</td>
+                <td className="center textbold">{orderitem.quantity}</td>
                
               </tr>
             ))}
           </tbody>
         </table>
-        <text className="w-100 line"></text>
+        
 
        
         
