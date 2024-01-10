@@ -1,15 +1,13 @@
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { SetStateAction } from 'react';
 
-import React, { SetStateAction } from 'react'
-
-const generatePdf = (capture : HTMLDivElement | null, setLoader:React.Dispatch<SetStateAction<boolean>>, num?:number) => {
-    const numwidth = 60 + num * 5;
+const generatedPDf = (capture : HTMLDivElement | null, setLoader:React.Dispatch<SetStateAction<boolean>>) => {
     setLoader(true);
     if (capture)
       html2canvas(capture).then(async (canvas) => {
         const imgData = canvas.toDataURL("img/png");
-        const doc = new jsPDF({ format: [50, numwidth], unit:'mm'}); 
+        const doc = new jsPDF("p", "mm", 'a4');
         const pdfWidth = doc.internal.pageSize.getWidth();
         const pdfHeight = doc.internal.pageSize.getHeight();
         const imgWidth = canvas.width;
@@ -34,4 +32,5 @@ const generatePdf = (capture : HTMLDivElement | null, setLoader:React.Dispatch<S
       });
 }
 
-export default generatePdf
+export default generatedPDf
+

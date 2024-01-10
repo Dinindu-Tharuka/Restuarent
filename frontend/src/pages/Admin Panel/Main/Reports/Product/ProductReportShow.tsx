@@ -7,7 +7,8 @@ import {
   getTotalOrderItemPrice,
 } from "../../../../../Generics/functions";
 import { COLOURS } from "../../../../../Generics/constants";
-import generatePdf from "../../../../../PDF/generatePdf";
+import generatedPDf from "../../../../../PDF/generatedPDf";
+
 
 interface Props {
   products: Product[];
@@ -74,7 +75,7 @@ const ProductReportShow = ({ products }: Props) => {
       <Button
         bg={COLOURS.OK_COLOUR}
         mr={3}
-        onClick={() => generatePdf(capture, setLoader)}
+        onClick={() => generatedPDf(capture, setLoader)}
         width="50%"
       >
         {loader ? "Printing..." : "Print"}

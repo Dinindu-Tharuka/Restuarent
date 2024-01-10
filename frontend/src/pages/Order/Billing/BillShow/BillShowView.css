@@ -32,3 +32,10 @@ table{
 .textbold{
     font-weight: bold;
 }
+
+
+@media print {
+    @page {
+      size: 50mm 150mm;
+    }
+  }

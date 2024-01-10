@@ -11,7 +11,8 @@ import { Order } from "../../../../../Generics/interfaces";
 import "./RevenueReportShow.css";
 import { Button, Text } from "@chakra-ui/react";
 import { COLOURS } from "../../../../../Generics/constants";
-import generatePdf from "../../../../../PDF/generatePdf";
+import generatedPDf from "../../../../../PDF/generatedPDf";
+;
 
 interface Props {
   orders: Order[];
@@ -90,7 +91,7 @@ const RevenueReportShow = ({ orders }: Props) => {
         <Button
           bg={COLOURS.OK_COLOUR}
           mr={3}
-          onClick={() => generatePdf(capture, setLoader)}
+          onClick={() => generatedPDf(capture, setLoader)}
           width='50%'
         >
           {loader ? "Printing..." : "Print"}
