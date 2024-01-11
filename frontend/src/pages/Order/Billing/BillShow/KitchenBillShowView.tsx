@@ -4,7 +4,7 @@ import {useRef} from "react";
 import { COLOURS } from "../../../../Generics/constants";
 import useAllProducts from "../../../../Hooks/Product/Product/useAllProducts";
 import "./BillShowView.css";
-import logo from "../../../../assets/images/logo1.png";
+import logo from "../../../../assets/images/hikka.png";
 import { getConvertedDateTime } from "../../../../Generics/functions";
 import ReactToPrint from "react-to-print";
 
@@ -30,6 +30,10 @@ const KitchenBillShowView = ({ order }: Props) => {
             Galle Road, Seenigama, <br />
             Hikkaduwa, <br /> Sri Lanka <br />
             {getConvertedDateTime(order?.date)}
+          </Text>
+          <Text>
+            0912273766 | 0779463893 <br />
+            WWW.HIKKALAZZO.COM
           </Text>
           <text className="w-100 line padding textbold">
             {order?.customer_name} - Table {order?.table}

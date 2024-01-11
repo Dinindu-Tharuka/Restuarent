@@ -18,13 +18,13 @@ const UploadExcelFile = ({ category_id }:Props) => {
     setSuccess('')
     const selectedFile = data.file[0];
 
-    const fileTypes = [
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    ];
+    // const fileTypes = [
+    //   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    // ];
 
-    if (!fileTypes.includes(selectedFile.type)) {
-      setUploadError("Given File type is not valid");
-    }
+    // if (!fileTypes.includes(selectedFile.type)) {
+    //   setUploadError("Given File type is not valid");
+    // }
     const newFile = {
       file: selectedFile,
       category_id:category_id
