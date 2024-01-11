@@ -36,6 +36,6 @@ table{
 
 @media print {
     @page {
-      size: 70mm 500mm;
+      size: 70mm 300mm;
     }
   }
