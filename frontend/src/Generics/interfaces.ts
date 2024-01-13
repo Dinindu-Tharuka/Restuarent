@@ -103,3 +103,9 @@ export interface Floor{
   vip_table_count:number;
   tables:Table[]
 }
+
+export interface SubCategory{
+  id:number;
+  title:string;
+  category_id:number;
+}
