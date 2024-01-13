@@ -6,6 +6,7 @@ import {
   SimpleGrid,
   VStack,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { COLOURS, REQUEST, SIZES } from "../../../../Generics/constants";
 import { useParams } from "react-router-dom";
@@ -15,8 +16,10 @@ import useUserMe from "../../../../Hooks/User/useUserMe";
 import useSubcategoryMutate from "../../../../Hooks/Product/SubCategory/useSubcategoryMutate";
 import { SubCategories } from "../../../../Generics/interfaces";
 import SubCategoryModel from "./SubCategoryModel";
+import AddSubCategory from "./AddSubCategory/AddSubCategory";
 
 const SubCategory = () => {
+    const toast = useToast()
     // filter categories
     const [categoryFilter, setCategoryFilter] = useState('')
 
@@ -40,6 +43,9 @@ const SubCategory = () => {
     <>
       {isAvailble !== undefined && isAvailble > 0 ? (
         <>
+        <HStack justifyContent='right' marginBottom={5}>
+          <AddSubCategory category_id={parseInt(id)}/>
+        </HStack>
           <Input
             placeholder="Search"
             onChange={(e) => setCategoryFilter(e.currentTarget.value)}

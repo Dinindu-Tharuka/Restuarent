@@ -23,9 +23,7 @@ import useSubcategoryMutate from "../../../../Hooks/Product/SubCategory/useSubca
   
 
 const SubCategoryModel = ({ subCategory, categoryId }: currentCtegory) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  
+  const { isOpen, onOpen, onClose } = useDisclosure();  
 
   const { register, handleSubmit } = useForm();
   const mutateSubCategory = useSubcategoryMutate(()=>{}, REQUEST.UPDATE, categoryId)
