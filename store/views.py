@@ -32,13 +32,13 @@ class ProductViewSet(ModelViewSet):
     serializer_class = ProductSerializer
 
     def get_queryset(self):
-        category_id = self.kwargs.get('category_pk')
-        queryset = Product.objects.filter(category_id=category_id).all()
+        sub_category_id = self.kwargs.get('subcategory_pk')
+        queryset = Product.objects.filter(sub_category_id=sub_category_id).all()
         return queryset
 
     def get_serializer_context(self):
         return {
-            'category_id': self.kwargs['category_pk']
+            'sub_category_id': self.kwargs['subcategory_pk']
         }
 
 

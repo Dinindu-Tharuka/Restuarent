@@ -20,7 +20,7 @@ class SubCategorySerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    category_id = serializers.IntegerField(read_only=True)
+    sub_category_id = serializers.IntegerField(read_only=True)
     orderitem_count = serializers.IntegerField(read_only=True)
     orderitem_total_quantity = serializers.SerializerMethodField(method_name='get_orderitem_total_quantity')
     orderitems_total_price = serializers.SerializerMethodField(method_name='get_orderitems_total_price')
@@ -39,7 +39,7 @@ class ProductSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         sub_category_id = self.context['sub_category_id']
         product = Product.objects.create(
-            category_id=sub_category_id, **validated_data)
+            sub_category_id=sub_category_id, **validated_data)
         return product
 
 
