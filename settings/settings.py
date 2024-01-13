@@ -73,7 +73,7 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'restuarent',
+        'NAME': 'resturent',
         'PASSWORD': '1234',
         'PORT': '3310',
         'HOST': 'localhost',

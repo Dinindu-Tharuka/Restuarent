@@ -1,11 +1,22 @@
 from rest_framework import serializers
-from .models import Product, Category, Order, OrderItem, Floor, Table
+from .models import Product, Category, Order, OrderItem, Floor, Table, SubCategory
 
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ['id', 'title', 'is_food']
+
+class SubCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubCategory
+        fields = ['id', 'title', 'category_id']
+
+    def create(self, validated_data):
+        category_id = self.context['category_id']
+        product = SubCategory.objects.create(
+            category_id=category_id, **validated_data)
+        return product
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -15,19 +26,20 @@ class ProductSerializer(serializers.ModelSerializer):
     orderitems_total_price = serializers.SerializerMethodField(method_name='get_orderitems_total_price')
     class Meta:
         model = Product
-        fields = ['id', 'title', 'price', 'category_id', 'orderitem_count', 'orderitem_total_quantity', 'orderitems_total_price']
+        fields = ['id', 'title', 'price', 'sub_category_id', 'orderitem_count', 'orderitem_total_quantity', 'orderitems_total_price']
 
     def get_orderitems_total_price(self, product):
         total = sum([item.quantity * product.price for item in  product.orderitems.all()])
         return total
-    def get_orderitem_total_quantity(self,product):
+    
+    def get_orderitem_total_quantity(self, product):
         total = sum([item.quantity for item in  product.orderitems.all()])
         return total
 
     def create(self, validated_data):
-        category_id = self.context['category_id']
+        sub_category_id = self.context['sub_category_id']
         product = Product.objects.create(
-            category_id=category_id, **validated_data)
+            category_id=sub_category_id, **validated_data)
         return product
 
 

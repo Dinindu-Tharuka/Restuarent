@@ -7,13 +7,26 @@ from rest_framework import status
 from settings.paginations import OrderPagination
 from settings.functions import ConvertDateToDateTime
 import pandas as pd
-from .models import Category, Product, Order, OrderItem, Floor, Table
-from .serializers import FloorSerializer, TableSerializer, FileSerializer
+from .models import Category, Product, Order, OrderItem, Floor, Table, SubCategory
+from .serializers import FloorSerializer, TableSerializer, FileSerializer, SubCategorySerializer
 from .serializers import CategorySerializer, ProductSerializer, OrderSerializer, OrderItemSerializer
 
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+class SubCategoryViewSet(ModelViewSet):
+    serializer_class = SubCategorySerializer
+
+    def get_queryset(self):
+        category_id = self.kwargs.get('category_pk')
+        queryset = SubCategory.objects.filter(category_id=category_id).all()
+        return queryset
+    
+    def get_serializer_context(self):
+        return {
+            'category_id': self.kwargs['category_pk']
+        }
 
 class ProductViewSet(ModelViewSet):
     serializer_class = ProductSerializer

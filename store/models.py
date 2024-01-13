@@ -18,10 +18,14 @@ class Category(models.Model):
     title = models.CharField(max_length=100)
     is_food = models.BooleanField(default=True)
 
+class SubCategory(models.Model):
+    title = models.CharField(max_length=100)
+    category =models.ForeignKey(Category, on_delete=models.CASCADE)
+
 class Product(models.Model):
     title = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
 
 class Order(models.Model):
     table = models.CharField(max_length=10)
@@ -35,7 +39,7 @@ class Order(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
 class OrderItem(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='orderitems')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=True, related_name='orderitems')
     order  = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='orderitems')
     quantity = models.IntegerField()
     datetime = models.DateTimeField(auto_now_add=True)
