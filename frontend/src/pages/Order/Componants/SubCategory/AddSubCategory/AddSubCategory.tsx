@@ -13,7 +13,6 @@ import {
   } from "@chakra-ui/react";
 import { FieldValues, useForm } from "react-hook-form";
   import { MdOutlineAddBox } from "react-icons/md";
-import useCategoryMutate from "../../../../../Hooks/Product/Category/useCategoryMutate";
 import useSubcategoryMutate from "../../../../../Hooks/Product/SubCategory/useSubcategoryMutate";
 import { REQUEST } from "../../../../../Generics/constants";
 import { SubCategories } from "../../../../../Generics/interfaces";

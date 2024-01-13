@@ -28,7 +28,7 @@ const Beverages = ({ categories, table }: Props) => {
   const {userMe} = useUserMe()
 
   const onClick = (category_id: number) => {
-    navigate(`/dining/order/${table}/products/${category_id}`);
+    navigate(`/dining/order/${table}/subCategory/${category_id}`);
   };
 
   // Delete

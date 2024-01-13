@@ -19,7 +19,6 @@ import SubCategoryModel from "./SubCategoryModel";
 import AddSubCategory from "./AddSubCategory/AddSubCategory";
 
 const SubCategory = () => {
-    const toast = useToast()
     // filter categories
     const [categoryFilter, setCategoryFilter] = useState('')
 
