@@ -30,7 +30,7 @@ const ProductUpdate = ({ product }: Props) => {
         onClose()
     },
     REQUEST.UPDATE,
-    product.category_id
+    product.sub_category_id
   );
 
   const onSumbmit = (data: FieldValues) => {

@@ -34,7 +34,7 @@ const ProductItemDeleteConfirmation = ({ product}:Props) => {
         isClosable: true,
       })
       onClose()
-  }, REQUEST.DELETE, product.category_id)
+  }, REQUEST.DELETE, product.sub_category_id)
 
   const onConfirm = ()=>{
     productMutate.mutate(product)

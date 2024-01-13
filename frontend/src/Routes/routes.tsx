@@ -52,9 +52,13 @@ const router = createBrowserRouter([
           </AnimatePresence>
         ),
         children: [
-          { path: "", element: <Categories /> },
-          { path: "subCategory/:id", element: <SubCategory/> },
+          { path: "", element: <Categories /> }, 
+          { path: "subCategory/:id", 
+            element: <SubCategory/>
+          },
+          { path: "product/:subId", element:<Products/>}
         ],
+
       },
 
       {

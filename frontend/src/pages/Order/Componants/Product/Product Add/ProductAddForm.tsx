@@ -10,11 +10,11 @@ interface Props{
   onClose:()=>void;
 }
 
-const ProductAddForm = ({ category_id, onClose }:Props) => {
+const ProductAddForm = ({ category_id, onClose}:Props) => {
     const {register, handleSubmit} = useForm<Product>()
-    const toast = useToast()
+    const toast = useToast()    
 
-    
+    console.log(category_id)
 
     const productMutate = useProductsMutate(()=>{
       toast({
@@ -31,7 +31,7 @@ const ProductAddForm = ({ category_id, onClose }:Props) => {
     const onSubmit = (data:FieldValues)=>{
       const newProdcut = {
         ...data,
-        category_id:category_id
+        sub_category_id:category_id
       } as Product
 
       productMutate.mutate(newProdcut)

@@ -6,19 +6,19 @@ import productsService from "../../../services/store/products-service";
 const useProductsMutate = (
   onSuccessfull: (product: Product) => void,
   requestType: string,
-  category_id:number
+  sub_category_id:number
 ) => {
   const queryClient = useQueryClient();
 
   const product = useMutation<Product, Error, Product>({
     mutationFn: (product: Product) => {
       if (requestType === REQUEST.POST) {
-        return productsService(category_id).create(product).then((res) => res.data);
+        return productsService(sub_category_id).create(product).then((res) => res.data);
       } else if (requestType === REQUEST.DELETE) {
-        return productsService(category_id).delete(product.id).then((res) => res.data);
+        return productsService(sub_category_id).delete(product.id).then((res) => res.data);
       }
 
-      return productsService(category_id)
+      return productsService(sub_category_id)
         .update(product, product.id)
         .then((res) => res.data);
     },

@@ -14,7 +14,7 @@ import { MdOutlineAddBox } from "react-icons/md";
 interface Props {
   category_id: number;
 }
-const ProductAddModel = ({ category_id }: Props) => {
+const ProductAddModel = ({ category_id}: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
