@@ -1,17 +1,17 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { SubCategory } from "../../../Generics/interfaces";
 import { REQUEST } from "../../../Generics/constants";
 import subCategoryService from "../../../services/store/sub-category-service";
+import { SubCategories } from "../../../Generics/interfaces";
 
 const useSubcategoryMutate = (
-  onSuccessfull: (subCategory: SubCategory) => void,
+  onSuccessfull: (subCategory: SubCategories) => void,
   requestType: string,
   category_id: number
 ) => {
   const queryClient = useQueryClient();
 
-  const subCategory = useMutation<SubCategory, Error, SubCategory>({
-    mutationFn: (subCategory: SubCategory) => {
+  const subCategory = useMutation<SubCategories, Error, SubCategories>({
+    mutationFn: (subCategory: SubCategories) => {
       if (requestType === REQUEST.POST) {
         return subCategoryService(category_id)
           .create(subCategory)
@@ -28,7 +28,7 @@ const useSubcategoryMutate = (
     },
     onSuccess: (savedProduct, newProduct) => {
       queryClient.invalidateQueries({
-        queryKey: ["products"],
+        queryKey: ["sub-category"],
       });
 
       

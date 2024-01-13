@@ -32,7 +32,7 @@ const Foods = ({ categories, table }: Props) => {
   const navigate = useNavigate();
 
   const onClick = (category_id: number) => {
-    navigate(`/dining/order/${table}/products/${category_id}`);
+    navigate(`/dining/order/${table}/subCategory/${category_id}`);
   };
 
   const onClickDelete = (date:Category)=>{

@@ -104,7 +104,7 @@ export interface Floor{
   tables:Table[]
 }
 
-export interface SubCategory{
+export interface SubCategories{
   id:number;
   title:string;
   category_id:number;

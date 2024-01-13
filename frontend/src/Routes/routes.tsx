@@ -13,6 +13,7 @@ import Products from "../pages/Order/Componants/Product/Products";
 import Floors from "../pages/Admin Panel/Main/Floors/Floors";
 import KitchenOrderShow from "../pages/Kitchen/KitchenOrderShow";
 import PasswordReset from "../pages/Auth/PasswordReset";
+import SubCategory from "../pages/Order/Componants/SubCategory/SubCategory";
 
 const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
       {
         path: "/kitchen",
         element: <KitchenOrderShow/>
-      },
+      },     
       {
         path: "/dining/order/:table",
         element: (
@@ -52,7 +53,7 @@ const router = createBrowserRouter([
         ),
         children: [
           { path: "", element: <Categories /> },
-          { path: "products/:id", element: <Products/> },
+          { path: "subCategory/:id", element: <SubCategory/> },
         ],
       },
 
