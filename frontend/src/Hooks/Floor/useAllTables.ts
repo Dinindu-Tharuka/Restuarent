@@ -9,7 +9,7 @@ const useAllTables = () => {
   return useQuery<Table[], Error>({
     queryKey: ["all-tables"],
     queryFn: () => fetchData(),
-    refetchInterval:5000,
+    // refetchInterval:5000,
   });
 };
 

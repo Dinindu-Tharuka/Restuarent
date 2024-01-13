@@ -13,7 +13,7 @@ const useOrders = (query?:Query) => {
     queryFn: () => orderService.getAll({
       params:{startDate:query?.startDate, endDate:query?.endDate}
     }),
-    refetchInterval:500
+    // refetchInterval:500
   });
 }
 
