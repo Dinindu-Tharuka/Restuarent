@@ -20,12 +20,12 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
     title = models.CharField(max_length=100)
-    category =models.ForeignKey(Category, on_delete=models.CASCADE)
+    category =models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
 
 class Product(models.Model):
     title = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+    sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True, blank=True)
 
 class Order(models.Model):
     table = models.CharField(max_length=10)
