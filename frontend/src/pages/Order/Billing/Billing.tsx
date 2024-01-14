@@ -30,16 +30,50 @@ import OrderCancelConfirmation from "./OrderCancelConfirmation";
 import BillShowModel from "./BillShow/BillShowModel";
 import KichenBillModel from "./BillShow/KichenBillModel";
 import useUserMe from "../../../Hooks/User/useUserMe";
+import { CiSquarePlus } from "react-icons/ci";
+import { CiSquareMinus } from "react-icons/ci";
 
 const Billing = () => {
   const { currentOrder } = useContext(CurrentOrderContext);
   const { data: orders } = useOrders();
-  const { userMe } = useUserMe();
   const currentFetchOrder = orders?.find(
     (order) => order.id === currentOrder?.id
   );
 
-  console.log('current order', currentFetchOrder)
+  const useMutate = useOrderItemMutate(()=>{
+    console.log('ok')
+  }, REQUEST.UPDATE, currentFetchOrder?.id)
+
+  // Changing value of the quantity
+  
+  const addingNumber =(orderitem:OrderItem)=>{
+    const newObj = {
+      ...orderitem,
+      quantity:orderitem.quantity+1
+    }
+    console.log(newObj)
+    useMutate.mutate(newObj)
+  }
+  const substractNumber =(orderitem:OrderItem)=>{
+    const newObj = {
+      ...orderitem,
+      quantity:orderitem.quantity-1
+    }
+    useMutate.mutate(newObj)
+  }
+  
+  const orderMutate = useOrderMutate(() => {
+    toast({
+      title: "Order",
+      description: "Order Successfully updated.",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+    });
+  }, REQUEST.UPDATE);
+
+  
+  const { userMe } = useUserMe();
 
   const { data: products } = useAllProducts();
 
@@ -53,15 +87,6 @@ const Billing = () => {
   const toast = useToast();
 
   const { register, handleSubmit } = useForm();
-  const orderMutate = useOrderMutate(() => {
-    toast({
-      title: "Order",
-      description: "Order Successfully updated.",
-      status: "success",
-      duration: 2000,
-      isClosable: true,
-    });
-  }, REQUEST.UPDATE);
 
   const onSubmit = (data: FieldValues) => {
     const newlyOrder = {
@@ -96,6 +121,7 @@ const Billing = () => {
               <Tr>
                 <Th></Th>
                 <Th>Product</Th>
+                <Th></Th>
                 <Th textAlign="right">quantity</Th>
                 <Th textAlign="right">Price</Th>
               </Tr>
@@ -120,6 +146,22 @@ const Billing = () => {
                       )?.title
                     }
                   </Td>
+                  <Td>
+                    <VStack margin={0} padding={0}>
+                      <IconButton 
+                      icon={<CiSquarePlus />} 
+                      aria-label="add"
+                      margin={0}
+                      onClick={()=>addingNumber(orderitem)}
+                      />
+                      <IconButton
+                        icon={<CiSquareMinus />}
+                        aria-label="substract"   
+                        margin={0} 
+                        onClick={()=>substractNumber(orderitem)}                   
+                      />
+                    </VStack>
+                  </Td>
                   <Td textAlign="right">{orderitem.quantity}</Td>
                   <Td textAlign="right">{orderitem.item_total}</Td>
                 </Tr>
@@ -128,19 +170,20 @@ const Billing = () => {
           </Table>
         </Container>
 
-        {(userMe.is_superuser || userMe.is_cashier)  && <Container>
-          <Table marginBottom={5}>
-            <Tbody>
-              <Tr>
-                <Th></Th>
-                <Th>Total Price</Th>
-                <Th></Th>
-                <Th></Th>
-                <Th textAlign="right">{currentFetchOrder?.total}</Th>
-              </Tr>
-            </Tbody>
-          </Table>
-          
+        {(userMe.is_superuser || userMe.is_cashier) && (
+          <Container>
+            <Table marginBottom={5}>
+              <Tbody>
+                <Tr>
+                  <Th></Th>
+                  <Th>Total Price</Th>
+                  <Th></Th>
+                  <Th></Th>
+                  <Th textAlign="right">{currentFetchOrder?.total}</Th>
+                </Tr>
+              </Tbody>
+            </Table>
+
             <form onSubmit={handleSubmit(onSubmit)}>
               <HStack justifyContent="space-between" marginBottom={2}>
                 <FormLabel marginRight={2}>Customer</FormLabel>
@@ -177,8 +220,7 @@ const Billing = () => {
                 </Button>
               </HStack>
             </form>
-          
-          
+
             <HStack>
               {currentOrder !== undefined && (
                 <OrderCancelConfirmation order={currentOrder} />
@@ -187,8 +229,8 @@ const Billing = () => {
 
               <BillShowModel order={currentFetchOrder} />
             </HStack>
-          
-        </Container>}
+          </Container>
+        )}
       </VStack>
     </Flex>
   );

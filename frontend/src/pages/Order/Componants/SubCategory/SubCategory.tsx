@@ -52,6 +52,7 @@ const SubCategory = () => {
   return (
     <>
       <HStack justifyContent="right" marginBottom={5}>
+        <Text>Add Sub Category</Text>
         <AddSubCategory category_id={parseInt(id)} />
       </HStack>
       {isAvailble !== undefined && isAvailble > 0 ? (
