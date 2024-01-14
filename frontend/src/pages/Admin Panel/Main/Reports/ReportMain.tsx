@@ -92,7 +92,7 @@ const ReportMain = () => {
           </MenuButton>
           <MenuList>
             <MenuItem>
-              {allOrders && <RevenueShowModel orders={allOrders} />}
+              {allOrders && <RevenueShowModel orders={allOrders} product={products}/>}
             </MenuItem>
             <MenuItem>
               {products && <ProductShowModel products={products} />}

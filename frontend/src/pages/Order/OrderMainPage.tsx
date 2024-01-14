@@ -39,10 +39,6 @@ const OrderMainPage = () => {
 
 
   }, [allTables])
-
-  
-
-
   
 
   useEffect(() => {
@@ -65,7 +61,7 @@ const OrderMainPage = () => {
 
       if (table === 'T000'){
         order = {...order, is_takeway:true, service_charge:0}
-        console.log('takeway')
+      
       }
     
       //for Degub
@@ -74,9 +70,7 @@ const OrderMainPage = () => {
       orderMutate.mutate(order);
       
     } else {
-      if (orders && table) {
-
-        console.log('current order', setCurrentOrder(findCurrentOrder(orders, table)))
+      if (orders && table) {        
         if (table !== 'T000'){
           setCurrentOrder(findCurrentOrder(orders, table));
 
