@@ -1,7 +1,7 @@
 import { Box, Button, Flex, HStack, Image, Text, VStack } from "@chakra-ui/react";
 import restuarent from "../assets/images/restuarent.jpg";
 import { COLOURS, SIZES } from "../Generics/constants";
-import { Link } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import {  motion } from "framer-motion";
 import AdminPanelButton from "./Admin Panel/AdminPanelButton";
 import { useEffect } from "react";
@@ -11,6 +11,7 @@ import KitchenShowModel from "./Kitchen/KitchenShowModel";
 
 const MainPage = () => {
   const { userMe } = useUserMe();
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (localStorage.getItem("firstTime") === "true") {
@@ -105,8 +106,11 @@ const MainPage = () => {
               bg: COLOURS.MAIN_PAGE_YELLOW,
               textColor: COLOURS.MAIN_PAGE_BLACK,
             }}
+            onClick={()=>{
+              navigate('/dining')
+            }}
           >
-            <Link to="/dining">Dining</Link>
+          Dining
           </Button>
           <Button
             width={{
@@ -123,8 +127,11 @@ const MainPage = () => {
               bg: COLOURS.MAIN_PAGE_YELLOW,
               textColor: COLOURS.MAIN_PAGE_BLACK,
             }}
+            onClick={()=>{
+              navigate('/dining/order/T000')
+            }}
           >
-            <Link to="/dining/order/T000">Take away</Link>
+            Take away
           </Button>
         </HStack>
       </Flex>

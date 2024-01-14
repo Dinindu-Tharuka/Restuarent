@@ -16,7 +16,7 @@ import {
   FormLabel,
   useToast,
 } from "@chakra-ui/react";
-import { useContext} from "react";
+import { useContext } from "react";
 import CurrentOrderContext from "../../../Contexts/Orders/CurrentOrderContext";
 import { FieldValues, useForm } from "react-hook-form";
 import { REQUEST } from "../../../Generics/constants";
@@ -40,28 +40,30 @@ const Billing = () => {
     (order) => order.id === currentOrder?.id
   );
 
-  const useMutate = useOrderItemMutate(()=>{
-    console.log('ok')
-  }, REQUEST.UPDATE, currentFetchOrder?.id)
+  const useMutate = useOrderItemMutate(
+    () => {},
+    REQUEST.UPDATE,
+    currentFetchOrder?.id
+  );
 
   // Changing value of the quantity
-  
-  const addingNumber =(orderitem:OrderItem)=>{
+
+  const addingNumber = (orderitem: OrderItem) => {
     const newObj = {
       ...orderitem,
-      quantity:orderitem.quantity+1
-    }
-    console.log(newObj)
-    useMutate.mutate(newObj)
-  }
-  const substractNumber =(orderitem:OrderItem)=>{
+      quantity: orderitem.quantity + 1,
+    };
+    console.log(newObj);
+    useMutate.mutate(newObj);
+  };
+  const substractNumber = (orderitem: OrderItem) => {
     const newObj = {
       ...orderitem,
-      quantity:orderitem.quantity-1
-    }
-    useMutate.mutate(newObj)
-  }
-  
+      quantity: orderitem.quantity - 1,
+    };
+    useMutate.mutate(newObj);
+  };
+
   const orderMutate = useOrderMutate(() => {
     toast({
       title: "Order",
@@ -72,7 +74,6 @@ const Billing = () => {
     });
   }, REQUEST.UPDATE);
 
-  
   const { userMe } = useUserMe();
 
   const { data: products } = useAllProducts();
@@ -148,17 +149,17 @@ const Billing = () => {
                   </Td>
                   <Td>
                     <VStack margin={0} padding={0}>
-                      <IconButton 
-                      icon={<CiSquarePlus />} 
-                      aria-label="add"
-                      margin={0}
-                      onClick={()=>addingNumber(orderitem)}
+                      <IconButton
+                        icon={<CiSquarePlus />}
+                        aria-label="add"
+                        margin={0}
+                        onClick={() => addingNumber(orderitem)}
                       />
                       <IconButton
                         icon={<CiSquareMinus />}
-                        aria-label="substract"   
-                        margin={0} 
-                        onClick={()=>substractNumber(orderitem)}                   
+                        aria-label="substract"
+                        margin={0}
+                        onClick={() => substractNumber(orderitem)}
                       />
                     </VStack>
                   </Td>
