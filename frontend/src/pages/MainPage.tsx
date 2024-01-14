@@ -72,7 +72,7 @@ const MainPage = () => {
                 color={COLOURS.MAIN_PAGE_YELLOW}
                 textShadow="1px 1px #ff0000"
               >
-                HIKKA LASSO
+                HIKKA LAZZO
               </Text>
               </Flex>
             </HStack>
