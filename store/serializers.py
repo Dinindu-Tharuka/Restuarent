@@ -65,7 +65,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
             for id in ids:
                 if product_id == id[0]:
                     self.instance = OrderItem.objects.get(id=id[1])
-                    self.instance.quantity += quantity
+                    self.instance.quantity = quantity
                     self.instance.save()
                     break
             else:
