@@ -57,10 +57,10 @@ const ProductItem = ({ product }: Props) => {
     currentOrder?.id ? currentOrder.id : 0
   );
 
-  const onSubmit = (data: FieldValues) => {
+  const onSubmit = () => {
     const orderitem = {
-      ...data,
       product_id: product.id,
+      quantity:1
     } as OrderItem;
     orderItemMutate.mutate(orderitem);
   };
@@ -72,6 +72,7 @@ const ProductItem = ({ product }: Props) => {
           bg: COLOURS.TABLE_BUTTON_HOVER_COLOR,
         }}
         margin={2}
+       
       >
         <HStack justifyContent="right">
           {
@@ -83,16 +84,16 @@ const ProductItem = ({ product }: Props) => {
           
         </HStack>
         <CardBody
-          onClick={() => {
-            onOpen();
-          }}
+        onClick={()=>{
+          onSubmit()
+        }}
         >
           <Text>{product.title}</Text>
           <Text>Rs: {formatNumberWithTwoDecimals(product.price)}</Text>
         </CardBody>
       </Card>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      {/* <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Add {product.title} Quantity</ModalHeader>
@@ -110,7 +111,7 @@ const ProductItem = ({ product }: Props) => {
           <ModalCloseButton />
           <ModalBody></ModalBody>
         </ModalContent>
-      </Modal>
+      </Modal> */}
     </>
   );
 };
