@@ -160,6 +160,7 @@ const Billing = () => {
                         aria-label="substract"
                         margin={0}
                         onClick={() => substractNumber(orderitem)}
+                        isDisabled={orderitem.quantity < 1}
                       />
                     </VStack>
                   </Td>
