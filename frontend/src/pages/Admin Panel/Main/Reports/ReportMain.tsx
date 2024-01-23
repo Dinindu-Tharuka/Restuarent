@@ -139,7 +139,7 @@ const ReportMain = () => {
         <Table overflow="auto">
           <Thead>
             <Tr>
-              <Th>User Name</Th>
+              <Th>Id</Th>
               <Th>Date</Th>
               <Th>Table</Th>
               <Th>Total</Th>
